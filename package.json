@@ -1,0 +1,38 @@
+{
+  "name": "xkb-layouts",
+  "version": "0.0.1",
+  "description": "XKB keymaps with a keyboard layout detector for the browser.",
+  "license": "MIT",
+  "author": "Joerg Breitbart <j.breitbart@netzkolchose.de>",
+  "type": "module",
+  "main": "./lib/Detector.js",
+  "exports": {
+    ".": {
+      "import": "./lib/Detector.js",
+      "require": "./lib/Detector.js",
+      "types": "./lib/Detector.d.ts"
+    },
+    "./keymaps": {
+      "import": "./lib/keymaps.js",
+      "require": "./lib/keymaps.js",
+      "types": "./lib/keymaps.d.ts"
+    },
+    "./keymapsResolved": {
+      "import": "./lib/keymapsResolved.js",
+      "require": "./lib/keymapsResolved.js",
+      "types": "./lib/keymapsResolved.d.ts"
+    }
+  },
+  "scripts": {
+    "test": "mocha lib/*.test.js",
+    "build": "tsc -p .",
+    "watch": "tsc -w",
+    "clean": "rm -rf lib",
+    "package": "npm run build",
+    "prepublishOnly": "npm run package"
+  },
+  "devDependencies": {
+    "@vscodium/native-keymap": "^3.3.7-258424",
+    "typescript": "^5.9.3"
+  }
+}
