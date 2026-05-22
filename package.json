@@ -32,7 +32,10 @@
     "prepublishOnly": "npm run package"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.12.4",
     "@vscodium/native-keymap": "^3.3.7-258424",
+    "mocha": "^11.7.6",
     "typescript": "^5.9.3"
   }
 }

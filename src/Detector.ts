@@ -4,7 +4,7 @@
  */
 
 
-interface IKeymap {
+export interface IKeymap {
   [index: string]: string;
 }
 
@@ -55,10 +55,13 @@ export default class Detector {
   private _key: IKeyResult;
   private _cached: ILayoutMatch[] | undefined;
   private _active: string = '';
+  private _discardHandler: (code: string, key: string) => boolean | undefined = () => false;
 
   constructor(data: IKeymapMerged) {
     this._acc = data.acc.split('|');
     this._codeAcc = Object.keys(data.map).sort();
+    // FIXME: ~12.3kB per instance
+    // better: make it singleton and deal only with indices in instance
     this._layouts = {};
     for (let i = 0; i < this._acc.length; ++i) {
       this._layouts[this._acc[i]] = i;
@@ -66,6 +69,8 @@ export default class Detector {
     let p = 0;
     for (const code of this._codeAcc) {
       this._codes[code] = p++;
+      // FIXME: this gets really big in memory! (~100kB per instance)
+      // better: stick with original string immutable? (~35kB singleton)
       this._values.push(data.map[code].split(''));
       this._rec.push(undefined);
     }
@@ -94,6 +99,42 @@ export default class Detector {
     // FIXME: get rid of borrowed containers
     this._cand = [...this._acc].map(e => ({ layout: e, match: 0 }));
     this._key = { layouts: [], certain: 0, key: undefined };
+  }
+
+  /**
+   * Free all internal resources.
+   * The instance may not be used anymore after calling dispose.
+   */
+  public dispose() {
+    this._discardHandler = () => false;
+    this._layouts = {};
+    this._acc = [];
+    this._codeAcc = [];
+    this._values = [];
+    this._codes = {};
+    this._active = '';
+    this._cached = undefined;
+  }
+
+  /**
+   * Set a discard handler to get notified, when the recorded characters
+   * get swiped due to a mismatch with an earlier recorded character.
+   * This is a strong indicator, that the user changed the keyboard layout
+   * on OS side.
+   * The handler gets called before the swipe happens and the should expect
+   * `code` and `key` as arguments for further inspection.
+   * Return `true` from the handler to suppress the swipe (useful to not lose
+   * changes from detector methods called in the handler itself).
+   */
+  public setDiscard(handler: (code: string, key: string) => boolean): void {
+    this._discardHandler = handler;
+  }
+
+  /**
+   * Clear the discard handler.
+   */
+  public clearDiscard() {
+    this._discardHandler = () => false;
   }
 
   /**
@@ -130,7 +171,7 @@ export default class Detector {
    * Set active layout. The layout must be registered.
    */
   public set activeLayout(layout: string) {
-    if (this._layouts[layout] === undefined) {
+    if (layout && this._layouts[layout] === undefined) {
       throw new Error(`layout '${layout}' is not registered`);
     }
     this._active = layout;
@@ -164,6 +205,11 @@ export default class Detector {
     }
     const pos = this._layouts[layout];
     delete this._layouts[layout];
+    for (const layout in this._layouts) {
+      if (this._layouts[layout] > pos) {
+        this._layouts[layout]--;
+      }
+    }
     this._acc.splice(pos, 1);
     this._cand.splice(pos, 1);
     for (let i = 0; i < this._values.length; ++i) {
@@ -195,7 +241,7 @@ export default class Detector {
   /**
    * Get a map of recorded key codes.
    */
-  public getRecordedLayoutMap(): IKeymap {
+  public getRecordedMap(): IKeymap {
     const result: IKeymap = {};
     for (let i = 0; i < this._codeAcc.length; ++i) {
       if (this._rec[i] !== undefined) {
@@ -207,21 +253,16 @@ export default class Detector {
 
   /**
    * Get character key for key code and layout.
+   * Uses the currently active layout, if `layout` is omitted.
    * The known key codes can be requested with `.codes`,
    * the registered layouts with `.layouts`.
    */
-  public getLayoutKey(code: string, layout: string): string | undefined {
-    if (this._codes[code] !== undefined && this._layouts[layout]) {
-      return this._values[this._codes[code]][this._layouts[layout]];
-    }
-  }
-
-  /**
-   * Get character key for key code of the active layout.
-   */
-  public getActiveKey(code: string): string | undefined {
-    if (this._active && this._codes[code] !== undefined) {
-      return this._values[this._codes[code]][this._layouts[this._active]];
+  public getLayoutKey(code: string, layout?: string): string | undefined {
+    if (
+      this._codes[code] !== undefined &&
+      this._layouts[layout ?? this._active] !== undefined
+    ) {
+      return this._values[this._codes[code]][this._layouts[layout ?? this._active]];
     }
   }
 
@@ -231,13 +272,16 @@ export default class Detector {
   public feed(code: string, key: string): void {
     const pos = this._codes[code];
     if (pos !== undefined) {
+      this._cached = undefined;
       if (this._rec[pos] && this._rec[pos] !== key) {
         // The key value should never change for the same layout,
         // so we treat a sudden change as a layout change.
+        if (this._discardHandler(code, key)) {
+          return;
+        }
         this.reset();
       }
       this._rec[pos] = key;
-      this._cached = undefined;
     }
   }
 

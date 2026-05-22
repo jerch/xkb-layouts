@@ -50,10 +50,10 @@ const a_char = ld.getActiveKey('KeyA');
 - *Changing Keyboard Layout*\
   When the user switches the keyboard layout on OS side we cannot directly spot that.
   Instead the detector will reset its recorded key characters if a mismatch to a previous
-  recording was found. Use the callback `onReset` to act upon it (e.g. redraw the
-  layout discovery dialog if your appilcation needs strict layout knowledge).
+  recording was found. Use the callback registered with `setDiscard` to act upon it
+  (e.g. redraw the layout discovery dialog if your appilcation needs strict layout knowledge).
   Note that a manually activated layout gets not automatically reset,
-  also do that from your `onReset` handler.
+  also do that from your discard handler.
 
 - *Dead Key Handling*\
   The package provides two different layout maps, one with dead key characters (`keymaps.ts`)
