@@ -48,9 +48,7 @@ for (const key of KEYS) {
     // save these as sparce lists
     SPARCE[key] = SPARCE[key] ?? {};
     for (const map in ACC) {
-      if (DATA[map][key]) {
-        SPARCE[key][ACC[map]] = DATA[map][key];
-      }
+      SPARCE[key][ACC[map]] = DATA[map][key];
     }
     continue;
   };
@@ -142,40 +140,50 @@ function test() {
 //test();
 
 
+function getSparceDefault(values) {
+  const counter = {};
+  for (let i = 0; i < values.length; ++i) {
+    counter[values[i]] = counter[values[i]] ?? 0;
+    counter[values[i]]++;
+  }
+  const sorted = Object.entries(counter).sort((a, b) => b[1] - a[1]);
+  return sorted[0][0];
+}
+
+
 // write ts file
 function writetoFile(filename) {
+  const codes = Object.keys(FINAL.map).sort();
+
   const accStr = FINAL.acc;
 
-  const mapParts = [];
-  for (const code in FINAL.map) {
-    const right = FINAL.map[code].replaceAll('\\', '\\\\').replaceAll("'", "\\'");
-    mapParts.push(`    ${code}: '${right}'`);
+  const codesStr = codes.join('|');
+
+  const valuesParts = [];
+  for (const code of codes) {
+    const values = FINAL.map[code].replaceAll('\\', '\\\\').replaceAll("'", "\\'");
+    valuesParts.push(`      '${values}'`);
   }
-  const mapStr = mapParts.join(',\n');
+  const valuesStr = valuesParts.join(',\n');
 
   const emptyParts = [];
-  for (const code in FINAL.empty) {
-    const right = `[${FINAL.empty[code].join(',')}]`;
-    emptyParts.push(`    ${code}: ${right}`);
+  for (const code of codes) {
+    const value = FINAL.empty[code] ?? [];
+    emptyParts.push(`[${value.join(',')}]`);
   }
-  const emptyStr = emptyParts.join(',\n');
+  const emptyStr = emptyParts.join(',');
 
   const skipParts = [];
   for (const [key, value] of Object.entries(SPARCE)) {
-    if (key === 'Space') continue;
-    const right = `{${Object.entries(value).map(e => `${e[0]}:'${e[1].replaceAll('\\', '\\\\')}'`).join(',')}}`;
-    skipParts.push(`    ${key}: ${right}`);
+    const char = getSparceDefault(Object.entries(value).sort().map(e => e[1]));
+    const transformed = Object.assign({c: char}, value);
+    const tEntries = Object.entries(transformed)
+      .filter(e => e[0] === 'c' || e[1] !== char)
+      .sort((a,b) => a[0] - b[0]);
+    const right = `{${tEntries.map(e => `${e[0]}:'${e[1].replaceAll('\\', '\\\\')}'`).join(',')}}`;
+    skipParts.push(`      ${codes.indexOf(key)}: ${right}`);
   }
   const skipStr = skipParts.join(',\n');
-
-  // extra handling of Space
-  const spaceParts = [];
-  for (const code in SPARCE.Space) {
-    if (SPARCE.Space[code] === ' ') continue;
-    const right = SPARCE.Space[code].replaceAll('\\', '\\\\').replaceAll("'", "\\'");
-    spaceParts.push(`${code}:'${right}'`);
-  }
-  const spaceStr = spaceParts.join(',');
 
   const output = `/**
  * Copyright (c) 2026 Joerg Breitbart
@@ -184,17 +192,60 @@ function writetoFile(filename) {
  * For copyright of xkb data - see XKB-LICENSES file.
  */
 
+interface SkipEntry {
+  [index: number]: string;
+  c: string;
+}
+
 // rebuild map: node bin/create_map.js layouts/*
 // filtered out: ${SKIP}
-export default {
-  acc: '${accStr}',
-  map: {\n${mapStr}\n  },
-  empty: {\n${emptyStr}\n  },
-  skip: {\n${skipStr}\n  },
-  Space: {${spaceStr}}
-};
+const KEYMAPS = (function() {
+  const DATA = {
+    layouts: '${accStr}',
+    codes: '${codesStr}',
+    values: [\n${valuesStr}\n    ],
+    empty: [${emptyStr}],
+    skip: {\n${skipStr}\n    }
+  };
+  const f: <T>(o: T) => Readonly<T> = (o) => Object.freeze(o);
+  const acc = DATA.layouts.split('|');
+  const layouts: {[index: string]: number} = {};
+  for (let i = 0; i < acc.length; ++i) {
+    layouts[acc[i]] = i;
+  }
+  const codeAcc = DATA.codes.split('|');
+  const codes: {[index: string]: number} = {};
+  for (let i = 0; i < codeAcc.length; ++i) {
+    codes[codeAcc[i]] = i;
+  }
+  const values = [];
+  for (let i = 0; i < DATA.values.length; ++i) {
+    let v : string[];
+    const skip = (DATA.skip as {[index: number]: SkipEntry})[i];
+    if (skip) {
+      v = new Array(acc.length).fill(skip.c);
+      for (const map in skip) {
+        if (map === 'c') continue;
+        v[map] = skip[map];
+      }
+    } else {
+      v = DATA.values[i].split('');
+      for (const empty of DATA.empty[i])
+        v[empty] = '';
+    }
+    f(v);
+    values.push(v);
+  }
+  f(acc);
+  f(layouts);
+  f(codeAcc);
+  f(codes);
+  f(values);
+  return f({ acc, layouts, codeAcc, codes, values });
+})();
+export default KEYMAPS;
 `;
   fs.writeFileSync(filename, output);
   console.log('module size:', output.length);
 }
-writetoFile('src/bla.ts');
+writetoFile('src/keymapsResolved.ts');

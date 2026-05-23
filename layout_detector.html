@@ -18,71 +18,217 @@
     <div id="layouts"></div>
     <script>
 
+
+        const KEYMAPS = (function () {
+            const DATA = {
+                layouts: 'af_ps|af_ps-olpc|al|al_plisi|am|am_eastern|am_eastern-alt|am_phonetic|am_phonetic-alt|am_western|ara_buckwalter|ara_digits|ara_mac|ara_mac-phonetic|ara_olpc|az|az_cyrillic|ba|ba_unicode|ba_unicodeus|ba_us|bd|bd_probhat|be|be_nodeadkeys|bg|bg_bas_phonetic|bg_bekl|bg_phonetic|br|br_dvorak|br_nativo|br_nativo-epo|br_nativo-us|br_nodeadkeys|br_rus|bt|by|by_intl|by_legacy|by_phonetic|ca|ca_fr-dvorak|ca_fr-legacy|ca_ike|ca_multix|cd|ch|ch_de_nodeadkeys|ch_fr|ch_fr_nodeadkeys|cm_azerty|cm_dvorak|cm_mmuock|cm_qwerty|cn_mon_todo_galik|cn_mon_trad|cn_mon_trad_galik|cn_mon_trad_manchu|cn_mon_trad_todo|cn_mon_trad_xibe|cn_tib|cn_tib_asciinum|cn_ug|cz|cz_bksl|cz_qwerty|cz_qwerty-mac|cz_qwerty_bksl|cz_rus|de|de_deadacute|de_dvorak|de_e2|de_neo|de_nodeadkeys|de_qwerty|de_ru|dk|dk_dvorak|dk_nodeadkeys|dz_ber|ee|ee_nodeadkeys|eg|epo|epo_legacy|es|es_dvorak|es_nodeadkeys|et|fo|fr|fr_afnor|fr_bepo|fr_bepo_afnor|fr_bre|fr_dvorak|fr_ergol|fr_ergol_iso|fr_geo|fr_latin9|fr_latin9_nodeadkeys|fr_mac|fr_nodeadkeys|gb|gb_colemak|gb_colemak_dh|gb_dvorak|gb_dvorakukp|gb_extd|gb_intl|gb_mac|gb_mac_intl|ge|ge_ergonomic|ge_mess|ge_os|ge_ru|gh_akan|gh_avn|gh_ewe|gh_fula|gh_ga|gh_gillbt|gn|gr|gr_nodeadkeys|gr_polytonic|hu|hu_101_qwertz_dot_dead|hu_102_qwerty_dot_dead|hu_qwerty|id_javanese|id_melayu-phonetic|id_pegon-phonetic|ie_ogam_is434|il|il_biblical|il_phonetic|il_si2|in|in_ben|in_ben-kagapa|in_ben_baishakhi|in_ben_bornona|in_ben_gitanjali|in_ben_inscript|in_bolnagri|in_guj|in_guj-kagapa|in_guru|in_hin-kagapa|in_hin-wx|in_iipa|in_jhelum|in_kan|in_kan-kagapa|in_mal|in_mal_enhanced|in_mal_lalitha|in_mal_poorna|in_marathi|in_mni|in_ori|in_ori-bolnagri|in_ori-wx|in_sat|in_tam|in_tam_tamilnumbers|in_tamilnet_TSCII|in_tamilnet_tamilnumbers|in_tel|in_tel-kagapa|in_tel-sarala|iq_ku_ara|iq_ku_f|ir|ir_winkeys|is|is_mac|is_mac_legacy|it|it_geo|it_mac|jp|jp_dvorak|jp_kana|jp_kana86|ke_kik|kg|kg_phonetic|kh|kz|kz_ext|kz_kazrus|kz_latin|kz_ruskaz|la|la_stea|latam|latam_colemak|latam_dvorak|latam_nodeadkeys|lk|lk_tam_TAB|lk_tam_unicode|lk_us|lt|lt_ibm|lt_lekp|lt_lekpa|lt_ratise|lt_sgs|lt_std|lt_us|lv_adapted|lv_apostrophe|lv_ergonomic|lv_fkey|lv_modern|lv_modern-cyr|lv_tilde|ma|ma_tifinagh|ma_tifinagh-alt|ma_tifinagh-extended|md_gag|mk|mk_nodeadkeys|mm|mm_mnw|mm_mnw-a1|mm_shn|mm_zgt|mn|mt|mt_us|mv|my|my_phonetic|ng_igbo|ng_yoruba|nl|no|no_colemak|no_dvorak|no_mac|no_mac_nodeadkeys|no_nodeadkeys|no_smi|np|ph_capewell-dvorak|ph_capewell-qwerf2k6|ph_colemak|pk|pk_ara|pk_snd|pk_urd-crulp|pk_urd-nla|pl_qwertz|pl_ru_phonetic_dvorak|pt|pt_mac|pt_mac_nodeadkeys|pt_nativo|pt_nativo-epo|pt_nativo-us|pt_nodeadkeys|ro|ro_std|ro_winkeys|rs|rs_rue|rs_yz|ru|ru_ab|ru_bak|ru_dos|ru_legacy|ru_mac|ru_os_winkeys|ru_phonetic|ru_phonetic_YAZHERTY|ru_phonetic_azerty|ru_phonetic_dvorak|ru_phonetic_winkeys|ru_ruchey_en|ru_ruchey_ru|ru_tt|ru_typewriter|ru_typewriter-legacy|ru_udm|ru_xal|se|se_dvorak|se_nodeadkeys|se_rus|se_smi|se_svdvorak|se_us_dvorak|si|si_us|sk|sk_bksl|sk_qwerty|sk_qwerty_bksl|sn|sy_syc|sy_syc_phonetic|th|th_pat|th_tis|tj|tm|tr|tr_e|tr_f|tr_ku|tw_indigenous|tw_saisiyat|tz|ua|ua_crh|ua_crh_f|ua_homophonic|ua_legacy|ua_macOS|ua_phonetic|ua_typewriter|us|us_chr|us_colemak|us_colemak_dh|us_colemak_dh_ortho|us_colemak_dh_wide|us_colemak_dh_wide_iso|us_dvorak|us_dvorak-classic|us_dvorak-intl|us_dvorak-l|us_dvorak-mac|us_dvorak-r|us_dvp|us_haw|us_hbs|us_intl|us_mac|us_norman|us_rus|us_symbolic|us_workman|us_workman-intl|uz|vn|vn_fr|vn_us',
+                codes: 'Backquote|Backslash|BracketLeft|BracketRight|Comma|Digit0|Digit1|Digit2|Digit3|Digit4|Digit5|Digit6|Digit7|Digit8|Digit9|Equal|IntlBackslash|IntlRo|IntlYen|KeyA|KeyB|KeyC|KeyD|KeyE|KeyF|KeyG|KeyH|KeyI|KeyJ|KeyK|KeyL|KeyM|KeyN|KeyO|KeyP|KeyQ|KeyR|KeyS|KeyT|KeyU|KeyV|KeyW|KeyX|KeyY|KeyZ|Minus|Period|Quote|Semicolon|Slash|Space',
+                values: [
+                    '‍‍\\`՝՝՝՝՝՝ٰذــ````````‍²²(ю(ч\'\'===\'\'༉ёёёю##°ᕻ/`§§§§$̍̀̍᠍᠍᠍᠍᠍᠍ཨཨ`;;;<;ё̂^^̂̂^̂ё½|½²̌^ذ``ººº#½²@$$²_``!œœ@²`````̀̀§§„„ჭэ^``````߬```0í0í꧞```;׃`;ॊ#`‍‍:‍ं#`#````ೊ`ൊൊ്ൊॢ`#ଂ``ொொ#\'ొ`ృ‍+‍÷̊°£\\\\@####`ёё«(ёё(ё‍"||||`#\'`````+̄````````#ذ²²²`̀``ၝ``#=ċċ`##``@|||||||ऽ```ًٍ’~`˙`\\``+++\\`„]`ь`ё́ә)ё]эююююю#ёһ|\'ё(§§§ё|§\'¸¸;;;;²܏܏__๏ёž"++"``ٰ\'"+`\'\'\'\'`````````̀```$``̀``ё``̀ё`²̀',
+                    '\\\\]\\»\'\'շշ\'#\\\\#\\\\\\žžžž\\‌µµ„ь„ю]-\'\'\']]ཝ\\\\\\э<<à\\à"$$$$᷆\\æ\\#᠁#᠁᠁᠁ཛཛ\\̈\\̈̈\\\\##-####ю\'<\'*\'\'\\\\\\ççç#\'**çç?~\\\\ჩ**̀*#######\\\\\\/=\\\\\\\\ɖ\\\\\\ߑ\\\\\\űűűű꧀\\\\#\\׀\\\\ॉ\\\\\\ৱ\\\\।ૉ\\\\\\\\\\।\\\\‌ർ\\‌ॉ\\\\।।᱿\\\\\\\\\\\\ౌ\\x\\پ+++ùù§]]ム]\\үъឮ\\\\\\\\\\ໜ/}}}ç\\\\\\\\\\\\\'\'z\\q\\\\\\ķ\\//\\\\***\\жж၏ၑၜ\\၏!#ż\\\\\\\\\\<\'\'<@@\'đॐ\\\\\\\\؎ڍ\\\\ó\\̃\\\\\\\\\\~\\ââжжж\\\\ң\\\\ё\\эээээ//\\)(\\\\\'\'\'юđ<;žžň\\ň\\µ܆܆ฃๅฅ\\ş,,x,\\\\\\ґ,ñьґґю(\\Ꮹ\\\\\\\\\'\\\\\\\\\\\\\\\\\\\\\\\\э\\\\\\\\\\*\\',
+                    'ججççծչչխխչ#ججثجöхšššš[ে̂^цяцш́́̃̃̃\'́ཇхххш̂é̂ᒡ̂ɛüüèè́/ǿ#[ᢊ[[[ཙཙ]úúúúúэüü?üßüüшå\'åⵯüüجĵ[̀̀`ፀå̂-zẑz[[თ̂^̂^[[[/[[[[[[კშхხ[ɛɔƴ[ɛ߳[[̃őőőő꧊]]#]][]डড[[[ডড[ડ[ਡ[[ɖਡಡ[ഡഡ[ഡड[ଡ[[[##́ுడ[జ]qججðððèèì@/゛@[хчៀххх#хບບ́́́`[̂ு[[į??c[į[ū[ž[[[[جⵯ̂ⵯöшшဟဟဍ[ဟкġġ[ج]ọ[̈åå\'ååååइ/[[]]ڇ]]ż/+ºº̃̃̃+[ăăшшшхххххххшшш/ш#ххххххå,åэå\'/ššúúúúŋܓ]บใบхňğsqx[[#хğqюххшх[Ꮥ[[[;;/\'/5/;/[[[[[ш[[[хư̂[',
+                    'چچ@>ցջջծծջ#دةظدğҹđđđđ]ো$$;щ;щ[=---[[ཉ\'’\'ў̧=ç̇ç*̈¨̈¨̰=σ̧#]ᢕ]]]ཚཚ[))))))++/+́++щ̈~¨$õõدĥ]+++ጨð$+ww/̈]]ძ$$$$]]]=]]]]]]ქღъჯ]]ʋǧ]ɔ$]]ͅúúúú꧌[[#[[][़়]]]‌়]઼]਼]][ਙ಼]‍‍]‍़]଼]]]ஞஞ##ఞ]ై[wچچ\'\'\'++$[[゜[]ъшឪъъұ#ъລລ++++]##]]„==f]w]ņ]h]]]]د$$$üѓѓဩဩဎ]၏ъħħ]د[]]*̈̈̈¨¨¨ŋए=]][[چ[[ś=́́´---´]îîђщђъҿъъъъъщщщчщ#ъүъъъъ̈̈¨̈ŋ̈=đđääää$ܕ[ลฌลъöüpwû]]#їüwщїїщґ]Ꮆ]]]\'#======@]]]]]щ]]]ъơ$]',
+                    'وو,,խշշ,,շ،و،،وçб,,,,,,;;р,р,,wggg,,སббб,,w,,,;,,,,;w,,᠂᠂᠂᠈,,ཐཐ،,,,,,,,,w,,,,,,w,;,,و,,,w,፣,;,ggñlggშ;;;;,,,ww,,,,,ლ,бბ,,,,,,؛,,,,,,,꧈،،,תת,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,þஇ,,,،bوو,,,,,;,wネ,,бц៼ббб#бມມ,,w,,Þஇ,,čūūd,č,,,,,hх,و;;;ä,,,ယံ,ယь,,،و،,,,,,w,,,,,w,,،،،،،,в,,,ggg,,,,,,,ббббббб,,;в,#бббббб,w,,,ww,,,,,,;ܘ܀มะมб,öybê,,،бöb,ббїб,,,,,hhwww,wvw,,,,,,,,,б,̣,',
+                    '۰۰00օօօճճօ٠٠٠٠٠000000০০àà00000000000༠0000000ᔾ0̈0000à000᠐0᠐000༠00ééééé=00000000000à00000000፻0à»**à"00)àààà0000000000)000000000߮000öööö꧐٠٠00000०০0০০০০0૦0੦0०00೦0൦൦00०꯰୦୦୦᱐0௰#௦౦00٠0۰000000é00ワ0000០ққ0ó0ຂຂ00000#00“)((/“)00000000à#@‍000၀၀၀0၀0000٠٠0000000000०0000۰0۰000000000000000000№000000à00000%%ӟ;000000000ééééà00จ๐จ00000000٠0000000%0Ꮔ0009906030/]0000000000đà0',
+                    '۱۱11ֆ։։էէ։١١١١١111111১১&&11111111111༡1111111ᖕ1&1111&111᠑1᠑111༡11++++++11111111111&11111111፩1&à""&=11„&&&&1111111111!111111111߱1111111꧑١١11111१১1১১১১1૧1੧1१11೧1൧൧11१꯱୧୧୧᱑1௧·௧౧11١1۱111111&11ヌ1111១""1"1ຢຢ11111ç11ą!//!ą!11111111&&&&111၁၁၁1၁1111١١1111111111१1111۱1۱111111111111111111!111111&11111№!??111111111++++&11ๅ=฿11111111١1111111!11111111[1[11&1111111111ă&1',
+                    '۲۲22ձձձթթձ٢٢٢٢٢222222২২éé22222222222༢2222222ᑉ2́2222é222᠒2᠒222༢22ěěěěěъ22222222222é22222222፪2éé««é/22№éééé2222222222№222222222߫2222222꧒٢٢22222२২2২২২২2૨2੨2२22೨2൨൨22२꯲୨୨୨᱒2௨௨౨22٢2۲222222"22フ2222២әә2á2ຟຟ22222ú22č"\\\\:č-22222222é#~ⵒ222၂၂၂2၂2222٢٢2222222222२2222۲2۲222222222222222222ө222222é22222-№(№222222222ľľľľé22/๒/22222222٢2222222№2222222272]22[2222222222ẫ2',
+                    '۳۳33֊յյփփյ٣٣٣٣٣333333৩৩""33333333333༣3333333ᕐ3̀3333"333᠓3᠓333༣33šššššш33333333333"33333333፫3"è»»"-33%""""3333333333,333333333ߵ3333333꧓٣٣33333३৩3৩৩৩৩3૩3੩3३33೩3൩൩33३꯳୩୩୩᱓3௩௩౩33٣3۳333333\'33ア3333៣іі3í3ໂໂ33333û33ę/...ę/33333333""""333၃၃၃3၃3333٣٣3333333333३3333۳3۳333333333333333333ҡ333333"33333//)ү333333333šššš"33-๓-33333333٣3333333/3333333353/33{3333333333ê"3',
+                    '۴۴44,՛՛ձձ՛٤٤٤٤٤444444৪৪\'\'44444444444༤4444444ᒃ4(4444\'444᠔4᠔444༤44čččččч44444444444\'44444444፬4\'ê((\'è44(\'\'\'\'4444444444;444444444ߴ4444444꧔٤٤44444४৪4৪৪৪৪4૪4੪4४44೪4൪൪44४꯴୪୪୪᱔4௪௪౪44٤4۴444444(44ウ4444៤ңң4ń4ຖຖ44444ü44ė;,,*ė;44444444\'\'\'\'444၄၄၄4၄4444٤٤4444444444४4444۴4۴444444444444444444ғ444444\'44444";:ә444444444čččč\'44ภ๔ภ44444444٤4444444;4Ꮩ44444434p44}4444444444ố4',
+                    '۵۵55։,,ջջ,٥٥٥٥٥555555৫৫((55555555555༥5555555ᑦ5{5555(555᠕5᠕555༥55řřřřřщ55555555555(55555555፭5(())(\\55:((((5555555555%555555555(5555555꧕٥٥55555५৫5৫৫৫৫5૫5੫5५55೫5൫൫55५꯵୫୫୫᱕5௫௫౫55٥5۵555555ç55エ5555៥ғғ5ǵ5ຸຸ55555ý55į:ff_į:55555555((((555၅၅၅5၅5555٥٥5555555555५5555۵5۵555555555555555555ҫ555555(55555::**555555555ťťťť(55ถ๕ถ55555555٥5555555:5Ꮶ55555515f5j(5555555555̀(5',
+                    '۶۶66՞--ււ-٦٦٦٦٦666666৬৬§§66666666666༦6666666ᖅ6}6666-666᠖6᠖666༦66žžžžžж66666666666-66666666፮6-)@@-̂66;--§-6666666666:666666666-6666666꧖٦٦66666६৬6৬৬৬৬6૬6੬6६66೬6൬൬66६꯶୬୬୬᱖6௬௬౬66٦6۶666666è66オ6666៦,,6,6ູູ66666þ66š,!!—š,66666666----666၆၆၆6၆6666٦٦6666666666६6666۶6۶666666666666666666:666666-66666,,ӝң666666666žžžž-66ุูุ66666666٦6666666,6Ꮬ66666696m6l=6666666666̉-6',
+                    '۷۷77․..ևև.٧٧٧٧٧777777৭৭èè77777777777༧7777777ᒻ7)7777è777᠗7᠗777༧77ýýýýý"77777777777è77777777፯7è‘++è(77?èèèè7777777777?777777777߬7777777꧗٧٧77777७৭7৭৭৭৭7૭7੭7७77೭7൭൭77७꯷୭୭୭᱗7௭௭౭77٧7۷777777)77ヤ7777៧..7.7ຄຄ77777ÿ77ų.ww=ų.77777777è#`ⵤ777၇၇၇7၇7777٧٧7777777777७7777۷7۷777777777777777777ҙ777777è77777..ӧө777777777ýýýýè77ึ๗ึ77777777٧7777777.7Ꮛ777==707l7m*7777777777̃̀7',
+                    '۸۸88՛««ռր«٨٨٨٨٨888888৮৮!!88888888888༨8888888ᓐ8̂8888_888᠘8᠘888༨88ááááá§88888888888_88888888፰8_’--_#88№__!_8888888888.888888888ߺ8888888꧘٨٨88888८৮8৮৮৮৮8૮8੮8८88೮8൮൮88८꯸୮୮୮᱘8௮#௮౮88٨8۸888888£88ユ8888៨үү8ú8ຕຕ88888#88ū?ųų,ū=88888888____888၈၈၈8၈8888٨٨8888888888८8888۸8۸888888888888888888һ888888_88888__ӵһ888888888áááá_88ค๘ค88888888٨8888888_8Ꮦ88877828j8f)8888888888́_8',
+                    '۹۹99)»»չչ»٩٩٩٩٩999999৯৯çç99999999999༩9999999ᓪ9̌9999ç999᠙9᠙999༩99ííííí$99999999999ç99999999፱9ç«//ç)99°çççç9999999999(999999999߭9999999꧙٩٩99999९৯9৯৯৯৯9૯9੯9९99೯9൯൯99९꯹୯୯୯᱙9௯#௯౯99٩9۹999999à99ヨ9999៩ұұ9ý9ຈຈ99999#99„(įį;„(99999999ç#^—999၉၉၉9၉9999٩٩9999999999९9999۹9۹999999999999999999?999999ç99999??ӥҗ999999999ííííç99ต๙ต99999999٩9999999?9Ꮢ9998894949p+9999999999̣ç9',
+                    '====ղժժժժժ=======++++==--.=.==]]]]==།===ч=̧=ᕝ==̂^̂^=̧==#=#===ཝཝ=́́́́́\'́́<́̀´́ъ́\\´=́\'===¡¡¡=́=̂%%=]==<==-====]======“ჟ=#=====ŋ====óóóóꦉ=======ृঋ===ৃৃ=ઋ======ೃ=ൃൃ=ൃृ=ୃ====௲#=ృ===-==---ìì=^^ヘ^=ңюឲһһ=ć=ໍໍ¿¿¿¿=#==ž+::?žx===f================щ=======°\\\\\\̀`\\\\‍]===ؤڌ==\']«++<<<«==\'+++==ү====чьчщь===;===́́´ъ\\́]++́́́́===ช๖ชӯ=----====--ї=====Ᏻ===--]]]1]]#=====ъ===ҳ₫==',
+                    '<<<<?<<??<<|ــ|<<<<<<<<<<ѝѝѝѝ\\ç;;;\\\\།///|««ùᕹù\\<<<<<<<<<<<<<<<<<\\\\\\\\\\|<<ä##<<<<ø<<<<|<<<<<<<<<êêqà<z«<<<<\\\\z\\\\\\\\`̀«««/«<<<<<<<«««í<í<|||\\<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<پ<<<<<<<<<<</<<<<<<<<<<<<<<<<<–<;<-–<–<<ģ<qї<|<<<<<<<<<<<(żż|||<<]<<ø<<<ž<<<<||<||<<<<<«««<\\\\<<<</////</|||<|///////<<<чžöö<<\\\\\\\\<<<<<</<<<<<<<</<</////<<-zzzz<<\\<§<<<<\\§<<⌊<\\/<<<',
+                    '',
+                    '',
+                    'ششaaջաաաաաَششاشaфaaaaৃাqqьаьаaaiiiaаཏфффаaaaᖑaqaaaaqaaaᢋᠠᢋᠠᠠᠠའའھaaaaaаaaaauaaаaaaⵇaaشaaaaa#aqqaaaoaaქqqqqaaaaaaaaaახაфფaaaaaa߫αααaaaaꦻااaששאשोোাাা‍োाોાੋा्oੋೋಾോോാോोꯑୋା୍ᱟோோÂயోాయاûششaaaaაaaaチaaфаាффөaфັັaaaaඅòயaaaaauaaaaašaeеaشⵇⵇⵇaааေေအေေйaaަشاaaaaaaaaaaाoaaاااامaаaaaiiiaaaaааафффффффааяааaффффффaaaаaaaaaaaaaqܫܐฟ้ฟфaaeuaaaَфauаффафaᎠaaaaaaaa-a7aaaaaaаaaaфaqa',
+                    'ذذbbզբբբբպبﻻزبذbиbbbbনবbbфбфбbxkkkbбརііібbxbᑕbbbbbbbxbbᢩᠪᢩᠪᡋᠪཔཔبbbbbbбbbxbzbbбbxbⴱbbﻻbbbxbበbbbkkbybბbbbbbb\\xxbbbbბჟბиიbbbbbbߓβββbbbbꦧببbננבנवববববৱবबવબਵबबwਬವಬവവബവवꯕଵବବᱵவவ¦ெవబబبçذذbbbbბbbxコbbибបиииbиຶຶbbxbබªெbbbžžxbbbbbpbwщbﻻⴱⴱⴱbббဘဘဗယဘмbbބﻻبbbbbbxbbbbबjbbببببشbщbbbkkkbbbbбббииииииибббьбbииииииbxbбbxxbbbbbbbܧܒิิิиbbhçbbbبиbçбиібіbᎨbzvz\\xxxwxixbbbbbбbvvиbbb',
+                    'ززccչքգցցգ#ؤذصؤcсccccেচccъцъцcjjjjcцའсссцcjcᖃcccccccjccᢓᠴᢦᡮᡔᡮཀཀغcccccцccjcäccцcjcⵛccؤcccjcቸcccxxc,-vცccccccdjjccccცყცсსcɔŋcŋcߗψψψccccꦕچچcבבצבमমচচচমমचમચਮचचmਚಮಚമമചമमꯆମଚଚᱪமம¯உమచడجvززccccცccjソccсжចсссcсແແccjcචàஉcccccįcccccīccцcؤⵛⵛⵛcццခခၚၶခёccޗؤچcccccjccccचcccچچطچےcйcccjjjccccцццсссссссцццйцcссссссcjcцcjjcccccccܤܤแลแсçcövcccچсcvцссцсcᏓcdcddjjjgjxjcccccцcmmсccc',
+                    'ییddգդդդդտدييديdвddddিডddададdeaaadдདвввдdedᖁdddddddeddᢍᠳᢍᡩᡑᡩདདدdddddдddedaddдdedⴷddيdddedደdddiidueeდdddddsseeddddდადвვdddɗddߘδδδddddꦢددdגגדג्্দদদ্্द્દ੍दडə੍್ದ്്ദ്्ꯗ୍ଦଡᱰ்்Éன్దదدeییddddდddeシddвдដввқdвກກdsedදùனðddssidddddsdaаdيⴷⴷⴷdддိိဒိိбddދيدddddseddddदedsددددرdеdddaaaddddдддвввввввдддедdввввввdedдdeedddddddܝܕกงกвddiedddدвdeдввдвdᏗssssseeecezeddddeдdhhвddd',
+                    'ثثeeբէէեեէ#ثثعثeуeeeeডীeeееееe....eеགуууеe.eᕿeeeeeee.eeᢂᠡᢂᡝᡄᡝེེېeeeeeеee.eleeеe.eⴻeeثeeeñe#eeeppeéooეeeeeeff..eeeeეუეуუeeeeeeߍεεεeeeeꦼىىeקקאקाােেোাेાેਾॆेaਾಾೆാാൊाꯏାେେᱮாா¿நాెేەxثثeeeeეee.イeeуеេуууeуຳຳefñeඑïநeeerryeeeeejeāяeثⴻⴻⴻeееနနေၼနуeeެثعeeeef.eeeeे.efععيعھe.eee...eeeeеееуууууууеее.еeууууууeöeеe..eeeeeeeܖܖำยำуeeüğeeeٖуeğеууеуeᎡfffff...b.q.eeeedеerrуeee',
+                    'ببffեֆֆֆֆֆفببفبfаffffবতffофофfuooofфནааафfufᑯfffffffuffᢎᠹᢎᡶᠸᡫབབاfffffфffifeffфfufⴼffبfffufፈfffeefennფfffffttuuffffფეფаაffffffߝφφφffffꦝففfככפכिি্তফিিटિ્ਿ्ङiਿಿ್ിിഫിिꯐିଟଙᱝிி¸கి్్فaببffffფffuハffафថаааfаດດftufෆèகþffttafšfffi#nнfبⴼⴼⴼfфф််ဖ်္өffފبفfffftuffffउittففففنfуfffoooffffфффааааааафффуфfааааааfufфfuufffffffܒܔดกดаffıafffفаfaфаафаfᎩtttttuuuduaufffftфfttаfff',
+                    'للggագգգգկغللغلgпgggg্গggжгжгgiuuugгཔпппгgigᑐgggggggiggᢏᠭᢏᡤᡎᡤངངەgggggгggugoggгgigⴳggلgggigገggg,,gbffგgggggdgiiggggგოგпპggggggߜγγγggggꦒݢڮgעעגעुুগগগুুगુગੁगगuੁುಗുുഗുुꯒୁଗଗᱜுுÀபుగగگuللggggგggiキggпгងпппgпເເgdigගðபgggmmhggggglgkкgلⴳⴳⴳgггါါဂွါаggގلڬggggdiggggगugdگگگگلgиggguuuggggгґгпппппппгггигgппппппgigгgiigggggggܠܓเัเпgggügggڠпgüґппгпgᎦdggggiiitieigggggгgggпggg',
+                    'ااhhնհհհհհهااحاhрhhhhাহhhгхгхhdmmmhхཕрррхhdhᓱhhhhhhhḍhᢔᠬᢐᡥᡍᡥམམىhhhhhхhhhhshhхhdhⵀhhاhhhdhሀhhhcchfllჰhhhhhhmddhhhhჰდჰрრhhhhhhߤηηηhhhhꦲههhייהיपপহ্্পপहપહਪहहpਹಪಹപപഹപपꯍପହହᱦபப̀ாపహచهtااhhhhჰhhdクhhрңហрррhр້້hhdhහ¢ாhhhpplhhhhhdh##hاⵀⵀⵀhхх့ဴဟႉ့хhhހاهhhhhhdhhhhहdhhحھهحہhдhhhmmmhhhhхххрррррррхчхдчhррррррhdhхhddhhhhhhhܐܗ้ี้рhhğthhhهрhtгррхрhᎯhmm]]dddhdhdhhhhyхhyyрhhh',
+                    'ههiiկիիիիիِههيهiшiiiiহিiiсисиictttiиོшшшіiciᓂiiiiiiiciiᢉᠢᢇᡳᡅᡞིིڭiiiiiиiicigiiиiciⵉiiهiiici#iiiddicddიiiiiiuucciiiiინიшშiiiiiiߌιιιiiiiꦶئئiןןיתगগিিিগগिગિਗििgਗಗಿഗഗിഗगꯤଗିିᱤ##¨ைగిిحnههiiiiიiicニiiшиិшшшiшຣຮiuciඉ¬ைiiiuukiiiiiziīіiهⵉⵉⵉiииငၚိငငшiiިهيiiiiuciiiiिgkuییڳیبiцiiitttiiiiииишшшшшшшииициiшшшшшшiciиicciiiiiiiܗܥรมรшiımniiiِшınішшішiᎢuuullcccocuciiiirиiuuшiii',
+                    'تتjjիճճյյճجتتجتjоjjjjকজjjтйтйjhdddjйབооойjhjᒧjjjjjjjhjjᢖᠵᢑᠵᡓᡪ་་قjjjjjйjjdjnjjйjhjⵊjjتjjjrjጀjjjttjsrrჯjjjjjnnhhjjjjჯმჯоოjŋƒjjjߖξξξjjjjꦗججjחחיחरরজজজররजરજਰजजɾਜರಜരരജരरꯖରଜଜᱡரர¾தరజాژkتتjjjjჯjjhマjjой្оооjо່່jnrjජîதjjjnnrjjjjjajsсjتⵊⵊⵊjјјြြ်ႇျрjjޖتجjjjjnhjjjjजhunججججاjхjjjdddjjjjјйјооооооойййхйjооооооjhjйjhhjjjjjjjܬܛ่า่оjjlkjjjجоjkйоойоjᏚnnnmmhhhehthjjjjnйjnnоjjj',
+                    'ننkkտկկկկքكننكنkлkkkkতকkkнкнкktssskкམлллкktkᓄkkkkkkktkkᢗᠺᢒᡴᡗᡣགགكkkkkkкkkrkrkkкktkⴽkkنkkktkከkkkssktttკkkkkkeettkkkkკსკлლkkkkkkߞκκκkkkkꦏکكkללכלकককককককकકકਕककkਕಕಕകകകകकꯀକକକᱠககÁமకకకکmننkkkkკkktノkkлкកлллkлາາketkකñமkkkeetkkkkktkiиkنⴽⴽⴽkккုုကုုоkkކنكkkkketkkkkकtieککڪککkтkkkssskkkkккклллллллкккткkллллллktkкkttkkkkkkkܢܟานาлkknmkkkكлkmкллклkᎸeeenntttatdtkkkkiкkeeлkkk',
+                    'ممllհլլլլլلمملمlдllllদলllвлвлlnrrrlлཙдддлlnlᓗlllllllnllᢘᠯᢓᠯᠯᠯལལلlllllлllnltllлlnlⵍllمlllnlለlllrrlniiლllllliinnllllლრლдდllllllߟλλλllllꦭللlךךלךतতলললততलતલਤललtਲತಲതതലതतꯂତଲଲᱞதத¼டతలలلlممllllლllnリllдлលдддlдສສlinlලìடllliisllllleltтlمⵍⵍⵍlллူူလူူлllލملllllinllllलnoiللللیlнlllrrrllllлллдддддддлллнлlддддддlnlлlnnlllllllܡܠสเสдllrllllلдllлддлдlᎵiiieennnzncnlllloлlooдlll',
+                    'ړړmmքմմմմմمةومةmғmmmmমম,,пмпмmmvvvmмཤьььмmmmᒪm,mmmm,mmm᠀ᠮ᠀ᠮᡏᠮ##مmmmmmмmmmmmmmмmmm,mmةmmmmmመm,.qq#rhh,,,,,mmhmmmmmmმცმьქmmmñmm߸μμμmmmmꦩممmצצמצसসমমমসসमસમਸममsਮಸಮസസമസसꯃସମମᱢஸஸ«அసమమمsپئmmmmმ,mmモmmьмមььүmьທທmmmmමÜஅmmmbbmmmmmmāmyыmة,,,mммာာမၢာтmmމةمmmmmmmmmmmमmmmممممعmмmmmvvvmmmmмммьььььььмм,ммmьҗььььmmmмmmmmmmmmm,.ܡทสทӣmmçsmmmمьmsмььмьmᏅmhhkkmmmimwmmmmmmмmllьm̉m',
+                    'ددnnլնննննنىرنىnтnnnnসনnnхнхнnbqĝqnнལтттнnbnᓴnnnnnnnbnn᠅ᠨ᠅ᠨᠨᠨནནنnnnnnнnnbnbnnнnbnⵏnnىnnnbnነnnn\'’nx..ნnnnnnkkbbnnnnნზნтტnnnnnnߣνννnnnnꦤننnממנמलলনননললनલનਲननlਨಲನലലനലलꯅଲନନᱱலல¶ஔలననنzددnnnnნnnbミnnтнនтттnтືືnkbnන¬ஔnnnššvnnnnnonfфnىⵏⵏⵏnннညညနၺညиnnނىنnnnnkbnnnnनlnkننننغnбnnnqĝqnnnnнннтттттттнннбнnттттттnbnнnbbnnnnnnn܀ܢืคืтnnzznnnنтnzнттнтnᎾkkk//bbbnbnbnnnnpнnkkтnnn',
+                    'خخooըոոօօոْخخهخoһooooগওooдодоorcccoоཅўўўоoroᓕooooooorooᢊᠥᢈᠣᡈᠣོོوoooooоootofooоoroⵄooخoooho#ooollom##ოoooooyyrrooooოვოщწooooooߐοοοooooꦺءءoםםסםदদোোোদদोદોਦॊोdਤದೊദദൊദदꯣଦୋୋᱚ##Êொదొోۆhخخooooოoorラooщоោщщғoщນນoyhoඔ®ொoooėėgoooooēolлoخⵄⵄⵄoооသသဲဝသүooޮخعooooyrooooोrlyہہوہجoрooocccooooооощәщщщщщооороoщәщщщщoroоorroooooooܞܧนวนҳookhoooْщohощщощoᎣyyyuurrr.ryroooolоoppўooo',
+                    'ححppթպպպպբةححةحpзppppড়পppзпзпplppppпཆзззпplpᔨppppppplppᢇᠫᢉᡦᡌᡦཕཕپpppppпppzpqppпplpⵃppحppplpፐpppjjpkyyპppppp;;llppppპშპзზppppppߔπππppppꦥڤڤpפפפפजজপপপজজपજપਜपपʤਪಜಪജജപജजꯄଜପପᱯஜஜ¢ிజపపپpححppppპpplセppзпផзззpзຍຍpñlpප¤ிpppęębpppppčpgгpحⵃⵃⵃpппစစပႁစзppޕکڤppppølppppपk;;پپپپحpлppppppppppпппзззззззппплпpззззззplpпpllpppppppܚܦยแยзppbppppپзppпззпзpᏁ;;;yylll6lblpppp;пp;;зppp',
+                    'ضضqqճխխքքխقضضقضqјqǉǉqঙদaa,ч,яq////qьཀйййяq̀qᖏqaqqqqàqqᢀᠣᢀᠴᡆᠴཅཅچqqqqq№qqüqxqqяqåqⴰqqضŝŝq.qቀqaabb#:qqაaaaaqqq\'/qqqqქჩქйღɛʋɛqɛʋߊ;;;qqqqꦐققq/̇קץौৌটডংৗৌ‌ૌટੌटृʰੌೌಟൌൗൈൗौꯈୌ‌ୃᱧௌௌ»ஞౌటెقfضضqqqqქqq:タqĩйөឆйййqйົົqq.qඍëஞdqąqqūqąqšqūqēэqضⴰⴰⴰţљљဆဆသၸဆфqqްضقịẹqqqåqqqáट\'qqققققطq\'qqq\'\'\'qqqqљяљйҟйййййяяа\'яqййййййqåqяáååqqqqqqaܔܩๆ็ๆйäqqfqqqقйqfяййяйqᎪqqqqq\'/́;\'5;qqqqqяqqqйqaq',
+                    'ققrrսրրրռրرققرقrкrrrrপরrrирирrphhhrрངкккрrprᑭrrrrrrrpšrᢃᠷᢃᡵᠷᠷརརرrrrrrрrrprcrrрrprⵔrrقrrrprረrrroorgppრrrrrrpppprrrrრძრкკrrrrrrߙρρρrrrrꦫررrררררीীরররীীरીરੀररiੀೀರീീരീीꯔୀରରᱨீீºசీరరرiققrrrrრrrpスrrкрរкккrкພພrpprරêசrrrllorrrrrrrpпrقⵔⵔⵔrррမမရမမжrrރقرrrrrpprrrrरprpرررردrпrrrhhhrrrrррркккккккрррпрrккккккrprрrpprrrrrrrܩܪพอพкrroırrrرкrıрккркrᏛppppppppyp.prrrrfрrwwкrrr',
+                    'سسssվսսսսսسسسسسsыssssুসssясясsoeeesсཐыыысsosᐅsssssssossᢌᠰᢌᠰᠰᠰསསسsssssсssosissсsosⵙssسsssosሰsssuusassსsssssrroossssსისыთssssssߛσσσssssꦱسسsדדשדेেসসসেেसેસੇससeੇೇಸേേസേेꯁେସସᱥேேÇளేసంسîسسssssსssoトssысសыыыsыຫຫsrosස÷ளssskkesssssusuуsسⵙⵙⵙsссျျစႄ်ыssސسسssssrossssसasrسسسسوsоssseeessssсссыыыыыыысссосsыыыыыыsosсsoosssssssܣܣหทหҷssaisssسіsiсіисиsᏍrrrrroooko8osssssсsssқsss',
+                    'ففttմտքտտդتففتفtеttttটটttштштtyxĉxtтིееетtytᑎtttttttyttᢄᠲᢄᡨᡐᡨཏཏتtttttтttytwttтtytⵜttفtttytተtttèèt.wwტtttttgbyyttttტჭტеეttttttߕτττttttꦠتتtאאתאूূতটতূূतૂતੂतटuੂೂತൂൂതൂूꯇୂତଟᱴூூÅவూతతتoففttttტttyカttетតеееtеະະtgytතõவtttddqtttttmtbбtفⵜⵜⵜtттအအတဢအэttތفتttttgyttttतyfgتتتتٹtыtttxĉxttttтттееееееетттытtееееееtytтtyytttttttܦܬะระеttfotttتеtoтеетеtᏔgbbbbyyyuyoyttttkтtbbеttt',
+                    'ععuuւըըււըُععوعuгuuuuজুuuкукуugllluуེгггуuguᒥuuuuuuuguuᢆᠦᢆᡠᡉᡠུུۇuuuuuуuuguhuuуuguⵓuuعuuugu#uuuvvuvmmუuuuuullgguuuuუთუгგuuuuuuߎθθθuuuuꦸؤؤuווווहহুুুহহुહુਹुुhਦಹುഹഹുഹहꯎହୁୁᱩஹஹÃரహుుئrععuuuuუuugナuuгуុгггuгີີulguඋóரuuujjnuuuuunudдuعⵓⵓⵓuууကကုၵကгuuުعوuuuulguuuuुfylءءعءتuгuuullluuuuууугггггггууугуuггггггuguуugguuuuuuuܥܜีดีгuutruuuُгurуггугuᎤllljjgggsgsguuuuuуuffгuuu',
+                    'ررvvյվվվվւثردذرvмvvvvরআvvэвѣжvkbbbvвཡмммжvkvᑲvvvvvvvkvvᡇᠤᢧᡡᡇᡡཁཁۈvvvvvвvvkvpvvьvkvⵖvvرvvvkvሸvvv..vivbვvvvvvvvkkvvvvვღვмმvvvvvvߢωωωvvvvꦛثثvההוהनনৱৱভননडનવਨववnਵನವനനവനनꯚନଡୱᱶநந±எనవవڤcررvvvvვvvkヒvvмвវмммvмອອvvkvවâஎvvvvvąvvvvvkvvвvرⵖⵖⵖvввလလညလလсvvވرۏvṣvvvkvvvvवvvvططڀطسvкvvvbbbvvvvвввмммммммжвжкжvммммммvkvжvkkvvvvvvvܪܫอหอмývucvvvڨмvcвммжмvᎥvvdvvkkkvk,kvvvvvжvccмvvv',
+                    'صصwwփււոովوصصشصüүwǌǌwযূzzушувw,,,,wжཁцццвw,wᐃwzwwwwz,wwᢁᠸᢁᠸᡖᠸཆཆۋwwwwwюww,wvwwвw,wⵣwwصĝĵw,wወwzzééw\'ccზzzzzwww,,wwwwწპწцცwwwüwwߠςςςwwwwꦮووw\'׳וןैৈডীঢৈৈवૈડੈडतæੈೈಡൈൈവൈैꯋୈୱତᱣைைÈறైడసوgصصwwwwწzw,テwwцүឹццңwцໄໄww,wඇøறæwžggėwžwēwgwoоwصⵣⵣⵣêњњတတဝတတцwwއصوwwwww,wwwšौ,wwووصوصw,www,,,wwwwњєњцццццццвжз,вwцөццццwäwвš,,wwwwwwzܨܘไตไқwwjgwwwوцwgшццвцwᎳwwwww,,,q,6,wwwwwвwddцwzw',
+                    'ېېxxդցցղղցخءطخءxчxǆǆxোশxxйжйьxqçŝ;xшཟчччьxqxᐊxxxxxxxqxxᢧᠱᢗᡧᠱᡧཤཤشxxxxxяxxqxöxxжxqxⵅxxءĉĉxqxአxxxyyxqx-ხxxxxxxcqqxxxxხჰხчჩɔxxxɔɩ،χχχxxxxꦚخخxססחסंংষড়ষংং्ંષਂषद̆ਂಂಷംം്ംंꯊଂ୍ଦᱽஂஂ´ஒంషూخêططxxxxხxxqサxũчхខччіxчປປxxqxඳåஒxxūxxęxūxķxbxzзxءⵅⵅⵅçџџထထဋထထчxx×ءخṅọxxxqxxxčडxxxششخشفxяxxxçŝ«xxxxџїџчччччччьхьяхxччччччxqxьčqqxxxxxxx[ܨปปปчüxwöxxxخчñöхччьчxᏴxcxccqqqxq0qxxxxxьxxxчxxx',
+                    'غغzyոեեըըեيغغطغyнzzžyচএyyщъщъyfwŭwyыུннныyfyᓯyyzzzzyfyyᢅᠶᢅᠶᡕᠶཡཡيzzyyyыzzfzkzyзyfyⵢyyغŭĝyfyየyyŷ̂yhjjყyyyyyjjffyyyyყტყнნyyyyyyߦυυυzzyyꦪييyטטעטबবযযধববयબયਬययbਰಬಯബബയബबꯌବଯଯᱭ##Äலబయీیdغغyyyyყyyfンyyныយнннyнິິyjfyයôலyyyččjyyyāyvyjйyغⵢⵢⵢyѕѕပပယပပнyyޔغيyyyyjfyyyŧयqjjےےٿےپzфyyywŭwyyyzззжннннннныыыфыyннннннyfyыŧffzyzzyyyܜܝั่ัнyycdyyyيнydиннинyᏯjjj[[fffrfrfyyyyjыyjjнyyy',
+                    'ۍظyzժզզզզզزئظزئzәyžzzঁয়wwюзюзz;yĵyzзཞяяязz;zᖓzwyyyyw#zzᢙᠽᢖᡯᠴᡯཟཟزyyzzzзyyöyüyzыzæzⵡzzئzzz-zዘzwwààz;zxწwwwwzzx;;zzzzზჯზяჭzzzɲzzߥζζζyyzzꦔززzזזזזॆzঞৈযেৎशzઞzञँ̪ੱೆಞെെഴെ\'ꯉ#ଶଁᱲெெ½ணెఞొزjظظzzzzზwz;ツzzязឋяяяzяຜຜzz-zඤíணzzzzzųzzzzzņzxьzئⵡⵡⵡzззဖဖဇၽဖяzzޒئزzzzzzæzzzzषzzzززززقy;zzzyĵyzzzyжюзяџяяяяяззв;зzяяяяяяz.zзzääyzyyzzw]ܙผบผяzzxjzzzزяzjзяязяzᎬzxzxx;;;\';9\'zzzzzзzzzяzwz',
+                    '----էռռ֊֊ռ-------\'\'\'\'--))-----[[[[--༔-----̂----\'\'\'\')́̄-      ཧཧ-=====%ßß+ß-ßßß+++)++---\'\'\'-+)\'==)[//-))))---[----------------)---üüüüꦎ----־------------ਃ----ಃ-------ଃ----௱#-ః---/--ööö\'\'--@ホ--өяឥөө-ś-ຊຊ\'\'\'\'-#---_))w-?--------))))--------е-------/+++++++-[---أڏ--+[\'\'\'ººº\'--+\'\'\'---------)ш----!---++++++[\'\'====)--ข๑ขғ-*//*----xxє-----Ꮏ---00[8[2[[!---------ғ-)-',
+                    'ږږ..շղղ․․ղ۔ز..زşө.....।::л.л..vfff..ཧююю..v...:....:v..᠃᠃᠃᠉。。ཇཇ.........v......v.:..ز...v.፤.::hh.p,,ღ::::...vv.....ფ.юყ...ç..،.......꧉...ץץ.......।....................ᱹ..##............:.vル..ющ។ююю#юໃໃ..v..##..šąąš.f.....,,.ز:::,...ၜာ..в...ز......v....।b..۔۔.۔۔.в...fff.......юҩююююю..:ж.#юююююю.v...vv......:ܙ.ใจใю.çş.ç..۔юç..ююєю.....,,vvv0vgv.........ю.:̣',
+                    'ګګ[\'րփփ՛՛փءط؛\'طəҝćććć\'\'ùùч\'ч\'̃̃́́́~̃ཛэээ\'̀-è\'èɔääàà̀-́̀᠋᠋᠋᠋᠋᠋།།\'§§§§§;ääläyääэø-øùääط\'ĥ́́´፦øù/mmùw\'\'ჟùùùù\'\'\'-\'\'́\'́\'გჩӕძ\'\'\'ǝ\'\'߯\'\'̀ááááꦵ««#,֚\'\'टট\'\'\'টট\'ટ\'ਟ\'\'ʈ\'ಟ\'ടട\'ടट\'ଟ\'\'\'டட¹ஙట\'\'\'şگگ́́́ààù:-ケ:\'эь់ээә#эງງ{{{´\'éங\'\'ėyyž\'ė\'\'##\'mм\'ط#%ⵑıќќ\'\'\'\'ဒп\'\'\'ط\'\'\'́ææ-ææææ\'-\'\'\'ٰڱ\'\'ą-º̃~́́́º\'țțћгћэҽээээӕ\'\'ù-\'#ээээээä-äщä--ćć§§§§ñܛܞงขงэ\'ivşîʼʼءєişжєєчє\'\'\'\'\'oo---7---ʻ́́\'\'ю\'\'́э\'ù́',
+                    'ککëëպթթ;;թ؛كك؛كıжčččč;;mmм;м;çsnnnçчཚжжж;;s;;;mööéémsœ#ᢒ;ᢔ;;;ཞཞ؛ůůůůůьöösödööчæsæⵎööك;ŭñsñ።æmmnnmduuმmmmm;ooss;;;;;ბთжჟ;;;ı;;ߡ́;́éééé꧇؛؛#ףף;ףचচ;;;চচ;ચ;ਚ;;ʧਸಚ;ചച;ചच;ଚ;;;சசÆ்చ;ట؛yککæææòòm;sレ;;жэើжжж#жວວñosñ;ö்;;ųoop;ų;ī;c;rр;كⵎⵎⵎşччးးဥႈးд;;;ک؛ụ;+øosøøøø;spo؛؛ک؛؛łсçççnnnç;șșчччжжжжжжж;;мс;#жңжжжжösöшössččôôôômܟܚวไวж;şdyş;ː؛жşyчжжґж;Ꮸoooiisss8sks;;;;hч;iiж;m;',
+                    '////ռծծ//ծ#ظ/\\ظ..----/্==б/б/;zzzz;;ཨ..//ézéᔭé!----#z#/#·#?、、ཉཉئ--------#-j----z-!--ظ//-z-፧-!;ff,jkkჭ!!=!///zz/////წძ/ჰ///ş//߹///----ꦂ///.֭//यয়///যয়/ય/ਯ//j/ಯ/യയ/യय/ଯ///யய##య/శ/,//þþþ--ò/zメ//..៊№№.№.ຝຝ--z-/##//ęhhč/ę/ļ/ļ/../ظ!!!.///။၊/။ю///ظ///---z----्;///#ئ//-з---zzz-//----./.ё//.//!з/...ёё..-z---zz------!܇܇ฝพฝ./..,.//#..,////ї/Ꮒ///..zzz9z\'z/////////./!̉',
+                    ''
+                ],
+                empty: [[90, 142, 149, 151, 164, 170, 185, 186, 187, 188, 205, 222, 234, 239, 240, 287], [10, 13, 55, 57, 74, 90], [10, 55, 136, 168, 169, 196, 287, 321], [10, 55, 136, 170, 171, 196, 205, 206, 287, 321], [196, 287], [170, 205, 224], [], [224], [], [], [], [], [224], [97, 170, 205], [170, 205, 224], [55, 57, 170, 205], [73, 74], [], [], [90], [], [10], [], [10, 90], [219], [], [220, 221], [90, 168, 169], [], [], [], [61, 62, 96], [], [90, 98, 99, 168, 169], [], [96], [], [], [], [90], [], [], [], [168, 169], [52, 164], [170, 205], [170, 171, 196, 205, 206, 287], [136, 196, 217, 218, 224, 287], [54, 136, 196, 287], [10, 51, 53, 55, 57, 170, 171, 205, 206, 256, 321], []],
+                skip: {
+                    17: { 29: '/', 30: '\\', 31: '\\', 32: '\\', 33: '\\', 34: '/', 35: '/', 185: '\\', 186: '\\', 187: 'ロ', 188: '\\', 335: '/', 336: '/', c: '' },
+                    18: { 185: '\\', 186: '¥', 187: 'ー', 188: '¥', c: '' },
+                    50: { 36: '་', 192: '​', c: ' ' }
+                }
+            };
+            const f = (o) => Object.freeze(o);
+            const acc = DATA.layouts.split('|');
+            const layouts = {};
+            for (let i = 0; i < acc.length; ++i) {
+                layouts[acc[i]] = i;
+            }
+            const codeAcc = DATA.codes.split('|');
+            const codes = {};
+            for (let i = 0; i < codeAcc.length; ++i) {
+                codes[codeAcc[i]] = i;
+            }
+            const values = [];
+            for (let i = 0; i < DATA.values.length; ++i) {
+                let v;
+                const skip = DATA.skip[i];
+                if (skip) {
+                    v = new Array(acc.length).fill(skip.c);
+                    for (const map in skip) {
+                        if (map === 'c')
+                            continue;
+                        v[map] = skip[map];
+                    }
+                }
+                else {
+                    v = DATA.values[i].split('');
+                    for (const empty of DATA.empty[i])
+                        v[empty] = '';
+                }
+                f(v);
+                values.push(v);
+            }
+            f(acc);
+            f(layouts);
+            f(codeAcc);
+            f(codes);
+            f(values);
+            return f({ acc, layouts, codeAcc, codes, values });
+        })();
+
+
+
+
         class Detector {
+            // copy of MAP.acc
             _layouts;
+            // MAP.acc.keys
             _acc;
+            // MAP.map.keys
             _codeAcc;
+            // MAP.map.values
             _values = [];
+            // {code: index}
             _codes = {};
+            // recorded codes
             _rec = [];
-            _cand;
-            _key;
             _cached;
             _active = '';
+            _discardHandler = () => false;
             constructor(data) {
-                this._acc = data.acc.split('|');
-                this._codeAcc = Object.keys(data.map).sort();
-                this._layouts = {};
-                for (let i = 0; i < this._acc.length; ++i) {
-                    this._layouts[this._acc[i]] = i;
-                }
+                this._acc = data.acc;
+                this._codeAcc = data.codeAcc;
+                // FIXME: ~12.3kB per instance
+                // better: make it singleton and deal only with indices in instance
+                this._layouts = data.layouts;
                 let p = 0;
                 for (const code of this._codeAcc) {
                     this._codes[code] = p++;
-                    this._values.push(data.map[code].split(''));
+                    // FIXME: this gets really big in memory! (~100kB per instance)
+                    // better: stick with original string immutable? (~35kB singleton)
+                    //this._values.push(data.map[code].split(''));
                     this._rec.push(undefined);
                 }
-                for (const code in data.empty) {
-                    const line = this._values[this._codes[code]];
-                    const empty = data.empty[code];
-                    for (let i = 0; i < empty.length; ++i) {
-                        line[empty[i]] = '';
-                    }
-                }
-                for (const code in data.skip) {
-                    this._values[this._codes[code]] = new Array(this._acc.length).fill('');
-                    const line = this._values[this._codes[code]];
-                    const skip = data.skip[code];
-                    for (const map in skip) {
-                        line[map] = skip[map];
-                    }
-                }
-                this._values[this._codes.Space] = new Array(this._acc.length).fill(' ');
-                for (const map in data.Space) {
-                    this._values[this._codes.Space][map] = data.Space[map];
-                }
-                this._cand = [...this._acc].map(e => ({ layout: e, match: 0 }));
-                this._key = { layouts: [], certain: 0, key: undefined };
+                this._values = data.values;
             }
+            /**
+             * Free all internal resources.
+             * The instance may not be used anymore after calling dispose.
+             */
+            dispose() {
+                this._discardHandler = () => false;
+                this._layouts = {};
+                this._acc = [];
+                this._codeAcc = [];
+                this._values = [];
+                this._codes = {};
+                this._active = '';
+                this._cached = undefined;
+            }
+            /**
+             * Set a discard handler to get notified, when the recorded characters
+             * get swiped due to a mismatch with an earlier recorded character.
+             * This is a strong indicator, that the user changed the keyboard layout
+             * on OS side.
+             * The handler gets called before the swipe happens and the should expect
+             * `code` and `key` as arguments for further inspection.
+             * Return `true` from the handler to suppress the swipe (useful to not lose
+             * changes from detector methods called in the handler itself).
+             */
+            setDiscard(handler) {
+                this._discardHandler = handler;
+            }
+            /**
+             * Clear the discard handler.
+             */
+            clearDiscard() {
+                this._discardHandler = () => false;
+            }
+            /**
+             * Reset detector.
+             */
             reset() {
+                // FIXME: implement onReset event
                 this._rec = this._rec.map(e => undefined);
                 this._cached = undefined;
             }
+            /**
+             * Return list of registered layouts.
+             */
             get layouts() {
                 return [...this._acc];
             }
+            /**
+             * Return list of supported key codes.
+             */
             get codes() {
                 return [...this._codeAcc];
             }
+            /**
+             * Get active layout.
+             */
             get activeLayout() {
                 return this._active;
             }
+            /**
+             * Set active layout. The layout must be registered.
+             */
             set activeLayout(layout) {
-                if (this._layouts[layout] === undefined) {
+                if (layout && this._layouts[layout] === undefined) {
                     throw new Error(`layout '${layout}' is not registered`);
                 }
                 this._active = layout;
             }
+            /**
+             * Register a custom layout.
+             * Currently it is not possible to introduce new codes.
+             */
             registerLayout(layout, map) {
                 if (!layout || this._layouts[layout] !== undefined) {
                     throw new Error(`layout '${layout}' is already registered`);
@@ -90,21 +236,27 @@
                 const pos = this._acc.length;
                 this._layouts[layout] = pos;
                 this._acc.push(layout);
-                this._cand.push({ layout, match: 0 });
                 for (let i = 0; i < this._values.length; ++i) {
-                    const v = map[this._codeAcc[i]];
-                    this._values[i].push(v);
+                    this._values[i].push(map[this._codeAcc[i]]);
                 }
                 this._cached = undefined;
             }
+            /**
+             * Unregister a layout.
+             * Will reset the active layout, if it was the unregistered one.
+             */
             unregisterLayout(layout) {
                 if (this._layouts[layout] === undefined) {
                     throw new Error(`layout '${layout}' is not registered`);
                 }
                 const pos = this._layouts[layout];
                 delete this._layouts[layout];
+                for (const layout in this._layouts) {
+                    if (this._layouts[layout] > pos) {
+                        this._layouts[layout]--;
+                    }
+                }
                 this._acc.splice(pos, 1);
-                this._cand.splice(pos, 1);
                 for (let i = 0; i < this._values.length; ++i) {
                     this._values[i].splice(pos, 1);
                 }
@@ -113,6 +265,9 @@
                     this._active = '';
                 }
             }
+            /**
+             * Get the layout map for a given or the active layout.
+             */
             getLayoutMap(layout) {
                 const acc = this._layouts[layout ?? this._active];
                 if (acc === undefined) {
@@ -126,7 +281,10 @@
                 }
                 return result;
             }
-            getRecordedLayoutMap() {
+            /**
+             * Get a map of recorded key codes.
+             */
+            getRecordedMap() {
                 const result = {};
                 for (let i = 0; i < this._codeAcc.length; ++i) {
                     if (this._rec[i] !== undefined) {
@@ -135,31 +293,46 @@
                 }
                 return result;
             }
+            /**
+             * Get character key for key code and layout.
+             * Uses the currently active layout, if `layout` is omitted.
+             * The known key codes can be requested with `.codes`,
+             * the registered layouts with `.layouts`.
+             */
             getLayoutKey(code, layout) {
-                if (this._codes[code] !== undefined && this._layouts[layout]) {
-                    return this._values[this._codes[code]][this._layouts[layout]];
+                if (this._codes[code] !== undefined &&
+                    this._layouts[layout ?? this._active] !== undefined) {
+                    return this._values[this._codes[code]][this._layouts[layout ?? this._active]];
                 }
             }
-            getActiveKey(code) {
-                if (this._active && this._codes[code] !== undefined) {
-                    return this._values[this._codes[code]][this._layouts[this._active]];
-                }
-            }
+            /**
+             * Feed a key code and a key character to the detector.
+             */
             feed(code, key) {
                 const pos = this._codes[code];
                 if (pos !== undefined) {
+                    this._cached = undefined;
                     if (this._rec[pos] && this._rec[pos] !== key) {
+                        // The key value should never change for the same layout,
+                        // so we treat a sudden change as a layout change.
+                        if (this._discardHandler(code, key)) {
+                            return;
+                        }
                         this.reset();
                     }
                     this._rec[pos] = key;
-                    this._cached = undefined;
                 }
             }
+            /**
+             * Shows all known layouts and their degree of matching mappings
+             * sorted descending (likely layouts first).
+             * Ideally there is only one leading layout with a match of 1.
+             * If the leading match is not 1, then the user uses an
+             * unknown or custom layout.
+             */
             matches() {
                 if (!this._cached) {
-                    for (let i = 0; i < this._cand.length; ++i) {
-                        this._cand[i].match = 0;
-                    }
+                    const cand = this._acc.map(e => ({ layout: e, match: 0 }));
                     let c = 0;
                     for (let k = 0; k < this._rec.length; ++k) {
                         const v = this._rec[k];
@@ -168,12 +341,12 @@
                             const values = this._values[k];
                             for (let i = 0; i < this._acc.length; ++i) {
                                 if (v === values[i]) {
-                                    this._cand[i].match++;
+                                    cand[i].match++;
                                 }
                             }
                         }
                     }
-                    this._cached = [...this._cand];
+                    this._cached = cand;
                     if (c) {
                         this._cached.sort((a, b) => b.match - a.match);
                         for (let i = 0; i < this._cached.length; ++i) {
@@ -183,9 +356,24 @@
                 }
                 return this._cached;
             }
+            /**
+             * Tries to resolve a key code to a key character.
+             * If `certain` is 1 then the result matches the listed layouts.
+             * Ideally only one layout is returned, then the detector has seen enough
+             * key events in `feed`.
+             * If multiple layouts are returned but only one key, then the layout is
+             * not yet fully determined but the key code is already known from `feed`.
+             * When multiple keys are returned, then the character is still undetermined
+             * and the layout needs further resolving with resolve.
+             * A certain value lesser than 1 can have different reasons:
+             * - not enough key event fed yet (multiple layouts or keys returned)
+             * - user has an unknown or custom layout (check match value of `matches`)
+             * If `certain` is 0 the result should not be used as the detector
+             * has not seen any key events at all.
+             */
             guessKey(code) {
                 const lm = this.matches();
-                let cands = [];
+                let layouts = [];
                 let last = 0;
                 for (let i = 0; i < lm.length; ++i) {
                     if (lm[i].match === 0) {
@@ -193,51 +381,61 @@
                     }
                     if (lm[i].match === 1) {
                         last = 1;
-                        cands.push(lm[i].layout);
+                        layouts.push(lm[i].layout);
                     }
                     else if (lm[i].match >= last) {
                         last = lm[i].match;
-                        cands.push(lm[i].layout);
+                        layouts.push(lm[i].layout);
                     }
                     else {
                         break;
                     }
                 }
-                if (this._rec[this._codes[code]] !== undefined) {
-                    this._key.layouts = cands;
-                    this._key.certain = 1;
-                    this._key.key = this._rec[this._codes[code]];
-                    return this._key;
+                if (!layouts.length) {
+                    layouts = [...this._acc];
                 }
-                const codeAcc = this._values[this._codes[code]];
-                if (cands.length === 1) {
-                    this._key.layouts = cands;
-                    this._key.certain = last;
-                    this._key.key = codeAcc
-                        ? codeAcc[this._layouts[cands[0]]]
-                        : undefined;
-                    return this._key;
+                const pos = this._codes[code];
+                if (pos === undefined) {
+                    return {
+                        layouts,
+                        certain: last,
+                        key: undefined
+                    };
                 }
-                if (!cands.length) {
-                    cands = [...this._acc];
+                if (this._rec[pos] !== undefined) {
+                    return {
+                        layouts,
+                        certain: 1,
+                        key: this._rec[pos]
+                    };
+                }
+                const codeAcc = this._values[pos];
+                if (layouts.length === 1) {
+                    return {
+                        layouts,
+                        certain: last,
+                        key: codeAcc[this._layouts[layouts[0]]]
+                    };
                 }
                 const values = [];
-                for (let i = 0; i < cands.length; ++i) {
-                    values.push(codeAcc ? codeAcc[this._layouts[cands[i]]] : undefined);
+                for (let i = 0; i < layouts.length; ++i) {
+                    values.push(codeAcc[this._layouts[layouts[i]]]);
                 }
-                const valuesSet = new Set(values);
-                if (valuesSet.size === 1) {
-                    this._key.layouts = cands;
-                    this._key.certain = last;
-                    const [value] = values;
-                    this._key.key = value;
-                    return this._key;
-                }
-                this._key.layouts = cands;
-                this._key.certain = last / valuesSet.size;
-                this._key.key = values;
-                return this._key;
+                return {
+                    layouts,
+                    certain: last / new Set(values).size,
+                    key: values
+                };
             }
+            /**
+             * Calculate distance to resolve keyboard layout.
+             * Returns the candicate layouts and a list of keys resolving layout ambiguity.
+             * The key list is sorted descending by candidate differences for a key code
+             * (picking a high difference code needs less follow-up steps).
+             * The user should be asked to press the corresponding key and the key event
+             * should be fed to `feed`.
+             * Repeat this process until this method returns only one layout.
+             */
             resolve() {
                 const lm = this.matches();
                 let cands = [];
@@ -269,6 +467,7 @@
                 const value = new Set();
                 for (let i = 0; i < this._values.length; ++i) {
                     if (this._rec[i]) {
+                        // don't handle key if it was already recorded
                         continue;
                     }
                     value.clear();
@@ -284,100 +483,13 @@
             }
         }
 
-        const KEYMAPS = {
-            acc: 'af_ps|af_ps-olpc|al|al_plisi|am|am_eastern|am_eastern-alt|am_phonetic|am_phonetic-alt|am_western|ara_buckwalter|ara_digits|ara_mac|ara_mac-phonetic|ara_olpc|az|az_cyrillic|ba|ba_unicode|ba_unicodeus|ba_us|bd|bd_probhat|be|be_nodeadkeys|bg|bg_bas_phonetic|bg_bekl|bg_phonetic|br|br_dvorak|br_nativo|br_nativo-epo|br_nativo-us|br_nodeadkeys|br_rus|bt|by|by_intl|by_legacy|by_phonetic|ca|ca_fr-dvorak|ca_fr-legacy|ca_ike|ca_multix|cd|ch|ch_de_nodeadkeys|ch_fr|ch_fr_nodeadkeys|cm_azerty|cm_dvorak|cm_mmuock|cm_qwerty|cn_mon_todo_galik|cn_mon_trad|cn_mon_trad_galik|cn_mon_trad_manchu|cn_mon_trad_todo|cn_mon_trad_xibe|cn_tib|cn_tib_asciinum|cn_ug|cz|cz_bksl|cz_qwerty|cz_qwerty-mac|cz_qwerty_bksl|cz_rus|de|de_deadacute|de_dvorak|de_e2|de_neo|de_nodeadkeys|de_qwerty|de_ru|dk|dk_dvorak|dk_nodeadkeys|dz_ber|ee|ee_nodeadkeys|eg|epo|epo_legacy|es|es_dvorak|es_nodeadkeys|et|fo|fr|fr_afnor|fr_bepo|fr_bepo_afnor|fr_bre|fr_dvorak|fr_ergol|fr_ergol_iso|fr_geo|fr_latin9|fr_latin9_nodeadkeys|fr_mac|fr_nodeadkeys|gb|gb_colemak|gb_colemak_dh|gb_dvorak|gb_dvorakukp|gb_extd|gb_intl|gb_mac|gb_mac_intl|ge|ge_ergonomic|ge_mess|ge_os|ge_ru|gh_akan|gh_avn|gh_ewe|gh_fula|gh_ga|gh_gillbt|gn|gr|gr_nodeadkeys|gr_polytonic|hu|hu_101_qwertz_dot_dead|hu_102_qwerty_dot_dead|hu_qwerty|id_javanese|id_melayu-phonetic|id_pegon-phonetic|ie_ogam_is434|il|il_biblical|il_phonetic|il_si2|in|in_ben|in_ben-kagapa|in_ben_baishakhi|in_ben_bornona|in_ben_gitanjali|in_ben_inscript|in_bolnagri|in_guj|in_guj-kagapa|in_guru|in_hin-kagapa|in_hin-wx|in_iipa|in_jhelum|in_kan|in_kan-kagapa|in_mal|in_mal_enhanced|in_mal_lalitha|in_mal_poorna|in_marathi|in_mni|in_ori|in_ori-bolnagri|in_ori-wx|in_sat|in_tam|in_tam_tamilnumbers|in_tamilnet_TSCII|in_tamilnet_tamilnumbers|in_tel|in_tel-kagapa|in_tel-sarala|iq_ku_ara|iq_ku_f|ir|ir_winkeys|is|is_mac|is_mac_legacy|it|it_geo|it_mac|jp|jp_dvorak|jp_kana|jp_kana86|ke_kik|kg|kg_phonetic|kh|kz|kz_ext|kz_kazrus|kz_latin|kz_ruskaz|la|la_stea|latam|latam_colemak|latam_dvorak|latam_nodeadkeys|lk|lk_tam_TAB|lk_tam_unicode|lk_us|lt|lt_ibm|lt_lekp|lt_lekpa|lt_ratise|lt_sgs|lt_std|lt_us|lv_adapted|lv_apostrophe|lv_ergonomic|lv_fkey|lv_modern|lv_modern-cyr|lv_tilde|ma|ma_tifinagh|ma_tifinagh-alt|ma_tifinagh-extended|md_gag|mk|mk_nodeadkeys|mm|mm_mnw|mm_mnw-a1|mm_shn|mm_zgt|mn|mt|mt_us|mv|my|my_phonetic|ng_igbo|ng_yoruba|nl|no|no_colemak|no_dvorak|no_mac|no_mac_nodeadkeys|no_nodeadkeys|no_smi|np|ph_capewell-dvorak|ph_capewell-qwerf2k6|ph_colemak|pk|pk_ara|pk_snd|pk_urd-crulp|pk_urd-nla|pl_qwertz|pl_ru_phonetic_dvorak|pt|pt_mac|pt_mac_nodeadkeys|pt_nativo|pt_nativo-epo|pt_nativo-us|pt_nodeadkeys|ro|ro_std|ro_winkeys|rs|rs_rue|rs_yz|ru|ru_ab|ru_bak|ru_dos|ru_legacy|ru_mac|ru_os_winkeys|ru_phonetic|ru_phonetic_YAZHERTY|ru_phonetic_azerty|ru_phonetic_dvorak|ru_phonetic_winkeys|ru_ruchey_en|ru_ruchey_ru|ru_tt|ru_typewriter|ru_typewriter-legacy|ru_udm|ru_xal|se|se_dvorak|se_nodeadkeys|se_rus|se_smi|se_svdvorak|se_us_dvorak|si|si_us|sk|sk_bksl|sk_qwerty|sk_qwerty_bksl|sn|sy_syc|sy_syc_phonetic|th|th_pat|th_tis|tj|tm|tr|tr_e|tr_f|tr_ku|tw_indigenous|tw_saisiyat|tz|ua|ua_crh|ua_crh_f|ua_homophonic|ua_legacy|ua_macOS|ua_phonetic|ua_typewriter|us|us_chr|us_colemak|us_colemak_dh|us_colemak_dh_ortho|us_colemak_dh_wide|us_colemak_dh_wide_iso|us_dvorak|us_dvorak-classic|us_dvorak-intl|us_dvorak-l|us_dvorak-mac|us_dvorak-r|us_dvp|us_haw|us_hbs|us_intl|us_mac|us_norman|us_rus|us_symbolic|us_workman|us_workman-intl|uz|vn|vn_fr|vn_us',
-            map: {
-                Backquote: '‍‍\\`՝՝՝՝՝՝ٰذــ````````‍²²(ю(ч\'\'===\'\'༉ёёёю##°ᕻ/`§§§§$̍̀̍᠍᠍᠍᠍᠍᠍ཨཨ`;;;<;ё̂^^̂̂^̂ё½|½²̌^ذ``ººº#½²@$$²_``!œœ@²`````̀̀§§„„ჭэ^``````߬```0í0í꧞```;׃`;ॊ#`‍‍:‍ं#`#````ೊ`ൊൊ്ൊॢ`#ଂ``ொொ#\'ొ`ృ‍+‍÷̊°£\\\\@####`ёё«(ёё(ё‍"||||`#\'`````+̄````````#ذ²²²`̀``ၝ``#=ċċ`##``@|||||||ऽ```ًٍ’~`˙`\\``+++\\`„]`ь`ё́ә)ё]эююююю#ёһ|\'ё(§§§ё|§\'¸¸;;;;²܏܏__๏ёž"++"``ٰ\'"+`\'\'\'\'`````````̀```$``̀``ё``̀ё`²̀',
-                Backslash: '\\\\]\\»\'\'շշ\'#\\\\#\\\\\\žžžž\\‌µµ„ь„ю]-\'\'\']]ཝ\\\\\\э<<à\\à"$$$$᷆\\æ\\#᠁#᠁᠁᠁ཛཛ\\̈\\̈̈\\\\##-####ю\'<\'*\'\'\\\\\\ççç#\'**çç?~\\\\ჩ**̀*#######\\\\\\/=\\\\\\\\ɖ\\\\\\ߑ\\\\\\űűűű꧀\\\\#\\׀\\\\ॉ\\\\\\ৱ\\\\।ૉ\\\\\\\\\\।\\\\‌ർ\\‌ॉ\\\\।।᱿\\\\\\\\\\\\ౌ\\x\\پ+++ùù§]]ム]\\үъឮ\\\\\\\\\\ໜ/}}}ç\\\\\\\\\\\\\'\'z\\q\\\\\\ķ\\//\\\\***\\жж၏ၑၜ\\၏!#ż\\\\\\\\\\<\'\'<@@\'đॐ\\\\\\\\؎ڍ\\\\ó\\̃\\\\\\\\\\~\\ââжжж\\\\ң\\\\ё\\эээээ//\\)(\\\\\'\'\'юđ<;žžň\\ň\\µ܆܆ฃๅฅ\\ş,,x,\\\\\\ґ,ñьґґю(\\Ꮹ\\\\\\\\\'\\\\\\\\\\\\\\\\\\\\\\\\э\\\\\\\\\\*\\',
-                BracketLeft: 'ججççծչչխխչ#ججثجöхšššš[ে̂^цяцш́́̃̃̃\'́ཇхххш̂é̂ᒡ̂ɛüüèè́/ǿ#[ᢊ[[[ཙཙ]úúúúúэüü?üßüüшå\'åⵯüüجĵ[̀̀`ፀå̂-zẑz[[თ̂^̂^[[[/[[[[[[კშхხ[ɛɔƴ[ɛ߳[[̃őőőő꧊]]#]][]डড[[[ডড[ડ[ਡ[[ɖਡಡ[ഡഡ[ഡड[ଡ[[[##́ுడ[జ]qججðððèèì@/゛@[хчៀххх#хບບ́́́`[̂ு[[į??c[į[ū[ž[[[[جⵯ̂ⵯöшшဟဟဍ[ဟкġġ[ج]ọ[̈åå\'ååååइ/[[]]ڇ]]ż/+ºº̃̃̃+[ăăшшшхххххххшшш/ш#ххххххå,åэå\'/ššúúúúŋܓ]บใบхňğsqx[[#хğqюххшх[Ꮥ[[[;;/\'/5/;/[[[[[ш[[[хư̂[',
-                BracketRight: 'چچ@>ցջջծծջ#دةظدğҹđđđđ]ো$$;щ;щ[=---[[ཉ\'’\'ў̧=ç̇ç*̈¨̈¨̰=σ̧#]ᢕ]]]ཚཚ[))))))++/+́++щ̈~¨$õõدĥ]+++ጨð$+ww/̈]]ძ$$$$]]]=]]]]]]ქღъჯ]]ʋǧ]ɔ$]]ͅúúúú꧌[[#[[][़়]]]‌়]઼]਼]][ਙ಼]‍‍]‍़]଼]]]ஞஞ##ఞ]ై[wچچ\'\'\'++$[[゜[]ъшឪъъұ#ъລລ++++]##]]„==f]w]ņ]h]]]]د$$$üѓѓဩဩဎ]၏ъħħ]د[]]*̈̈̈¨¨¨ŋए=]][[چ[[ś=́́´---´]îîђщђъҿъъъъъщщщчщ#ъүъъъъ̈̈¨̈ŋ̈=đđääää$ܕ[ลฌลъöüpwû]]#їüwщїїщґ]Ꮆ]]]\'#======@]]]]]щ]]]ъơ$]',
-                Comma: 'وو,,խշշ,,շ،و،،وçб,,,,,,;;р,р,,wggg,,སббб,,w,,,;,,,,;w,,᠂᠂᠂᠈,,ཐཐ،,,,,,,,,w,,,,,,w,;,,و,,,w,፣,;,ggñlggშ;;;;,,,ww,,,,,ლ,бბ,,,,,,؛,,,,,,,꧈،،,תת,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,þஇ,,,،bوو,,,,,;,wネ,,бц៼ббб#бມມ,,w,,Þஇ,,čūūd,č,,,,,hх,و;;;ä,,,ယံ,ယь,,،و،,,,,,w,,,,,w,,،،،،،,в,,,ggg,,,,,,,ббббббб,,;в,#бббббб,w,,,ww,,,,,,;ܘ܀มะมб,öybê,,،бöb,ббїб,,,,,hhwww,wvw,,,,,,,,,б,̣,',
-                Digit0: '۰۰00օօօճճօ٠٠٠٠٠000000০০àà00000000000༠0000000ᔾ0̈0000à000᠐0᠐000༠00ééééé=00000000000à00000000፻0à»**à"00)àààà0000000000)000000000߮000öööö꧐٠٠00000०০0০০০০0૦0੦0०00೦0൦൦00०꯰୦୦୦᱐0௰#௦౦00٠0۰000000é00ワ0000០ққ0ó0ຂຂ00000#00“)((/“)00000000à#@‍000၀၀၀0၀0000٠٠0000000000०0000۰0۰000000000000000000№000000à00000%%ӟ;000000000ééééà00จ๐จ00000000٠0000000%0Ꮔ0009906030/]0000000000đà0',
-                Digit1: '۱۱11ֆ։։էէ։١١١١١111111১১&&11111111111༡1111111ᖕ1&1111&111᠑1᠑111༡11++++++11111111111&11111111፩1&à""&=11„&&&&1111111111!111111111߱1111111꧑١١11111१১1১১১১1૧1੧1१11೧1൧൧11१꯱୧୧୧᱑1௧·௧౧11١1۱111111&11ヌ1111១""1"1ຢຢ11111ç11ą!//!ą!11111111&&&&111၁၁၁1၁1111١١1111111111१1111۱1۱111111111111111111!111111&11111№!??111111111++++&11ๅ=฿11111111١1111111!11111111[1[11&1111111111ă&1',
-                Digit2: '۲۲22ձձձթթձ٢٢٢٢٢222222২২éé22222222222༢2222222ᑉ2́2222é222᠒2᠒222༢22ěěěěěъ22222222222é22222222፪2éé««é/22№éééé2222222222№222222222߫2222222꧒٢٢22222२২2২২২২2૨2੨2२22೨2൨൨22२꯲୨୨୨᱒2௨௨౨22٢2۲222222"22フ2222២әә2á2ຟຟ22222ú22č"\\\\:č-22222222é#~ⵒ222၂၂၂2၂2222٢٢2222222222२2222۲2۲222222222222222222ө222222é22222-№(№222222222ľľľľé22/๒/22222222٢2222222№2222222272]22[2222222222ẫ2',
-                Digit3: '۳۳33֊յյփփյ٣٣٣٣٣333333৩৩""33333333333༣3333333ᕐ3̀3333"333᠓3᠓333༣33šššššш33333333333"33333333፫3"è»»"-33%""""3333333333,333333333ߵ3333333꧓٣٣33333३৩3৩৩৩৩3૩3੩3३33೩3൩൩33३꯳୩୩୩᱓3௩௩౩33٣3۳333333\'33ア3333៣іі3í3ໂໂ33333û33ę/...ę/33333333""""333၃၃၃3၃3333٣٣3333333333३3333۳3۳333333333333333333ҡ333333"33333//)ү333333333šššš"33-๓-33333333٣3333333/3333333353/33{3333333333ê"3',
-                Digit4: '۴۴44,՛՛ձձ՛٤٤٤٤٤444444৪৪\'\'44444444444༤4444444ᒃ4(4444\'444᠔4᠔444༤44čččččч44444444444\'44444444፬4\'ê((\'è44(\'\'\'\'4444444444;444444444ߴ4444444꧔٤٤44444४৪4৪৪৪৪4૪4੪4४44೪4൪൪44४꯴୪୪୪᱔4௪௪౪44٤4۴444444(44ウ4444៤ңң4ń4ຖຖ44444ü44ė;,,*ė;44444444\'\'\'\'444၄၄၄4၄4444٤٤4444444444४4444۴4۴444444444444444444ғ444444\'44444";:ә444444444čččč\'44ภ๔ภ44444444٤4444444;4Ꮩ44444434p44}4444444444ố4',
-                Digit5: '۵۵55։,,ջջ,٥٥٥٥٥555555৫৫((55555555555༥5555555ᑦ5{5555(555᠕5᠕555༥55řřřřřщ55555555555(55555555፭5(())(\\55:((((5555555555%555555555(5555555꧕٥٥55555५৫5৫৫৫৫5૫5੫5५55೫5൫൫55५꯵୫୫୫᱕5௫௫౫55٥5۵555555ç55エ5555៥ғғ5ǵ5ຸຸ55555ý55į:ff_į:55555555((((555၅၅၅5၅5555٥٥5555555555५5555۵5۵555555555555555555ҫ555555(55555::**555555555ťťťť(55ถ๕ถ55555555٥5555555:5Ꮶ55555515f5j(5555555555̀(5',
-                Digit6: '۶۶66՞--ււ-٦٦٦٦٦666666৬৬§§66666666666༦6666666ᖅ6}6666-666᠖6᠖666༦66žžžžžж66666666666-66666666፮6-)@@-̂66;--§-6666666666:666666666-6666666꧖٦٦66666६৬6৬৬৬৬6૬6੬6६66೬6൬൬66६꯶୬୬୬᱖6௬௬౬66٦6۶666666è66オ6666៦,,6,6ູູ66666þ66š,!!—š,66666666----666၆၆၆6၆6666٦٦6666666666६6666۶6۶666666666666666666:666666-66666,,ӝң666666666žžžž-66ุูุ66666666٦6666666,6Ꮬ66666696m6l=6666666666̉-6',
-                Digit7: '۷۷77․..ևև.٧٧٧٧٧777777৭৭èè77777777777༧7777777ᒻ7)7777è777᠗7᠗777༧77ýýýýý"77777777777è77777777፯7è‘++è(77?èèèè7777777777?777777777߬7777777꧗٧٧77777७৭7৭৭৭৭7૭7੭7७77೭7൭൭77७꯷୭୭୭᱗7௭௭౭77٧7۷777777)77ヤ7777៧..7.7ຄຄ77777ÿ77ų.ww=ų.77777777è#`ⵤ777၇၇၇7၇7777٧٧7777777777७7777۷7۷777777777777777777ҙ777777è77777..ӧө777777777ýýýýè77ึ๗ึ77777777٧7777777.7Ꮛ777==707l7m*7777777777̃̀7',
-                Digit8: '۸۸88՛««ռր«٨٨٨٨٨888888৮৮!!88888888888༨8888888ᓐ8̂8888_888᠘8᠘888༨88ááááá§88888888888_88888888፰8_’--_#88№__!_8888888888.888888888ߺ8888888꧘٨٨88888८৮8৮৮৮৮8૮8੮8८88೮8൮൮88८꯸୮୮୮᱘8௮#௮౮88٨8۸888888£88ユ8888៨үү8ú8ຕຕ88888#88ū?ųų,ū=88888888____888၈၈၈8၈8888٨٨8888888888८8888۸8۸888888888888888888һ888888_88888__ӵһ888888888áááá_88ค๘ค88888888٨8888888_8Ꮦ88877828j8f)8888888888́_8',
-                Digit9: '۹۹99)»»չչ»٩٩٩٩٩999999৯৯çç99999999999༩9999999ᓪ9̌9999ç999᠙9᠙999༩99ííííí$99999999999ç99999999፱9ç«//ç)99°çççç9999999999(999999999߭9999999꧙٩٩99999९৯9৯৯৯৯9૯9੯9९99೯9൯൯99९꯹୯୯୯᱙9௯#௯౯99٩9۹999999à99ヨ9999៩ұұ9ý9ຈຈ99999#99„(įį;„(99999999ç#^—999၉၉၉9၉9999٩٩9999999999९9999۹9۹999999999999999999?999999ç99999??ӥҗ999999999ííííç99ต๙ต99999999٩9999999?9Ꮢ9998894949p+9999999999̣ç9',
-                Equal: '====ղժժժժժ=======++++==--.=.==]]]]==།===ч=̧=ᕝ==̂^̂^=̧==#=#===ཝཝ=́́́́́\'́́<́̀´́ъ́\\´=́\'===¡¡¡=́=̂%%=]==<==-====]======“ჟ=#=====ŋ====óóóóꦉ=======ृঋ===ৃৃ=ઋ======ೃ=ൃൃ=ൃृ=ୃ====௲#=ృ===-==---ìì=^^ヘ^=ңюឲһһ=ć=ໍໍ¿¿¿¿=#==ž+::?žx===f================щ=======°\\\\\\̀`\\\\‍]===ؤڌ==\']«++<<<«==\'+++==ү====чьчщь===;===́́´ъ\\́]++́́́́===ช๖ชӯ=----====--ї=====Ᏻ===--]]]1]]#=====ъ===ҳ₫==',
-                IntlBackslash: '<<<<?<<??<<|ــ|<<<<<<<<<<ѝѝѝѝ\\ç;;;\\\\།///|««ùᕹù\\<<<<<<<<<<<<<<<<<\\\\\\\\\\|<<ä##<<<<ø<<<<|<<<<<<<<<êêqà<z«<<<<\\\\z\\\\\\\\`̀«««/«<<<<<<<«««í<í<|||\\<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<پ<<<<<<<<<<</<<<<<<<<<<<<<<<<<–<;<-–<–<<ģ<qї<|<<<<<<<<<<<(żż|||<<]<<ø<<<ž<<<<||<||<<<<<«««<\\\\<<<</////</|||<|///////<<<чžöö<<\\\\\\\\<<<<<</<<<<<<<</<</////<<-zzzz<<\\<§<<<<\\§<<⌊<\\/<<<',
-                IntlRo: '',
-                IntlYen: '',
-                KeyA: 'ششaaջաաաաաَششاشaфaaaaৃাqqьаьаaaiiiaаཏфффаaaaᖑaqaaaaqaaaᢋᠠᢋᠠᠠᠠའའھaaaaaаaaaauaaаaaaⵇaaشaaaaa#aqqaaaoaaქqqqqaaaaaaaaaახაфფaaaaaa߫αααaaaaꦻااaששאשोোাাা‍োाોાੋा्oੋೋಾോോാോोꯑୋା୍ᱟோோÂயోాయاûششaaaaაaaaチaaфаាффөaфັັaaaaඅòயaaaaauaaaaašaeеaشⵇⵇⵇaааေေအေေйaaަشاaaaaaaaaaaाoaaاااامaаaaaiiiaaaaааафффффффааяааaффффффaaaаaaaaaaaaaqܫܐฟ้ฟфaaeuaaaَфauаффафaᎠaaaaaaaa-a7aaaaaaаaaaфaqa',
-                KeyB: 'ذذbbզբբբբպبﻻزبذbиbbbbনবbbфбфбbxkkkbбརііібbxbᑕbbbbbbbxbbᢩᠪᢩᠪᡋᠪཔཔبbbbbbбbbxbzbbбbxbⴱbbﻻbbbxbበbbbkkbybბbbbbbb\\xxbbbbბჟბиიbbbbbbߓβββbbbbꦧببbננבנवববববৱবबવબਵबबwਬವಬവവബവवꯕଵବବᱵவவ¦ெవబబبçذذbbbbბbbxコbbибបиииbиຶຶbbxbබªெbbbžžxbbbbbpbwщbﻻⴱⴱⴱbббဘဘဗယဘмbbބﻻبbbbbbxbbbbबjbbببببشbщbbbkkkbbbbбббииииииибббьбbииииииbxbбbxxbbbbbbbܧܒิิิиbbhçbbbبиbçбиібіbᎨbzvz\\xxxwxixbbbbbбbvvиbbb',
-                KeyC: 'ززccչքգցցգ#ؤذصؤcсccccেচccъцъцcjjjjcцའсссцcjcᖃcccccccjccᢓᠴᢦᡮᡔᡮཀཀغcccccцccjcäccцcjcⵛccؤcccjcቸcccxxc,-vცccccccdjjccccცყცсსcɔŋcŋcߗψψψccccꦕچچcבבצבमমচচচমমचમચਮचचmਚಮಚമമചമमꯆମଚଚᱪமம¯உమచడجvززccccცccjソccсжចсссcсແແccjcචàஉcccccįcccccīccцcؤⵛⵛⵛcццခခၚၶခёccޗؤچcccccjccccचcccچچطچےcйcccjjjccccцццсссссссцццйцcссссссcjcцcjjcccccccܤܤแลแсçcövcccچсcvцссцсcᏓcdcddjjjgjxjcccccцcmmсccc',
-                KeyD: 'ییddգդդդդտدييديdвddddিডddададdeaaadдདвввдdedᖁdddddddeddᢍᠳᢍᡩᡑᡩདདدdddddдddedaddдdedⴷddيdddedደdddiidueeდdddddsseeddddდადвვdddɗddߘδδδddddꦢددdגגדג्্দদদ্্द્દ੍दडə੍್ದ്്ദ്्ꯗ୍ଦଡᱰ்்Éன్దదدeییddddდddeシddвдដввқdвກກdsedදùனðddssidddddsdaаdيⴷⴷⴷdддိိဒိိбddދيدddddseddddदedsددددرdеdddaaaddddдддвввввввдддедdввввввdedдdeedddddddܝܕกงกвddiedddدвdeдввдвdᏗssssseeecezeddddeдdhhвddd',
-                KeyE: 'ثثeeբէէեեէ#ثثعثeуeeeeডীeeееееe....eеགуууеe.eᕿeeeeeee.eeᢂᠡᢂᡝᡄᡝེེېeeeeeеee.eleeеe.eⴻeeثeeeñe#eeeppeéooეeeeeeff..eeeeეუეуუeeeeeeߍεεεeeeeꦼىىeקקאקाােেোাेાેਾॆेaਾಾೆാാൊाꯏାେେᱮாா¿நాెేەxثثeeeeეee.イeeуеេуууeуຳຳefñeඑïநeeerryeeeeejeāяeثⴻⴻⴻeееနနေၼနуeeެثعeeeef.eeeeे.efععيعھe.eee...eeeeеееуууууууеее.еeууууууeöeеe..eeeeeeeܖܖำยำуeeüğeeeٖуeğеууеуeᎡfffff...b.q.eeeedеerrуeee',
-                KeyF: 'ببffեֆֆֆֆֆفببفبfаffffবতffофофfuooofфནааафfufᑯfffffffuffᢎᠹᢎᡶᠸᡫབབاfffffфffifeffфfufⴼffبfffufፈfffeefennფfffffttuuffffფეფаაffffffߝφφφffffꦝففfככפכिি্তফিিटિ્ਿ्ङiਿಿ್ിിഫിिꯐିଟଙᱝிி¸கి్్فaببffffფffuハffафថаааfаດດftufෆèகþffttafšfffi#nнfبⴼⴼⴼfфф််ဖ်္өffފبفfffftuffffउittففففنfуfffoooffffфффааааааафффуфfааааааfufфfuufffffffܒܔดกดаffıafffفаfaфаафаfᎩtttttuuuduaufffftфfttаfff',
-                KeyG: 'للggագգգգկغللغلgпgggg্গggжгжгgiuuugгཔпппгgigᑐgggggggiggᢏᠭᢏᡤᡎᡤངངەgggggгggugoggгgigⴳggلgggigገggg,,gbffგgggggdgiiggggგოგпპggggggߜγγγggggꦒݢڮgעעגעुুগগগুুगુગੁगगuੁುಗുുഗുुꯒୁଗଗᱜுுÀபుగగگuللggggგggiキggпгងпппgпເເgdigගðபgggmmhggggglgkкgلⴳⴳⴳgггါါဂွါаggގلڬggggdiggggगugdگگگگلgиggguuuggggгґгпппппппгггигgппппппgigгgiigggggggܠܓเัเпgggügggڠпgüґппгпgᎦdggggiiitieigggggгgggпggg',
-                KeyH: 'ااhhնհհհհհهااحاhрhhhhাহhhгхгхhdmmmhхཕрррхhdhᓱhhhhhhhḍhᢔᠬᢐᡥᡍᡥམམىhhhhhхhhhhshhхhdhⵀhhاhhhdhሀhhhcchfllჰhhhhhhmddhhhhჰდჰрრhhhhhhߤηηηhhhhꦲههhייהיपপহ্্পপहપહਪहहpਹಪಹപപഹപपꯍପହହᱦபப̀ாపహచهtااhhhhჰhhdクhhрңហрррhр້້hhdhහ¢ாhhhpplhhhhhdh##hاⵀⵀⵀhхх့ဴဟႉ့хhhހاهhhhhhdhhhhहdhhحھهحہhдhhhmmmhhhhхххрррррррхчхдчhррррррhdhхhddhhhhhhhܐܗ้ี้рhhğthhhهрhtгррхрhᎯhmm]]dddhdhdhhhhyхhyyрhhh',
-                KeyI: 'ههiiկիիիիիِههيهiшiiiiহিiiсисиictttiиོшшшіiciᓂiiiiiiiciiᢉᠢᢇᡳᡅᡞིིڭiiiiiиiicigiiиiciⵉiiهiiici#iiiddicddიiiiiiuucciiiiინიшშiiiiiiߌιιιiiiiꦶئئiןןיתगগিিিগগिગિਗििgਗಗಿഗഗിഗगꯤଗିିᱤ##¨ைగిిحnههiiiiიiicニiiшиិшшшiшຣຮiuciඉ¬ைiiiuukiiiiiziīіiهⵉⵉⵉiииငၚိငငшiiިهيiiiiuciiiiिgkuییڳیبiцiiitttiiiiииишшшшшшшииициiшшшшшшiciиicciiiiiiiܗܥรมรшiımniiiِшınішшішiᎢuuullcccocuciiiirиiuuшiii',
-                KeyJ: 'تتjjիճճյյճجتتجتjоjjjjকজjjтйтйjhdddjйབооойjhjᒧjjjjjjjhjjᢖᠵᢑᠵᡓᡪ་་قjjjjjйjjdjnjjйjhjⵊjjتjjjrjጀjjjttjsrrჯjjjjjnnhhjjjjჯმჯоოjŋƒjjjߖξξξjjjjꦗججjחחיחरরজজজররजરજਰजजɾਜರಜരരജരरꯖରଜଜᱡரர¾தరజాژkتتjjjjჯjjhマjjой្оооjо່່jnrjජîதjjjnnrjjjjjajsсjتⵊⵊⵊjјјြြ်ႇျрjjޖتجjjjjnhjjjjजhunججججاjхjjjdddjjjjјйјооооооойййхйjооооооjhjйjhhjjjjjjjܬܛ่า่оjjlkjjjجоjkйоойоjᏚnnnmmhhhehthjjjjnйjnnоjjj',
-                KeyK: 'ننkkտկկկկքكننكنkлkkkkতকkkнкнкktssskкམлллкktkᓄkkkkkkktkkᢗᠺᢒᡴᡗᡣགགكkkkkkкkkrkrkkкktkⴽkkنkkktkከkkkssktttკkkkkkeettkkkkკსკлლkkkkkkߞκκκkkkkꦏکكkללכלकককককককकકકਕककkਕಕಕകകകകकꯀକକକᱠககÁமకకకکmننkkkkკkktノkkлкកлллkлາາketkකñமkkkeetkkkkktkiиkنⴽⴽⴽkккုုကုုоkkކنكkkkketkkkkकtieککڪککkтkkkssskkkkккклллллллкккткkллллллktkкkttkkkkkkkܢܟานาлkknmkkkكлkmкллклkᎸeeenntttatdtkkkkiкkeeлkkk',
-                KeyL: 'ممllհլլլլլلمملمlдllllদলllвлвлlnrrrlлཙдддлlnlᓗlllllllnllᢘᠯᢓᠯᠯᠯལལلlllllлllnltllлlnlⵍllمlllnlለlllrrlniiლllllliinnllllლრლдდllllllߟλλλllllꦭللlךךלךतতলললততलતલਤललtਲತಲതതലതतꯂତଲଲᱞதத¼டతలలلlممllllლllnリllдлលдддlдສສlinlලìடllliisllllleltтlمⵍⵍⵍlллူူလူူлllލملllllinllllलnoiللللیlнlllrrrllllлллдддддддлллнлlддддддlnlлlnnlllllllܡܠสเสдllrllllلдllлддлдlᎵiiieennnzncnlllloлlooдlll',
-                KeyM: 'ړړmmքմմմմմمةومةmғmmmmমম,,пмпмmmvvvmмཤьььмmmmᒪm,mmmm,mmm᠀ᠮ᠀ᠮᡏᠮ##مmmmmmмmmmmmmmмmmm,mmةmmmmmመm,.qq#rhh,,,,,mmhmmmmmmმცმьქmmmñmm߸μμμmmmmꦩممmצצמצसসমমমসসमસમਸममsਮಸಮസസമസसꯃସମମᱢஸஸ«அసమమمsپئmmmmმ,mmモmmьмមььүmьທທmmmmමÜஅmmmbbmmmmmmāmyыmة,,,mммာာမၢာтmmމةمmmmmmmmmmmमmmmممممعmмmmmvvvmmmmмммьььььььмм,ммmьҗььььmmmмmmmmmmmmm,.ܡทสทӣmmçsmmmمьmsмььмьmᏅmhhkkmmmimwmmmmmmмmllьm̉m',
-                KeyN: 'ددnnլնննննنىرنىnтnnnnসনnnхнхнnbqĝqnнལтттнnbnᓴnnnnnnnbnn᠅ᠨ᠅ᠨᠨᠨནནنnnnnnнnnbnbnnнnbnⵏnnىnnnbnነnnn\'’nx..ნnnnnnkkbbnnnnნზნтტnnnnnnߣνννnnnnꦤننnממנמलলনননললनલનਲननlਨಲನലലനലलꯅଲନନᱱலல¶ஔలననنzددnnnnნnnbミnnтнនтттnтືືnkbnන¬ஔnnnššvnnnnnonfфnىⵏⵏⵏnннညညနၺညиnnނىنnnnnkbnnnnनlnkننننغnбnnnqĝqnnnnнннтттттттнннбнnттттттnbnнnbbnnnnnnn܀ܢืคืтnnzznnnنтnzнттнтnᎾkkk//bbbnbnbnnnnpнnkkтnnn',
-                KeyO: 'خخooըոոօօոْخخهخoһooooগওooдодоorcccoоཅўўўоoroᓕooooooorooᢊᠥᢈᠣᡈᠣོོوoooooоootofooоoroⵄooخoooho#ooollom##ოoooooyyrrooooოვოщწooooooߐοοοooooꦺءءoםםסםदদোোোদদोદોਦॊोdਤದೊദദൊദदꯣଦୋୋᱚ##Êொదొోۆhخخooooოoorラooщоោщщғoщນນoyhoඔ®ொoooėėgoooooēolлoخⵄⵄⵄoооသသဲဝသүooޮخعooooyrooooोrlyہہوہجoрooocccooooооощәщщщщщооороoщәщщщщoroоorroooooooܞܧนวนҳookhoooْщohощщощoᎣyyyuurrr.ryroooolоoppўooo',
-                KeyP: 'ححppթպպպպբةححةحpзppppড়পppзпзпplppppпཆзззпplpᔨppppppplppᢇᠫᢉᡦᡌᡦཕཕپpppppпppzpqppпplpⵃppحppplpፐpppjjpkyyპppppp;;llppppპშპзზppppppߔπππppppꦥڤڤpפפפפजজপপপজজपજપਜपपʤਪಜಪജജപജजꯄଜପପᱯஜஜ¢ிజపపپpححppppპpplセppзпផзззpзຍຍpñlpප¤ிpppęębpppppčpgгpحⵃⵃⵃpппစစပႁစзppޕکڤppppølppppपk;;پپپپحpлppppppppppпппзззззззппплпpззззззplpпpllpppppppܚܦยแยзppbppppپзppпззпзpᏁ;;;yylll6lblpppp;пp;;зppp',
-                KeyQ: 'ضضqqճխխքքխقضضقضqјqǉǉqঙদaa,ч,яq////qьཀйййяq̀qᖏqaqqqqàqqᢀᠣᢀᠴᡆᠴཅཅچqqqqq№qqüqxqqяqåqⴰqqضŝŝq.qቀqaabb#:qqაaaaaqqq\'/qqqqქჩქйღɛʋɛqɛʋߊ;;;qqqqꦐققq/̇קץौৌটডংৗৌ‌ૌટੌटृʰੌೌಟൌൗൈൗौꯈୌ‌ୃᱧௌௌ»ஞౌటెقfضضqqqqქqq:タqĩйөឆйййqйົົqq.qඍëஞdqąqqūqąqšqūqēэqضⴰⴰⴰţљљဆဆသၸဆфqqްضقịẹqqqåqqqáट\'qqققققطq\'qqq\'\'\'qqqqљяљйҟйййййяяа\'яqййййййqåqяáååqqqqqqaܔܩๆ็ๆйäqqfqqqقйqfяййяйqᎪqqqqq\'/́;\'5;qqqqqяqqqйqaq',
-                KeyR: 'ققrrսրրրռրرققرقrкrrrrপরrrирирrphhhrрངкккрrprᑭrrrrrrrpšrᢃᠷᢃᡵᠷᠷརརرrrrrrрrrprcrrрrprⵔrrقrrrprረrrroorgppრrrrrrpppprrrrრძრкკrrrrrrߙρρρrrrrꦫررrררררीীরররীীरીરੀररiੀೀರീീരീीꯔୀରରᱨீீºசీరరرiققrrrrრrrpスrrкрរкккrкພພrpprරêசrrrllorrrrrrrpпrقⵔⵔⵔrррမမရမမжrrރقرrrrrpprrrrरprpرررردrпrrrhhhrrrrррркккккккрррпрrккккккrprрrpprrrrrrrܩܪพอพкrroırrrرкrıрккркrᏛppppppppyp.prrrrfрrwwкrrr',
-                KeyS: 'سسssվսսսսսسسسسسsыssssুসssясясsoeeesсཐыыысsosᐅsssssssossᢌᠰᢌᠰᠰᠰསསسsssssсssosissсsosⵙssسsssosሰsssuusassსsssssrroossssსისыთssssssߛσσσssssꦱسسsדדשדेেসসসেেसેસੇससeੇೇಸേേസേेꯁେସସᱥேேÇளేసంسîسسssssსssoトssысសыыыsыຫຫsrosස÷ளssskkesssssusuуsسⵙⵙⵙsссျျစႄ်ыssސسسssssrossssसasrسسسسوsоssseeessssсссыыыыыыысссосsыыыыыыsosсsoosssssssܣܣหทหҷssaisssسіsiсіисиsᏍrrrrroooko8osssssсsssқsss',
-                KeyT: 'ففttմտքտտդتففتفtеttttটটttштштtyxĉxtтིееетtytᑎtttttttyttᢄᠲᢄᡨᡐᡨཏཏتtttttтttytwttтtytⵜttفtttytተtttèèt.wwტtttttgbyyttttტჭტеეttttttߕτττttttꦠتتtאאתאूূতটতূূतૂતੂतटuੂೂತൂൂതൂूꯇୂତଟᱴூூÅவూతతتoففttttტttyカttетតеееtеະະtgytතõவtttddqtttttmtbбtفⵜⵜⵜtттအအတဢအэttތفتttttgyttttतyfgتتتتٹtыtttxĉxttttтттееееееетттытtееееееtytтtyytttttttܦܬะระеttfotttتеtoтеетеtᏔgbbbbyyyuyoyttttkтtbbеttt',
-                KeyU: 'ععuuւըըււըُععوعuгuuuuজুuuкукуugllluуེгггуuguᒥuuuuuuuguuᢆᠦᢆᡠᡉᡠུུۇuuuuuуuuguhuuуuguⵓuuعuuugu#uuuvvuvmmუuuuuullgguuuuუთუгგuuuuuuߎθθθuuuuꦸؤؤuווווहহুুুহহुહુਹुुhਦಹುഹഹുഹहꯎହୁୁᱩஹஹÃரహుుئrععuuuuუuugナuuгуុгггuгີີulguඋóரuuujjnuuuuunudдuعⵓⵓⵓuууကကုၵကгuuުعوuuuulguuuuुfylءءعءتuгuuullluuuuууугггггггууугуuггггггuguуugguuuuuuuܥܜีดีгuutruuuُгurуггугuᎤllljjgggsgsguuuuuуuffгuuu',
-                KeyV: 'ررvvյվվվվւثردذرvмvvvvরআvvэвѣжvkbbbvвཡмммжvkvᑲvvvvvvvkvvᡇᠤᢧᡡᡇᡡཁཁۈvvvvvвvvkvpvvьvkvⵖvvرvvvkvሸvvv..vivbვvvvvvvvkkvvvvვღვмმvvvvvvߢωωωvvvvꦛثثvההוהनনৱৱভননडનવਨववnਵನವനനവനनꯚନଡୱᱶநந±எనవవڤcررvvvvვvvkヒvvмвវмммvмອອvvkvවâஎvvvvvąvvvvvkvvвvرⵖⵖⵖvввလလညလလсvvވرۏvṣvvvkvvvvवvvvططڀطسvкvvvbbbvvvvвввмммммммжвжкжvммммммvkvжvkkvvvvvvvܪܫอหอмývucvvvڨмvcвммжмvᎥvvdvvkkkvk,kvvvvvжvccмvvv',
-                KeyW: 'صصwwփււոովوصصشصüүwǌǌwযূzzушувw,,,,wжཁцццвw,wᐃwzwwwwz,wwᢁᠸᢁᠸᡖᠸཆཆۋwwwwwюww,wvwwвw,wⵣwwصĝĵw,wወwzzééw\'ccზzzzzwww,,wwwwწპწцცwwwüwwߠςςςwwwwꦮووw\'׳וןैৈডীঢৈৈवૈડੈडतæੈೈಡൈൈവൈैꯋୈୱତᱣைைÈறైడసوgصصwwwwწzw,テwwцүឹццңwцໄໄww,wඇøறæwžggėwžwēwgwoоwصⵣⵣⵣêњњတတဝတတцwwއصوwwwww,wwwšौ,wwووصوصw,www,,,wwwwњєњцццццццвжз,вwцөццццwäwвš,,wwwwwwzܨܘไตไқwwjgwwwوцwgшццвцwᎳwwwww,,,q,6,wwwwwвwddцwzw',
-                KeyX: 'ېېxxդցցղղցخءطخءxчxǆǆxোশxxйжйьxqçŝ;xшཟчччьxqxᐊxxxxxxxqxxᢧᠱᢗᡧᠱᡧཤཤشxxxxxяxxqxöxxжxqxⵅxxءĉĉxqxአxxxyyxqx-ხxxxxxxcqqxxxxხჰხчჩɔxxxɔɩ،χχχxxxxꦚخخxססחסंংষড়ষংং्ંષਂषद̆ਂಂಷംം്ംंꯊଂ୍ଦᱽஂஂ´ஒంషూخêططxxxxხxxqサxũчхខччіxчປປxxqxඳåஒxxūxxęxūxķxbxzзxءⵅⵅⵅçџџထထဋထထчxx×ءخṅọxxxqxxxčडxxxششخشفxяxxxçŝ«xxxxџїџчччччччьхьяхxччччччxqxьčqqxxxxxxx[ܨปปปчüxwöxxxخчñöхччьчxᏴxcxccqqqxq0qxxxxxьxxxчxxx',
-                KeyY: 'غغzyոեեըըեيغغطغyнzzžyচএyyщъщъyfwŭwyыུннныyfyᓯyyzzzzyfyyᢅᠶᢅᠶᡕᠶཡཡيzzyyyыzzfzkzyзyfyⵢyyغŭĝyfyየyyŷ̂yhjjყyyyyyjjffyyyyყტყнნyyyyyyߦυυυzzyyꦪييyטטעטबবযযধববयબયਬययbਰಬಯബബയബबꯌବଯଯᱭ##Äலబయీیdغغyyyyყyyfンyyныយнннyнິິyjfyයôலyyyččjyyyāyvyjйyغⵢⵢⵢyѕѕပပယပပнyyޔغيyyyyjfyyyŧयqjjےےٿےپzфyyywŭwyyyzззжннннннныыыфыyннннннyfyыŧffzyzzyyyܜܝั่ัнyycdyyyيнydиннинyᏯjjj[[fffrfrfyyyyjыyjjнyyy',
-                KeyZ: 'ۍظyzժզզզզզزئظزئzәyžzzঁয়wwюзюзz;yĵyzзཞяяязz;zᖓzwyyyyw#zzᢙᠽᢖᡯᠴᡯཟཟزyyzzzзyyöyüyzыzæzⵡzzئzzz-zዘzwwààz;zxწwwwwzzx;;zzzzზჯზяჭzzzɲzzߥζζζyyzzꦔززzזזזזॆzঞৈযেৎशzઞzञँ̪ੱೆಞെെഴെ\'ꯉ#ଶଁᱲெெ½ணెఞొزjظظzzzzზwz;ツzzязឋяяяzяຜຜzz-zඤíணzzzzzųzzzzzņzxьzئⵡⵡⵡzззဖဖဇၽဖяzzޒئزzzzzzæzzzzषzzzززززقy;zzzyĵyzzzyжюзяџяяяяяззв;зzяяяяяяz.zзzääyzyyzzw]ܙผบผяzzxjzzzزяzjзяязяzᎬzxzxx;;;\';9\'zzzzzзzzzяzwz',
-                Minus: '----էռռ֊֊ռ-------\'\'\'\'--))-----[[[[--༔-----̂----\'\'\'\')́̄-      ཧཧ-=====%ßß+ß-ßßß+++)++---\'\'\'-+)\'==)[//-))))---[----------------)---üüüüꦎ----־------------ਃ----ಃ-------ଃ----௱#-ః---/--ööö\'\'--@ホ--өяឥөө-ś-ຊຊ\'\'\'\'-#---_))w-?--------))))--------е-------/+++++++-[---أڏ--+[\'\'\'ººº\'--+\'\'\'---------)ш----!---++++++[\'\'====)--ข๑ขғ-*//*----xxє-----Ꮏ---00[8[2[[!---------ғ-)-',
-                Period: 'ږږ..շղղ․․ղ۔ز..زşө.....।::л.л..vfff..ཧююю..v...:....:v..᠃᠃᠃᠉。。ཇཇ.........v......v.:..ز...v.፤.::hh.p,,ღ::::...vv.....ფ.юყ...ç..،.......꧉...ץץ.......।....................ᱹ..##............:.vル..ющ។ююю#юໃໃ..v..##..šąąš.f.....,,.ز:::,...ၜာ..в...ز......v....।b..۔۔.۔۔.в...fff.......юҩююююю..:ж.#юююююю.v...vv......:ܙ.ใจใю.çş.ç..۔юç..ююєю.....,,vvv0vgv.........ю.:̣',
-                Quote: 'ګګ[\'րփփ՛՛փءط؛\'طəҝćććć\'\'ùùч\'ч\'̃̃́́́~̃ཛэээ\'̀-è\'èɔääàà̀-́̀᠋᠋᠋᠋᠋᠋།།\'§§§§§;ääläyääэø-øùääط\'ĥ́́´፦øù/mmùw\'\'ჟùùùù\'\'\'-\'\'́\'́\'გჩӕძ\'\'\'ǝ\'\'߯\'\'̀ááááꦵ««#,֚\'\'टট\'\'\'টট\'ટ\'ਟ\'\'ʈ\'ಟ\'ടട\'ടट\'ଟ\'\'\'டட¹ஙట\'\'\'şگگ́́́ààù:-ケ:\'эь់ээә#эງງ{{{´\'éங\'\'ėyyž\'ė\'\'##\'mм\'ط#%ⵑıќќ\'\'\'\'ဒп\'\'\'ط\'\'\'́ææ-ææææ\'-\'\'\'ٰڱ\'\'ą-º̃~́́́º\'țțћгћэҽээээӕ\'\'ù-\'#ээээээä-äщä--ćć§§§§ñܛܞงขงэ\'ivşîʼʼءєişжєєчє\'\'\'\'\'oo---7---ʻ́́\'\'ю\'\'́э\'ù́',
-                Semicolon: 'ککëëպթթ;;թ؛كك؛كıжčččč;;mmм;м;çsnnnçчཚжжж;;s;;;mööéémsœ#ᢒ;ᢔ;;;ཞཞ؛ůůůůůьöösödööчæsæⵎööك;ŭñsñ።æmmnnmduuმmmmm;ooss;;;;;ბთжჟ;;;ı;;ߡ́;́éééé꧇؛؛#ףף;ףचচ;;;চচ;ચ;ਚ;;ʧਸಚ;ചച;ചच;ଚ;;;சசÆ்చ;ట؛yککæææòòm;sレ;;жэើжжж#жວວñosñ;ö்;;ųoop;ų;ī;c;rр;كⵎⵎⵎşччးးဥႈးд;;;ک؛ụ;+øosøøøø;spo؛؛ک؛؛łсçççnnnç;șșчччжжжжжжж;;мс;#жңжжжжösöшössččôôôômܟܚวไวж;şdyş;ː؛жşyчжжґж;Ꮸoooiisss8sks;;;;hч;iiж;m;',
-                Slash: '////ռծծ//ծ#ظ/\\ظ..----/্==б/б/;zzzz;;ཨ..//ézéᔭé!----#z#/#·#?、、ཉཉئ--------#-j----z-!--ظ//-z-፧-!;ff,jkkჭ!!=!///zz/////წძ/ჰ///ş//߹///----ꦂ///.֭//यয়///যয়/ય/ਯ//j/ಯ/യയ/യय/ଯ///யய##య/శ/,//þþþ--ò/zメ//..៊№№.№.ຝຝ--z-/##//ęhhč/ę/ļ/ļ/../ظ!!!.///။၊/။ю///ظ///---z----्;///#ئ//-з---zzz-//----./.ё//.//!з/...ёё..-z---zz------!܇܇ฝพฝ./..,.//#..,////ї/Ꮒ///..zzz9z\'z/////////./!̉',
-                Space: ''
-            },
-            empty: {
-                Backquote: [90, 142, 149, 151, 164, 170, 185, 186, 187, 188, 205, 222, 234, 239, 240, 287],
-                Backslash: [10, 13, 55, 57, 74, 90],
-                BracketLeft: [10, 55, 136, 168, 169, 196, 287, 321],
-                BracketRight: [10, 55, 136, 170, 171, 196, 205, 206, 287, 321],
-                Comma: [196, 287],
-                Digit0: [170, 205, 224],
-                Digit2: [224],
-                Digit7: [224],
-                Digit8: [97, 170, 205],
-                Digit9: [170, 205, 224],
-                Equal: [55, 57, 170, 205],
-                IntlBackslash: [73, 74],
-                KeyA: [90],
-                KeyC: [10],
-                KeyE: [10, 90],
-                KeyF: [219],
-                KeyH: [220, 221],
-                KeyI: [90, 168, 169],
-                KeyM: [61, 62, 96],
-                KeyO: [90, 98, 99, 168, 169],
-                KeyQ: [96],
-                KeyU: [90],
-                KeyY: [168, 169],
-                KeyZ: [52, 164],
-                Minus: [170, 205],
-                Period: [170, 171, 196, 205, 206, 287],
-                Quote: [136, 196, 217, 218, 224, 287],
-                Semicolon: [54, 136, 196, 287],
-                Slash: [10, 51, 53, 55, 57, 170, 171, 205, 206, 256, 321]
-            },
-            skip: {
-                IntlRo: { 29: '/', 30: '\\', 31: '\\', 32: '\\', 33: '\\', 34: '/', 35: '/', 185: '\\', 186: '\\', 187: 'ロ', 188: '\\', 335: '/', 336: '/' },
-                IntlYen: { 185: '\\', 186: '¥', 187: 'ー', 188: '¥' }
-            },
-            Space: { 36: '་', 192: '​' }
-        };
+
 
         const ld = new Detector(KEYMAPS);
+        const ld2 = new Detector(KEYMAPS);
+        const ld3 = new Detector(KEYMAPS);
+        const ld4 = new Detector(KEYMAPS);
+        const ld5 = new Detector(KEYMAPS);
 
 
         const silent = [

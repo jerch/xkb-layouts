@@ -8,12 +8,12 @@ export interface IKeymap {
   [index: string]: string;
 }
 
-interface IKeymapMerged {
-  acc: string;
-  map: IKeymap;
-  empty: {[index: string]: number[]};
-  skip: {[index: string]: {[index: number]: string}};
-  Space: {[index: number]: string};
+interface IKeymaps {
+  acc: Readonly<string[]>;
+  layouts: Readonly<{[index: string]: number}>;
+  codeAcc: Readonly<string[]>;
+  codes: Readonly<{[index: string]: number}>;
+  values: Readonly<string[][]>;
 }
 
 interface ILayoutMatch {
@@ -41,61 +41,23 @@ type DiscardHandler = (code: string, key: string) => boolean | void;
 
 
 export default class Detector {
-  // copy of MAP.acc
-  private _layouts: {[index: string]: number};
-  // MAP.acc.keys
-  private _acc: string[];
-  // MAP.map.keys
-  private _codeAcc: string[];
-  // MAP.map.values
-  private _values: string[][] = [];
-  // {code: index}
-  private _codes: {[index: string]: number} = {};
-  // recorded codes
+  private _layouts: Readonly<{[index: string]: number}>;
+  private _acc: Readonly<string[]>;
+  private _codeAcc: Readonly<string[]>;
+  private _values: Readonly<string[][]>;
+  private _codes: Readonly<{[index: string]: number}>;
   private _rec: (string | undefined)[] = [];
   private _cached: ILayoutMatch[] | undefined;
   private _active: string = '';
   private _discardHandler: DiscardHandler = () => false;
 
-  constructor(data: IKeymapMerged) {
-    this._acc = data.acc.split('|');
-    this._codeAcc = Object.keys(data.map).sort();
-    // FIXME: ~12.3kB per instance
-    // better: make it singleton and deal only with indices in instance
-    this._layouts = {};
-    for (let i = 0; i < this._acc.length; ++i) {
-      this._layouts[this._acc[i]] = i;
-    }
-    let p = 0;
-    for (const code of this._codeAcc) {
-      this._codes[code] = p++;
-      // FIXME: this gets really big in memory! (~100kB per instance)
-      // better: stick with original string immutable? (~35kB singleton)
-      this._values.push(data.map[code].split(''));
-      this._rec.push(undefined);
-    }
-    // patch empty values
-    for (const code in data.empty) {
-      const line = this._values[this._codes[code]];
-      const empty = data.empty[code];
-      for (let i = 0; i < empty.length; ++i) {
-        line[empty[i]] = '';
-      }
-    }
-    // patch IntlRo & IntlYen (skip entries)
-    for (const code in data.skip) {
-      this._values[this._codes[code]] = new Array(this._acc.length).fill('');
-      const line = this._values[this._codes[code]];
-      const skip = data.skip[code];
-      for (const map in skip) {
-        line[map] = skip[map];
-      }
-    }
-    // patch Space
-    this._values[this._codes.Space] = new Array(this._acc.length).fill(' ');
-    for (const map in data.Space) {
-      this._values[this._codes.Space][map] = data.Space[map];
-    }
+  constructor(data: Readonly<IKeymaps>) {
+    this._acc = data.acc;
+    this._codeAcc = data.codeAcc;
+    this._layouts = data.layouts;
+    this._codes = data.codes;
+    this._values = data.values;
+    this._rec = new Array(this._codeAcc.length).fill(undefined);
   }
 
   /**
@@ -178,43 +140,43 @@ export default class Detector {
    * Register a custom layout.
    * Currently it is not possible to introduce new codes.
    */
-  public registerLayout(layout: string, map: IKeymap): void {
-    if (!layout || this._layouts[layout] !== undefined) {
-      throw new Error(`layout '${layout}' is already registered`);
-    }
-    const pos = this._acc.length;
-    this._layouts[layout] = pos;
-    this._acc.push(layout);
-    for (let i = 0; i < this._values.length; ++i) {
-      this._values[i].push(map[this._codeAcc[i]]);
-    }
-    this._cached = undefined;
-  }
+  // public registerLayout(layout: string, map: IKeymap): void {
+  //   if (!layout || this._layouts[layout] !== undefined) {
+  //     throw new Error(`layout '${layout}' is already registered`);
+  //   }
+  //   const pos = this._acc.length;
+  //   this._layouts[layout] = pos;
+  //   this._acc.push(layout);
+  //   for (let i = 0; i < this._values.length; ++i) {
+  //     this._values[i].push(map[this._codeAcc[i]]);
+  //   }
+  //   this._cached = undefined;
+  // }
 
   /**
    * Unregister a layout.
    * Will reset the active layout, if it was the unregistered one.
    */
-  public unregisterLayout(layout: string): void {
-    if (this._layouts[layout] === undefined) {
-      throw new Error(`layout '${layout}' is not registered`);
-    }
-    const pos = this._layouts[layout];
-    delete this._layouts[layout];
-    for (const layout in this._layouts) {
-      if (this._layouts[layout] > pos) {
-        this._layouts[layout]--;
-      }
-    }
-    this._acc.splice(pos, 1);
-    for (let i = 0; i < this._values.length; ++i) {
-      this._values[i].splice(pos, 1);
-    }
-    this._cached = undefined;
-    if (this._active === layout) {
-      this._active = '';
-    }
-  }
+  // public unregisterLayout(layout: string): void {
+  //   if (this._layouts[layout] === undefined) {
+  //     throw new Error(`layout '${layout}' is not registered`);
+  //   }
+  //   const pos = this._layouts[layout];
+  //   delete this._layouts[layout];
+  //   for (const layout in this._layouts) {
+  //     if (this._layouts[layout] > pos) {
+  //       this._layouts[layout]--;
+  //     }
+  //   }
+  //   this._acc.splice(pos, 1);
+  //   for (let i = 0; i < this._values.length; ++i) {
+  //     this._values[i].splice(pos, 1);
+  //   }
+  //   this._cached = undefined;
+  //   if (this._active === layout) {
+  //     this._active = '';
+  //   }
+  // }
 
   /**
    * Get the layout map for a given or the active layout.
