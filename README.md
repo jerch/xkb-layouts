@@ -78,6 +78,7 @@ const a_char = dect.getActiveKey('KeyA');
   - on application startup, do layout discovery as described above
   - feed the keymap of the discovered layout to `feed` to have it as a recorded state
   ```javascript
+  dect.reset();
   const map = dect.getLayoutMap(discovered_layout);
   for (const code in map)
     dect.feed(code, map[code]);
