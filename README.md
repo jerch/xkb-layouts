@@ -13,31 +13,30 @@ For electron based application you are better served with `@vscodium/native-keym
 import Detector from 'xkb-layouts';
 import KEYMAPS from 'xkb-layouts/keymapsResolved';
 
-const ld = new Detector(KEYMAPS);
+const dect = new Detector(KEYMAPS);
 
 // feed the detector `code` and `key` from unshifted keyboard events, e.g.
 some_input_field.addEventListener('keydown', ev => {
-  if (isUnshifted(ev)) { // must test for all key shifting modifiers!
-    ld.feed(ev.code, ev.key);
-  }
+  if (isUnshifted(ev)) // must test for all key shifting modifiers!
+    dect.feed(ev.code, ev.key);
 });
 
 // inspect the layout matches of seen keys
-ld.matches();
+dect.matches();
 // guess the character for a key code
-ld.guessKey('KeyA');
+dect.guessKey('KeyA');
 
 // to implement a layout discovery, use `resolve`
-let toResolve = ld.resolve();
+let toResolve = dect.resolve();
 while (toResolve.layouts.length > 1) {
   const to_press = toResolve.keys[one_of];
   ask_user(to_press); // must record the key with `feed`
-  toResolve = ld.resolve();
+  toResolve = dect.resolve();
 }
 // activate the found layout
-ld.activeLayout = toResolve.layouts[0];
+dect.activeLayout = toResolve.layouts[0];
 // now use `getActiveKey` w'o the uncertainty of `guessKey`
-const a_char = ld.getActiveKey('KeyA');
+const a_char = dect.getActiveKey('KeyA');
 ```
 
 ## Notes
@@ -45,7 +44,7 @@ const a_char = ld.getActiveKey('KeyA');
 - `navigator.keyboard.getLayoutMap()`\
   Chromium based browsers implement this experimental interface. It does not work reliable
   in tests, it shows slightly off characters or does not change the map at all from
-  the layout switcher in the taskbar. Thus we don't rely on this at all.
+  the layout switcher in the taskbar. Thus we don't rely on this.
 
 - *Changing Keyboard Layout*\
   When the user switches the keyboard layout on OS side we cannot directly spot that.
@@ -72,6 +71,27 @@ const a_char = ld.getActiveKey('KeyA');
     key = String.fromCharCode(key2dead[key])
   ld.feed(code, key);
   ```
+
+- *Pinpointing Keyboard Layout*\
+  If your application needs to pinpoint the keyboard layout strictly, then you have to implement
+  a layout discovery asking the user to press certain keys. A general recipe for that is:
+  - on application startup, do layout discovery as described above
+  - feed the keymap of the discovered layout to `feed` to have it as a recorded state
+  ```javascript
+  const map = dect.getLayoutMap();
+  for (const code in map)
+    dect.feed(code, map[code]);
+  ```
+  - set a discard handler redoing the two steps above
+
+- *Full Keymaps*\
+  The provided keymaps contain only the unshifted key characters. The data is already quite
+  big with ~35kB for ~350 layouts. xkb knows ~600 layouts (with variants), the higher number
+  results from character changes in shifted states. While it is possible to export
+  the shifted states as well (needs only minor adjustments in `create_layouts.js`),
+  it gets impractical due to the resulting package size in the hundreds of kilobytes.
+  There are still savings possible on the package size by a more clever map construction.
+  Currently a tradeoff between reasonable package size and loading times is chosen.
 
 
 ## Build Instructions
