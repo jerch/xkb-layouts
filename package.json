@@ -36,6 +36,7 @@
     "@types/node": "^24.12.4",
     "@vscodium/native-keymap": "^3.3.7-258424",
     "mocha": "^11.7.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "xterm-benchmark": "^0.3.2"
   }
 }

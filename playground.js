@@ -15,7 +15,7 @@ ld.matches();
 //ld.feed('Digit8', '8');
 //ld.feed('Digit9', '9');
 //ld.feed('KeyA', 'a');
-//ld.feed('Minus', 'ß');
+ld.feed('Minus', 'ß');
 const start = performance.now();
 for (let i = 0; i < 1000; ++i) {
   //new LayoutDetector(MAP);
@@ -25,5 +25,5 @@ for (let i = 0; i < 1000; ++i) {
 }
 const end = performance.now();
 console.log(end-start, ld.resolve());
-//console.log(end-start, ld.guessKey('KeyQ'));
+console.log(end-start, ld.guessKey('Enter'));
 //console.log(ld.getRecordedLayoutMap());

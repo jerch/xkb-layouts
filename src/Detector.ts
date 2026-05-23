@@ -37,6 +37,8 @@ interface IResolveResult {
   keys: IResolveKey[];
 }
 
+type DiscardHandler = (code: string, key: string) => boolean | void;
+
 
 export default class Detector {
   // copy of MAP.acc
@@ -51,11 +53,9 @@ export default class Detector {
   private _codes: {[index: string]: number} = {};
   // recorded codes
   private _rec: (string | undefined)[] = [];
-  private _cand: ILayoutMatch[];
-  private _key: IKeyResult;
   private _cached: ILayoutMatch[] | undefined;
   private _active: string = '';
-  private _discardHandler: (code: string, key: string) => boolean | undefined = () => false;
+  private _discardHandler: DiscardHandler = () => false;
 
   constructor(data: IKeymapMerged) {
     this._acc = data.acc.split('|');
@@ -96,9 +96,6 @@ export default class Detector {
     for (const map in data.Space) {
       this._values[this._codes.Space][map] = data.Space[map];
     }
-    // FIXME: get rid of borrowed containers
-    this._cand = [...this._acc].map(e => ({ layout: e, match: 0 }));
-    this._key = { layouts: [], certain: 0, key: undefined };
   }
 
   /**
@@ -126,7 +123,7 @@ export default class Detector {
    * Return `true` from the handler to suppress the swipe (useful to not lose
    * changes from detector methods called in the handler itself).
    */
-  public setDiscard(handler: (code: string, key: string) => boolean): void {
+  public setDiscard(handler: DiscardHandler): void {
     this._discardHandler = handler;
   }
 
@@ -188,7 +185,6 @@ export default class Detector {
     const pos = this._acc.length;
     this._layouts[layout] = pos;
     this._acc.push(layout);
-    this._cand.push({ layout, match: 0 });
     for (let i = 0; i < this._values.length; ++i) {
       this._values[i].push(map[this._codeAcc[i]]);
     }
@@ -211,7 +207,6 @@ export default class Detector {
       }
     }
     this._acc.splice(pos, 1);
-    this._cand.splice(pos, 1);
     for (let i = 0; i < this._values.length; ++i) {
       this._values[i].splice(pos, 1);
     }
@@ -294,9 +289,7 @@ export default class Detector {
    */
   public matches(): ILayoutMatch[] {
     if (!this._cached) {
-      for (let i = 0; i < this._cand.length; ++i) {
-        this._cand[i].match = 0;
-      }
+      const cand = this._acc.map(e => ({ layout: e, match: 0 }));
       let c = 0;
       for (let k = 0; k < this._rec.length; ++k) {
         const v = this._rec[k];
@@ -305,12 +298,12 @@ export default class Detector {
           const values = this._values[k];
           for (let i = 0; i < this._acc.length; ++i) {
             if (v === values[i]) {
-              this._cand[i].match++;
+              cand[i].match++;
             }
           }
         }
       }
-      this._cached = [...this._cand];
+      this._cached = cand;
       if (c) {
         this._cached.sort((a, b) => b.match - a.match);
         for (let i = 0; i < this._cached.length; ++i) {
@@ -328,17 +321,17 @@ export default class Detector {
    * key events in `feed`.
    * If multiple layouts are returned but only one key, then the layout is
    * not yet fully determined but the key code is already known from `feed`.
-   * When multiple keys are returned, then the character undetermined
+   * When multiple keys are returned, then the character is still undetermined
    * and the layout needs further resolving with resolve.
-   * A certainty lesser than 1 can have different reasons:
-   * - not enough key event fed yet (multiple layouts returned)
-   * - user has an unknown or custom layout
+   * A certain value lesser than 1 can have different reasons:
+   * - not enough key event fed yet (multiple layouts or keys returned)
+   * - user has an unknown or custom layout (check match value of `matches`)
    * If `certain` is 0 the result should not be used as the detector
    * has not seen any key events at all.
    */
   public guessKey(code: string): IKeyResult {
     const lm = this.matches();
-    let cands = [];
+    let layouts = [];
     let last = 0;
     for (let i = 0; i < lm.length; ++i) {
       if (lm[i].match === 0) {
@@ -346,50 +339,49 @@ export default class Detector {
       }
       if (lm[i].match === 1) {
         last = 1;
-        cands.push(lm[i].layout);
+        layouts.push(lm[i].layout);
       } else if (lm[i].match >= last) {
         last = lm[i].match;
-        cands.push(lm[i].layout);
+        layouts.push(lm[i].layout);
       } else {
         break;
       }
     }
-    if (this._rec[this._codes[code]] !== undefined) {
-      this._key.layouts = cands;
-      this._key.certain = 1;
-      this._key.key = this._rec[this._codes[code]];
-      return this._key;
+    if (!layouts.length) {
+      layouts = [...this._acc];
     }
-    const codeAcc = this._values[this._codes[code]];
-    if (cands.length === 1) {
-      this._key.layouts = cands;
-      this._key.certain = last;
-      this._key.key = codeAcc
-        ? codeAcc[this._layouts[cands[0]]]
-        : undefined;
-      return this._key;
+    const pos = this._codes[code];
+    if (pos === undefined) {
+      return {
+        layouts,
+        certain: last,
+        key: undefined
+      };
     }
-    if (!cands.length) {
-      cands = [...this._acc];
+    if (this._rec[pos] !== undefined) {
+      return {
+        layouts,
+        certain: 1,
+        key: this._rec[pos]
+      };
+    }
+    const codeAcc = this._values[pos];
+    if (layouts.length === 1) {
+      return {
+        layouts,
+        certain: last,
+        key: codeAcc[this._layouts[layouts[0]]]
+      };
     }
     const values = [];
-    for (let i = 0; i < cands.length; ++i) {
-      values.push(codeAcc ? codeAcc[this._layouts[cands[i]]] : undefined);
+    for (let i = 0; i < layouts.length; ++i) {
+      values.push(codeAcc[this._layouts[layouts[i]]]);
     }
-    const valuesSet = new Set(values);
-    // if all candidates yield the same char, return it
-    if (valuesSet.size === 1) {
-      this._key.layouts = cands;
-      this._key.certain = last;
-      const [value] = values;
-      this._key.key = value;
-      return this._key;
-    }
-    // fallthrough
-    this._key.layouts = cands;
-    this._key.certain = last / valuesSet.size;
-    this._key.key = values;
-    return this._key;
+    return {
+      layouts,
+      certain: last / new Set(values).size,
+      key: values
+    };
   }
 
   /**

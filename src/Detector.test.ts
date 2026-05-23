@@ -121,12 +121,11 @@ describe('detector unit tests', () => {
       dect.feed('KeyA', 'x');
       assert.deepStrictEqual(dect.getRecordedMap(), { KeyA: 'x' });
     });
-    it('discardHandler (false)', () => {
+    it('discardHandler (false | void)', () => {
       const dect = new Detector(keymaps);
       const discards: [string, string][] = [];
       const handler = (code: string, key: string) => {
         discards.push([code, key]);
-        return false;
       }
       dect.setDiscard(handler);
       dect.feed('KeyA', 'a');
