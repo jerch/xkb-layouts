@@ -9,11 +9,12 @@ export interface IKeymap {
 }
 
 interface IKeymaps {
-  acc: Readonly<string[]>;
-  layouts: Readonly<{[index: string]: number}>;
-  codeAcc: Readonly<string[]>;
-  codes: Readonly<{[index: string]: number}>;
-  values: Readonly<string[][]>;
+  layouts: string[];
+  layoutIdx: {[index: string]: number};
+  codes: string[];
+  codeIdx: {[index: string]: number};
+  getKey(codeIdx: number, layoutIdx: number): string | undefined;
+  data?: any;
 }
 
 interface ILayoutMatch {
@@ -29,7 +30,7 @@ interface IKeyResult {
 
 interface IResolveKey {
   code: string;
-  keys: string[];
+  keys: (string|undefined)[];
 }
 
 interface IResolveResult {
@@ -41,23 +42,13 @@ type DiscardHandler = (code: string, key: string) => boolean | void;
 
 
 export default class Detector {
-  private _layouts: Readonly<{[index: string]: number}>;
-  private _acc: Readonly<string[]>;
-  private _codeAcc: Readonly<string[]>;
-  private _values: Readonly<string[][]>;
-  private _codes: Readonly<{[index: string]: number}>;
   private _rec: (string | undefined)[] = [];
   private _cached: ILayoutMatch[] | undefined;
   private _active: string = '';
   private _discardHandler: DiscardHandler = () => false;
 
-  constructor(data: Readonly<IKeymaps>) {
-    this._acc = data.acc;
-    this._codeAcc = data.codeAcc;
-    this._layouts = data.layouts;
-    this._codes = data.codes;
-    this._values = data.values;
-    this._rec = new Array(this._codeAcc.length).fill(undefined);
+  constructor(private _maps: IKeymaps) {
+    this._rec = new Array(_maps.codes.length).fill(undefined);
   }
 
   /**
@@ -65,12 +56,8 @@ export default class Detector {
    * The instance may not be used anymore after calling dispose.
    */
   public dispose() {
+    this._maps = { layouts: [], codes: [], layoutIdx: {}, codeIdx: {}, getKey: () => undefined };
     this._discardHandler = () => false;
-    this._layouts = {};
-    this._acc = [];
-    this._codeAcc = [];
-    this._values = [];
-    this._codes = {};
     this._active = '';
     this._cached = undefined;
   }
@@ -109,14 +96,14 @@ export default class Detector {
    * Return list of registered layouts.
    */
   public get layouts(): string[] {
-    return [...this._acc];
+    return [...this._maps.layouts];
   }
 
   /**
    * Return list of supported key codes.
    */
   public get codes(): string[] {
-    return [...this._codeAcc];
+    return [...this._maps.codes];
   }
 
   /**
@@ -130,7 +117,7 @@ export default class Detector {
    * Set active layout. The layout must be registered.
    */
   public set activeLayout(layout: string) {
-    if (layout && this._layouts[layout] === undefined) {
+    if (layout && this._maps.layoutIdx[layout] === undefined) {
       throw new Error(`layout '${layout}' is not registered`);
     }
     this._active = layout;
@@ -182,14 +169,15 @@ export default class Detector {
    * Get the layout map for a given or the active layout.
    */
   public getLayoutMap(layout?: string): IKeymap {
-    const acc = this._layouts[layout ?? this._active];
+    const acc = this._maps.layoutIdx[layout ?? this._active];
     if (acc === undefined) {
       throw new Error(`layout '${layout}' is not registered`);
     }
     const result: IKeymap = {};
-    for (let i = 0; i < this._codeAcc.length; ++i) {
-      if (this._values[i][acc] !== undefined) {
-        result[this._codeAcc[i]] = this._values[i][acc] as string;
+    for (let i = 0; i < this._maps.codes.length; ++i) {
+      const v = this._maps.getKey(i, acc);
+      if (v !== undefined) {
+        result[this._maps.codes[i]] = v;
       }
     }
     return result;
@@ -200,9 +188,9 @@ export default class Detector {
    */
   public getRecordedMap(): IKeymap {
     const result: IKeymap = {};
-    for (let i = 0; i < this._codeAcc.length; ++i) {
+    for (let i = 0; i < this._maps.codes.length; ++i) {
       if (this._rec[i] !== undefined) {
-        result[this._codeAcc[i]] = this._rec[i] as string;
+        result[this._maps.codes[i]] = this._rec[i] as string;
       }
     }
     return result;
@@ -216,10 +204,10 @@ export default class Detector {
    */
   public getLayoutKey(code: string, layout?: string): string | undefined {
     if (
-      this._codes[code] !== undefined &&
-      this._layouts[layout ?? this._active] !== undefined
+      this._maps.codeIdx[code] !== undefined &&
+      this._maps.layoutIdx[layout ?? this._active] !== undefined
     ) {
-      return this._values[this._codes[code]][this._layouts[layout ?? this._active]];
+      return this._maps.getKey(this._maps.codeIdx[code], this._maps.layoutIdx[layout ?? this._active]);
     }
   }
 
@@ -227,7 +215,7 @@ export default class Detector {
    * Feed a key code and a key character to the detector.
    */
   public feed(code: string, key: string): void {
-    const pos = this._codes[code];
+    const pos = this._maps.codeIdx[code];
     if (pos !== undefined) {
       this._cached = undefined;
       if (this._rec[pos] && this._rec[pos] !== key) {
@@ -251,21 +239,19 @@ export default class Detector {
    */
   public matches(): ILayoutMatch[] {
     if (!this._cached) {
-      const cand = this._acc.map(e => ({ layout: e, match: 0 }));
+      this._cached = this._maps.layouts.map(e => ({ layout: e, match: 0 }));
       let c = 0;
       for (let k = 0; k < this._rec.length; ++k) {
         const v = this._rec[k];
         if (v) {
           c++;
-          const values = this._values[k];
-          for (let i = 0; i < this._acc.length; ++i) {
-            if (v === values[i]) {
-              cand[i].match++;
+          for (let i = 0; i < this._maps.layouts.length; ++i) {
+            if (v === this._maps.getKey(k, i)) {
+              this._cached[i].match++;
             }
           }
         }
       }
-      this._cached = cand;
       if (c) {
         this._cached.sort((a, b) => b.match - a.match);
         for (let i = 0; i < this._cached.length; ++i) {
@@ -310,9 +296,9 @@ export default class Detector {
       }
     }
     if (!layouts.length) {
-      layouts = [...this._acc];
+      layouts = [...this._maps.layouts];
     }
-    const pos = this._codes[code];
+    const pos = this._maps.codeIdx[code];
     if (pos === undefined) {
       return {
         layouts,
@@ -327,17 +313,16 @@ export default class Detector {
         key: this._rec[pos]
       };
     }
-    const codeAcc = this._values[pos];
     if (layouts.length === 1) {
       return {
         layouts,
         certain: last,
-        key: codeAcc[this._layouts[layouts[0]]]
+        key: this._maps.getKey(pos, this._maps.layoutIdx[layouts[0]])
       };
     }
     const values = [];
     for (let i = 0; i < layouts.length; ++i) {
-      values.push(codeAcc[this._layouts[layouts[i]]]);
+      values.push(this._maps.getKey(pos, this._maps.layoutIdx[layouts[i]]));
     }
     return {
       layouts,
@@ -377,22 +362,22 @@ export default class Detector {
       return { layouts: cands, keys: [] };
     }
     if (!cands.length) {
-      cands = [...this._acc];
+      cands = [...this._maps.layouts];
     }
-    const acc = cands.map(e => this._layouts[e]);
+    const acc = cands.map(e => this._maps.layoutIdx[e]);
     const values = [];
-    const value = new Set<string>();
-    for (let i = 0; i < this._values.length; ++i) {
+    const value = new Set<string|undefined>();
+    for (let i = 0; i < this._maps.codes.length; ++i) {
       if (this._rec[i]) {
         // don't handle key if it was already recorded
         continue;
       }
       value.clear();
       for (let k = 0; k < acc.length; ++k) {
-        value.add(this._values[i][acc[k]]);
+        value.add(this._maps.getKey(i, acc[k]));
       }
       if (value.size > 1) {
-        values.push({ code: this._codeAcc[i], keys: [...value] });
+        values.push({ code: this._maps.codes[i], keys: [...value] });
       }
     }
     values.sort((a, b) => b.keys.length - a.keys.length);

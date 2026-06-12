@@ -1,6 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// all uppercase latin chars are not in unshifted positions
+// thus we use 'A' as empty placeholder
+const EMPTY_PLACEHOLDER = 'A';
+
 const DATA = {};
 
 
@@ -20,10 +24,6 @@ const SKIP = [
   //'in_tamilnet_TSCII', 'lk_tam_TAB', 'et', 'ru_ruchey_en'
 ];
 
-// skipped for being too empty (IntlRo & IntlYen) or too uniform
-// handled extra by skip & Space entries
-const SKIP_CODES = ['IntlRo', 'IntlYen', 'Space'];
-
 
 // read all keymaps
 for (let i = 2; i < process.argv.length; ++i) {
@@ -42,20 +42,12 @@ for (const map in DATA) {
 const KEYS = Array.from(new Set(keys)).sort();
 const ACC = Object.fromEntries(Object.keys(DATA).sort().map((el, i) => [el, i]));
 const MAP = Object.fromEntries(KEYS.map(el => [el, []]));
-const SPARCE = {};
 for (const key of KEYS) {
-  if (SKIP_CODES.includes(key)) {
-    // save these as sparce lists
-    SPARCE[key] = SPARCE[key] ?? {};
-    for (const map in ACC) {
-      SPARCE[key][ACC[map]] = DATA[map][key];
-    }
-    continue;
-  };
   for (const map in ACC) {
+    if (DATA[map][key] === EMPTY_PLACEHOLDER)
+      throw new Error(`EMPTY_PLACEHOLDER found in DATA: ${map}, ${key}`);
     MAP[key].push(DATA[map][key]);
   }
-
 }
 
 // minify if all entries of length 1
@@ -65,7 +57,7 @@ for (const key in MAP) {
     let c = MAP[key][i];
     if (!c || c.length !== 1) {
       if (!c) {
-        MAP[key][i] = '#';
+        MAP[key][i] = EMPTY_PLACEHOLDER;
         empty[key] = empty[key] ?? [];
         empty[key].push(i);
       } else {
@@ -79,19 +71,9 @@ for (const key in MAP) {
 
 // build the FINAL merged keymap
 const accArray = Object.entries(ACC).sort((a,b) => a[1] - b[1]).map(e => e[0]);
-const skipMinusSpace = Object.assign({}, SPARCE);
-delete skipMinusSpace.Space;
-const SPACE = {};
-for (const map in SPARCE.Space) {
-  if (SPARCE.Space[map] === ' ') continue;
-  SPACE[map] = SPARCE.Space[map]
-}
 const FINAL = {
   acc: accArray.join('|'),
-  map: MAP,
-  empty,
-  skip: skipMinusSpace,
-  Space: SPACE
+  map: MAP
 };
 
 
@@ -110,10 +92,12 @@ for (const name in empty) {
   }
 }
 // filter missing > 10
-const toSkip = Object.entries(counter).sort((a,b) => b[1] - a[1]).filter(e => e[1] > 10);
+// add to candidates to SKIP above
+const SKIP_FILTER = 10;
+const toSkip = Object.entries(counter).sort((a,b) => b[1] - a[1]).filter(e => e[1] > SKIP_FILTER);
 const accKeys = Object.keys(ACC);
+console.log('SKIP candidates:');
 console.log(toSkip.map(e => [accKeys[e[0]], e[1]]));
-console.log(toSkip.map(e => accKeys[e[0]]));
 
 
 // test result --> should yield DATA
@@ -121,15 +105,12 @@ function test() {
   const tAcc = FINAL.acc.split('|');
   const tCodes = Object.keys(FINAL.map).sort();
   for (let i = 0; i < tAcc.length; ++i) {
-    console.log('testing', tAcc[i]);
     for (let k = 0; k < tCodes.length; ++k) {
-      if (SKIP_CODES.includes(tCodes[k])) continue;
       const v = FINAL.map[tCodes[k]][i];
       const orig = DATA[tAcc[i]][tCodes[k]];
       if (v !== orig) {
-        if (!orig && v === '#') {
-
-        } else {
+        // let empty orig set to EMPTY_PLACEHOLDER pass
+        if (orig || v !== EMPTY_PLACEHOLDER) {
           console.log([v, orig], i, tCodes[k]);
           throw new Error();
         }
@@ -137,7 +118,7 @@ function test() {
     }
   }
 }
-//test();
+test();
 
 
 function getSparceDefault(values) {
@@ -166,25 +147,6 @@ function writetoFile(filename) {
   }
   const valuesStr = valuesParts.join(',\n');
 
-  const emptyParts = [];
-  for (const code of codes) {
-    const value = FINAL.empty[code] ?? [];
-    emptyParts.push(`[${value.join(',')}]`);
-  }
-  const emptyStr = emptyParts.join(',');
-
-  const skipParts = [];
-  for (const [key, value] of Object.entries(SPARCE)) {
-    const char = getSparceDefault(Object.entries(value).sort().map(e => e[1]));
-    const transformed = Object.assign({c: char}, value);
-    const tEntries = Object.entries(transformed)
-      .filter(e => e[0] === 'c' || e[1] !== char)
-      .sort((a,b) => a[0] - b[0]);
-    const right = `{${tEntries.map(e => `${e[0]}:'${e[1].replaceAll('\\', '\\\\')}'`).join(',')}}`;
-    skipParts.push(`      ${codes.indexOf(key)}: ${right}`);
-  }
-  const skipStr = skipParts.join(',\n');
-
   const output = `/**
  * Copyright (c) 2026 Joerg Breitbart
  * @license MIT
@@ -192,56 +154,29 @@ function writetoFile(filename) {
  * For copyright of xkb data - see XKB-LICENSES file.
  */
 
-interface SkipEntry {
-  [index: number]: string;
-  c: string;
-}
-
 // rebuild map: node bin/create_map.js layouts/*
-// filtered out: ${SKIP}
+// empty placeholer: ${EMPTY_PLACEHOLDER}
 const KEYMAPS = (function() {
   const DATA = {
     layouts: '${accStr}',
     codes: '${codesStr}',
-    values: [\n${valuesStr}\n    ],
-    empty: [${emptyStr}],
-    skip: {\n${skipStr}\n    }
+    values: [\n${valuesStr}\n    ]
   };
-  const f: <T>(o: T) => Readonly<T> = (o) => Object.freeze(o);
-  const acc = DATA.layouts.split('|');
-  const layouts: {[index: string]: number} = {};
-  for (let i = 0; i < acc.length; ++i) {
-    layouts[acc[i]] = i;
+  const layouts = DATA.layouts.split('|');
+  const layoutIdx: {[index: string]: number} = {};
+  for (let i = 0; i < layouts.length; ++i) {
+    layoutIdx[layouts[i]] = i;
   }
-  const codeAcc = DATA.codes.split('|');
-  const codes: {[index: string]: number} = {};
-  for (let i = 0; i < codeAcc.length; ++i) {
-    codes[codeAcc[i]] = i;
+  const codes = DATA.codes.split('|');
+  const codeIdx: {[index: string]: number} = {};
+  for (let i = 0; i < codes.length; ++i) {
+    codeIdx[codes[i]] = i;
   }
-  const values = [];
-  for (let i = 0; i < DATA.values.length; ++i) {
-    let v : string[];
-    const skip = (DATA.skip as {[index: number]: SkipEntry})[i];
-    if (skip) {
-      v = new Array(acc.length).fill(skip.c);
-      for (const map in skip) {
-        if (map === 'c') continue;
-        v[map] = skip[map];
-      }
-    } else {
-      v = DATA.values[i].split('');
-      for (const empty of DATA.empty[i])
-        v[empty] = '';
-    }
-    f(v);
-    values.push(v);
-  }
-  f(acc);
-  f(layouts);
-  f(codeAcc);
-  f(codes);
-  f(values);
-  return f({ acc, layouts, codeAcc, codes, values });
+  const getKey = (codeIdx: number, layoutIdx: number) => {
+    const v = DATA.values[codeIdx][layoutIdx];
+    return v !== '${EMPTY_PLACEHOLDER}' ? v : '';
+  };
+  return { layouts, layoutIdx, codes, codeIdx, getKey, data: DATA };
 })();
 export default KEYMAPS;
 `;

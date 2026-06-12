@@ -15,15 +15,15 @@ ld.matches();
 //ld.feed('Digit8', '8');
 //ld.feed('Digit9', '9');
 //ld.feed('KeyA', 'a');
-ld.feed('Minus', 'ß');
+//ld.feed('Minus', 'ß');
 const start = performance.now();
 for (let i = 0; i < 1000; ++i) {
-  //new LayoutDetector(MAP);
+  new Detector(KEYMAPS);
   ld.resolve();
   //ld.guessKey('KeyQ');
   //ld.getLayoutKey('KeyQ', 'EN_US');
 }
 const end = performance.now();
 console.log(end-start, ld.resolve());
-console.log(end-start, ld.guessKey('Enter'));
+//console.log(end-start, ld.guessKey('Enter'));
 //console.log(ld.getRecordedLayoutMap());
