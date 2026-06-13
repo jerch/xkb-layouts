@@ -8,13 +8,19 @@ export interface IKeymap {
   [index: string]: string;
 }
 
-interface IKeymaps {
+export interface IKeymaps {
   layouts: string[];
   layoutIdx: {[index: string]: number};
   codes: string[];
   codeIdx: {[index: string]: number};
   getKey(codeIdx: number, layoutIdx: number): string | undefined;
-  data?: any;
+}
+
+export interface IMutableKeymaps extends IKeymaps {
+  addCode(code: string): void;
+  removeCode(code: string): void;
+  register(layout: string, map: IKeymap): void;
+  unregister(layout: string): void;
 }
 
 interface ILayoutMatch {
@@ -41,6 +47,121 @@ interface IResolveResult {
 type DiscardHandler = (code: string, key: string) => boolean | void;
 
 
+/**
+ * Mutable version of keymaps.
+ * By default the detector uses the static shared version of the keymaps
+ * to save memory - static holds ~35kB in memory for unshifted layouts
+ * for all detector instances, while this instance needs ~120kB per instance.
+ * On a register or unregister request the static version
+ * gets replaced by this mutable one allowing code and layout changes,
+ * e.g. to add a custom layout on-the-fly.
+ */
+export class MutableKeymaps implements IMutableKeymaps {
+  public layouts: string[];
+  public layoutIdx: {[index: string]: number};
+  public codes: string[];
+  public codeIdx: {[index: string]: number};
+  private _values: string[][] = [];
+
+  constructor(maps?: IKeymaps) {
+    if (maps) {
+      this.layouts = [...maps.layouts];
+      this.layoutIdx = Object.assign({}, maps.layoutIdx);
+      this.codes = [...maps.codes];
+      this.codeIdx = Object.assign({}, maps.codeIdx);
+      for (let codeIdx = 0; codeIdx < this.codes.length; ++codeIdx) {
+        const line: string[] = [];
+        for (let layoutIdx = 0; layoutIdx < this.layouts.length; ++layoutIdx) {
+          line.push(maps.getKey(codeIdx, layoutIdx) ?? '');
+        }
+        this._values.push(line);
+      }
+    } else {
+      this.layouts = [];
+      this.layoutIdx = {};
+      this.codes = [];
+      this.codeIdx = {}
+    }
+  }
+
+  public getKey(codeIdx: number, layoutIdx: number): string | undefined {
+    return this._values[codeIdx][layoutIdx];
+  }
+
+  /**
+   * Add code to keymaps.
+   * The key values of registered layouts will be set to undefined.
+   */
+  public addCode(code: string): void {
+    if (!code || this.codeIdx[code] !== undefined) {
+      throw new Error(`code '${code}' is already registered`);
+    }
+    const pos = this.codes.length;
+    this.codeIdx[code] = pos;
+    this.codes.push(code);
+    this._values.push(new Array(this.layouts.length).fill(undefined));
+  }
+
+  /**
+   * Remove a code from keymaps.
+   */
+  public removeCode(code: string): void {
+    if (this.codeIdx[code] === undefined) {
+      throw new Error(`code '${code}' is not registered`);
+    }
+    const pos = this.codeIdx[code];
+    delete this.codeIdx[code];
+    for (const _code in this.codeIdx) {
+      if (this.codeIdx[_code] > pos) {
+        this.codeIdx[_code]--;
+      }
+    }
+    this._values.splice(pos, 1);
+  }
+
+  /**
+   * Register a custom layout.
+   * Note that only known codes are transferred.
+   * Use `addCode` to introduce new codes to the keymaps.
+   */
+  public register(layout: string, map: IKeymap): void {
+    if (!layout || this.layoutIdx[layout] !== undefined) {
+      throw new Error(`layout '${layout}' is already registered`);
+    }
+    const pos = this.layouts.length;
+    this.layoutIdx[layout] = pos;
+    this.layouts.push(layout);
+    for (let i = 0; i < this._values.length; ++i) {
+      // NOTE: pushes undefined for non-existent codes
+      this._values[i].push(map[this.codes[i]]);
+    }
+  }
+
+  /**
+   * Unregister a layout.
+   */
+  public unregister(layout: string): void {
+    if (this.layoutIdx[layout] === undefined) {
+      throw new Error(`layout '${layout}' is not registered`);
+    }
+    const pos = this.layoutIdx[layout];
+    delete this.layoutIdx[layout];
+    for (const _layout in this.layoutIdx) {
+      if (this.layoutIdx[_layout] > pos) {
+        this.layoutIdx[_layout]--;
+      }
+    }
+    this.layouts.splice(pos, 1);
+    for (let i = 0; i < this._values.length; ++i) {
+      this._values[i].splice(pos, 1);
+    }
+  }
+}
+
+
+/**
+ * Keymap detector.
+ */
 export default class Detector {
   private _rec: (string | undefined)[] = [];
   private _cached: ILayoutMatch[] | undefined;
@@ -56,7 +177,7 @@ export default class Detector {
    * The instance may not be used anymore after calling dispose.
    */
   public dispose() {
-    this._maps = { layouts: [], codes: [], layoutIdx: {}, codeIdx: {}, getKey: () => undefined };
+    this._maps = undefined!;
     this._discardHandler = () => false;
     this._active = '';
     this._cached = undefined;
@@ -125,57 +246,41 @@ export default class Detector {
 
   /**
    * Register a custom layout.
-   * Currently it is not possible to introduce new codes.
    */
-  // public registerLayout(layout: string, map: IKeymap): void {
-  //   if (!layout || this._layouts[layout] !== undefined) {
-  //     throw new Error(`layout '${layout}' is already registered`);
-  //   }
-  //   const pos = this._acc.length;
-  //   this._layouts[layout] = pos;
-  //   this._acc.push(layout);
-  //   for (let i = 0; i < this._values.length; ++i) {
-  //     this._values[i].push(map[this._codeAcc[i]]);
-  //   }
-  //   this._cached = undefined;
-  // }
+  public registerLayout(layout: string, map: IKeymap): void {
+    if ((this._maps as IMutableKeymaps).register === undefined) {
+      this._maps = new MutableKeymaps(this._maps);
+    }
+    (this._maps as IMutableKeymaps).register(layout, map);
+    this._cached = undefined;
+  }
 
   /**
    * Unregister a layout.
    * Will reset the active layout, if it was the unregistered one.
    */
-  // public unregisterLayout(layout: string): void {
-  //   if (this._layouts[layout] === undefined) {
-  //     throw new Error(`layout '${layout}' is not registered`);
-  //   }
-  //   const pos = this._layouts[layout];
-  //   delete this._layouts[layout];
-  //   for (const layout in this._layouts) {
-  //     if (this._layouts[layout] > pos) {
-  //       this._layouts[layout]--;
-  //     }
-  //   }
-  //   this._acc.splice(pos, 1);
-  //   for (let i = 0; i < this._values.length; ++i) {
-  //     this._values[i].splice(pos, 1);
-  //   }
-  //   this._cached = undefined;
-  //   if (this._active === layout) {
-  //     this._active = '';
-  //   }
-  // }
+  public unregisterLayout(layout: string): void {
+    if ((this._maps as IMutableKeymaps).unregister === undefined) {
+      this._maps = new MutableKeymaps(this._maps);
+    }
+    (this._maps as IMutableKeymaps).unregister(layout);
+    this._cached = undefined;
+    if (this._active === layout) {
+      this._active = '';
+    }
+  }
 
   /**
    * Get the layout map for a given or the active layout.
    */
   public getLayoutMap(layout?: string): IKeymap {
-    const acc = this._maps.layoutIdx[layout ?? this._active];
-    if (acc === undefined) {
+    const layoutIdx = this._maps.layoutIdx[layout ?? this._active];
+    if (layoutIdx === undefined) {
       throw new Error(`layout '${layout}' is not registered`);
     }
     const result: IKeymap = {};
     for (let i = 0; i < this._maps.codes.length; ++i) {
-      const v = this._maps.getKey(i, acc);
+      const v = this._maps.getKey(i, layoutIdx);
       if (v !== undefined) {
         result[this._maps.codes[i]] = v;
       }

@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
-import Detector from './Detector.js';
+import Detector, { IKeymap } from './Detector.js';
 import keymaps from './keymaps.js';
 import keymapsResolved from './keymapsResolved.js';
 
@@ -23,9 +23,35 @@ describe('keymaps match original', () => {
   }
 });
 
+describe('keymaps match original in mutable keymaps', () => {
+  const dect = new Detector(keymaps);
+  const layouts = dect.layouts;
+  dect.registerLayout('custom', { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' });
+  for (let i = 0; i < layouts.length; ++i) {
+    const layout = layouts[i];
+    it(layout, () => {
+      const orig = fs.readFileSync(path.join(KEYMAPS_PATH, layout + '.json'), { encoding: 'utf-8' });
+      assert.deepStrictEqual(dect.getLayoutMap(layout), JSON.parse(orig));
+    });
+  }
+});
+
 describe('keymaps resolved match original', () => {
   const dect = new Detector(keymapsResolved);
   const layouts = dect.layouts;
+  for (let i = 0; i < layouts.length; ++i) {
+    const layout = layouts[i];
+    it(layout, () => {
+      const orig = fs.readFileSync(path.join(KEYMAPS_RESOLVED_PATH, layout + '.json'), { encoding: 'utf-8' });
+      assert.deepStrictEqual(dect.getLayoutMap(layout), JSON.parse(orig));
+    });
+  }
+});
+
+describe('keymaps resolved match original in mutable keymaps', () => {
+  const dect = new Detector(keymapsResolved);
+  const layouts = dect.layouts;
+  dect.registerLayout('custom', { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' });
   for (let i = 0; i < layouts.length; ++i) {
     const layout = layouts[i];
     it(layout, () => {
@@ -56,45 +82,45 @@ describe('detector unit tests', () => {
       }
     }
   });
-  // it('register', () => {
-  //   const dect = new Detector(keymaps);
-  //   const customMap = { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' };
-  //   dect.registerLayout('custom', customMap);
-  //   assert.strictEqual(dect.layouts.includes('custom'), true);
-  //   assert.deepStrictEqual(dect.getLayoutMap('custom'), customMap);
-  //   dect.activeLayout = 'custom';
-  //   assert.strictEqual(
-  //     Object.keys(customMap).map(code => dect.getLayoutKey(code)).join(''),
-  //     'HELLO'
-  //   );
-  // });
-  // it('unregister', () => {
-  //   const dect = new Detector(keymaps);
-  //   const customMap = { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' };
-  //   dect.registerLayout('custom', customMap);
-  //   const oldLayouts = dect.layouts;
-  //   const maps: {[index: string]: IKeymap} = {};
-  //   for (let i = 0; i < oldLayouts.length; ++i) {
-  //     const layout = oldLayouts[i];
-  //     if (i % 2) {
-  //       dect.unregisterLayout(layout);
-  //     } else {
-  //       maps[layout] = dect.getLayoutMap(layout);
-  //     }
-  //   }
-  //   for (let i = 0; i < oldLayouts.length; ++i) {
-  //     const layout = oldLayouts[i];
-  //     if (i % 2) {
-  //       assert.strictEqual(dect.layouts.includes(layout), false);
-  //       assert.throws(() => dect.getLayoutMap(layout));
-  //       assert.strictEqual(dect.getLayoutKey('KeyA', layout), undefined);
-  //     } else {
-  //       assert.strictEqual(dect.layouts.includes(layout), true);
-  //       assert.deepStrictEqual(dect.getLayoutMap(layout), maps[layout]);
-  //       assert.strictEqual(dect.getLayoutKey('KeyA', layout), maps[layout].KeyA);
-  //     }
-  //   }
-  // });
+  it('register', () => {
+    const dect = new Detector(keymaps);
+    const customMap = { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' };
+    dect.registerLayout('custom', customMap);
+    assert.strictEqual(dect.layouts.includes('custom'), true);
+    assert.deepStrictEqual(dect.getLayoutMap('custom'), customMap);
+    dect.activeLayout = 'custom';
+    assert.strictEqual(
+      Object.keys(customMap).map(code => dect.getLayoutKey(code)).join(''),
+      'HELLO'
+    );
+  });
+  it('unregister', () => {
+    const dect = new Detector(keymaps);
+    const customMap = { 'KeyA': 'H', 'KeyB': 'E', 'KeyC': 'L', 'KeyD': 'L', 'KeyE': 'O' };
+    dect.registerLayout('custom', customMap);
+    const oldLayouts = dect.layouts;
+    const maps: {[index: string]: IKeymap} = {};
+    for (let i = 0; i < oldLayouts.length; ++i) {
+      const layout = oldLayouts[i];
+      if (i % 2) {
+        dect.unregisterLayout(layout);
+      } else {
+        maps[layout] = dect.getLayoutMap(layout);
+      }
+    }
+    for (let i = 0; i < oldLayouts.length; ++i) {
+      const layout = oldLayouts[i];
+      if (i % 2) {
+        assert.strictEqual(dect.layouts.includes(layout), false);
+        assert.throws(() => dect.getLayoutMap(layout));
+        assert.strictEqual(dect.getLayoutKey('KeyA', layout), undefined);
+      } else {
+        assert.strictEqual(dect.layouts.includes(layout), true);
+        assert.deepStrictEqual(dect.getLayoutMap(layout), maps[layout]);
+        assert.strictEqual(dect.getLayoutKey('KeyA', layout), maps[layout].KeyA);
+      }
+    }
+  });
   it('getLayoutKey', () => {
     const dect = new Detector(keymaps);
     // known code and known layout yields a char
