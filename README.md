@@ -94,6 +94,10 @@ const a_char = dect.getActiveKey('KeyA');
   There are still savings possible on the package size by a more clever map construction.
   Currently a tradeoff between reasonable package size and loading times is chosen.
 
+- *Layout Description*\
+  The repo also contains a file `xkb_layouts_structured.json` containing all layout meta information
+  from the XML file of XKB. This can be used to build a selection based layout chooser with country
+  or language selections and more speaking layout names.
 
 ## Build Instructions
 

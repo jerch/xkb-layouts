@@ -1,0 +1,3383 @@
+{
+  "al": {
+    "desc": "Albanian",
+    "countries": [
+      "AL"
+    ],
+    "langs": [
+      "sqi"
+    ],
+    "variants": {
+      "plisi": {
+        "desc": "Albanian (Plisi)"
+      },
+      "veqilharxhi": {
+        "desc": "Albanian (Veqilharxhi)"
+      }
+    }
+  },
+  "et": {
+    "desc": "Amharic",
+    "countries": [
+      "ET"
+    ],
+    "langs": [
+      "amh"
+    ]
+  },
+  "am": {
+    "desc": "Armenian",
+    "countries": [
+      "AM"
+    ],
+    "langs": [
+      "hye"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Armenian (phonetic)"
+      },
+      "phonetic-alt": {
+        "desc": "Armenian (alt. phonetic)"
+      },
+      "eastern": {
+        "desc": "Armenian (eastern)"
+      },
+      "eastern-alt": {
+        "desc": "Armenian (alt. eastern)"
+      },
+      "western": {
+        "desc": "Armenian (western)"
+      }
+    }
+  },
+  "ara": {
+    "desc": "Arabic",
+    "countries": [
+      "AE",
+      "BH",
+      "DZ",
+      "EG",
+      "EH",
+      "JO",
+      "KW",
+      "LB",
+      "LY",
+      "MA",
+      "MR",
+      "OM",
+      "PS",
+      "QA",
+      "SA",
+      "SD",
+      "SY",
+      "TN",
+      "YE"
+    ],
+    "langs": [
+      "ara"
+    ],
+    "variants": {
+      "digits": {
+        "desc": "Arabic (Eastern Arabic numerals)"
+      },
+      "azerty": {
+        "desc": "Arabic (AZERTY)"
+      },
+      "azerty_digits": {
+        "desc": "Arabic (AZERTY, Eastern Arabic numerals)"
+      },
+      "buckwalter": {
+        "desc": "Arabic (Buckwalter)"
+      },
+      "mac": {
+        "desc": "Arabic (Macintosh)"
+      },
+      "mac-phonetic": {
+        "desc": "Arabic (Macintosh, phonetic)"
+      },
+      "olpc": {
+        "desc": "Arabic (OLPC)"
+      }
+    }
+  },
+  "eg": {
+    "desc": "Arabic (Egypt)",
+    "countries": [
+      "EG"
+    ],
+    "langs": [
+      "ara",
+      "arz"
+    ]
+  },
+  "iq": {
+    "desc": "Arabic (Iraq)",
+    "countries": [
+      "IQ"
+    ],
+    "langs": [
+      "ara"
+    ],
+    "variants": {
+      "ku": {
+        "desc": "Kurdish (Iraq, Latin Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_alt": {
+        "desc": "Kurdish (Iraq, Latin Alt-Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_f": {
+        "desc": "Kurdish (Iraq, F)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_ara": {
+        "desc": "Kurdish (Iraq, Arabic-Latin)",
+        "langs": [
+          "kur"
+        ]
+      }
+    }
+  },
+  "ma": {
+    "desc": "Arabic (Morocco)",
+    "countries": [
+      "MA"
+    ],
+    "langs": [
+      "ary"
+    ],
+    "variants": {
+      "tifinagh": {
+        "desc": "Berber (Morocco, Tifinagh)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "tifinagh-alt": {
+        "desc": "Berber (Morocco, Tifinagh alt.)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "tifinagh-alt-phonetic": {
+        "desc": "Berber (Morocco, Tifinagh phonetic, alt.)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "tifinagh-extended": {
+        "desc": "Berber (Morocco, Tifinagh extended)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "tifinagh-phonetic": {
+        "desc": "Berber (Morocco, Tifinagh phonetic)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "tifinagh-extended-phonetic": {
+        "desc": "Berber (Morocco, Tifinagh extended phonetic)",
+        "langs": [
+          "ber"
+        ]
+      },
+      "french": {
+        "desc": "French (Morocco)",
+        "langs": [
+          "fra"
+        ]
+      },
+      "rif": {
+        "desc": "Tarifit",
+        "langs": [
+          "rif"
+        ]
+      }
+    }
+  },
+  "sy": {
+    "desc": "Arabic (Syria)",
+    "countries": [
+      "SY"
+    ],
+    "langs": [
+      "syr"
+    ],
+    "variants": {
+      "syc": {
+        "desc": "Syriac"
+      },
+      "syc_phonetic": {
+        "desc": "Syriac (phonetic)"
+      },
+      "ku": {
+        "desc": "Kurdish (Syria, Latin Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_alt": {
+        "desc": "Kurdish (Syria, Latin Alt-Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_f": {
+        "desc": "Kurdish (Syria, F)",
+        "langs": [
+          "kur"
+        ]
+      }
+    }
+  },
+  "az": {
+    "desc": "Azerbaijani",
+    "countries": [
+      "AZ"
+    ],
+    "langs": [
+      "aze"
+    ],
+    "variants": {
+      "cyrillic": {
+        "desc": "Azerbaijani (Cyrillic)"
+      }
+    }
+  },
+  "ml": {
+    "desc": "Bambara",
+    "countries": [
+      "ML"
+    ],
+    "langs": [
+      "bam"
+    ],
+    "variants": {
+      "fr-oss": {
+        "desc": "French (Mali, alt.)",
+        "langs": [
+          "fra"
+        ]
+      },
+      "us-mac": {
+        "desc": "English (Mali, US, Macintosh)",
+        "langs": [
+          "eng"
+        ]
+      },
+      "us-intl": {
+        "desc": "English (Mali, US, intl.)",
+        "langs": [
+          "eng"
+        ]
+      }
+    }
+  },
+  "bd": {
+    "desc": "Bangla",
+    "countries": [
+      "BD"
+    ],
+    "langs": [
+      "ben",
+      "sat"
+    ],
+    "variants": {
+      "probhat": {
+        "desc": "Bangla (Probhat)"
+      }
+    }
+  },
+  "by": {
+    "desc": "Belarusian",
+    "countries": [
+      "BY"
+    ],
+    "langs": [
+      "bel"
+    ],
+    "variants": {
+      "legacy": {
+        "desc": "Belarusian (legacy)"
+      },
+      "latin": {
+        "desc": "Belarusian (Latin)"
+      },
+      "intl": {
+        "desc": "Belarusian (intl.)"
+      },
+      "phonetic": {
+        "desc": "Belarusian (phonetic)"
+      },
+      "ru": {
+        "desc": "Russian (Belarus)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "be": {
+    "desc": "Belgian",
+    "countries": [
+      "BE"
+    ],
+    "langs": [
+      "deu",
+      "nld",
+      "fra"
+    ],
+    "variants": {
+      "oss": {
+        "desc": "Belgian (alt.)"
+      },
+      "oss_latin9": {
+        "desc": "Belgian (Latin-9 only, alt.)"
+      },
+      "iso-alternate": {
+        "desc": "Belgian (ISO, alt.)"
+      },
+      "nodeadkeys": {
+        "desc": "Belgian (no dead keys)"
+      },
+      "wang": {
+        "desc": "Belgian (Wang 724 AZERTY)"
+      }
+    }
+  },
+  "dz": {
+    "desc": "Berber (Algeria, Latin)",
+    "countries": [
+      "DZ"
+    ],
+    "langs": [
+      "tzm",
+      "fra"
+    ],
+    "variants": {
+      "ber": {
+        "desc": "Berber (Algeria, Tifinagh)",
+        "langs": [
+          "kab"
+        ]
+      },
+      "azerty-deadkeys": {
+        "desc": "Kabyle (AZERTY, with dead keys)",
+        "langs": [
+          "kab"
+        ]
+      },
+      "qwerty-gb-deadkeys": {
+        "desc": "Kabyle (QWERTY, UK, with dead keys)",
+        "langs": [
+          "kab"
+        ]
+      },
+      "qwerty-us-deadkeys": {
+        "desc": "Kabyle (QWERTY, US, with dead keys)",
+        "langs": [
+          "kab"
+        ]
+      },
+      "ar": {
+        "desc": "Arabic (Algeria)",
+        "langs": [
+          "ara"
+        ]
+      }
+    }
+  },
+  "ba": {
+    "desc": "Bosnian",
+    "countries": [
+      "BA"
+    ],
+    "langs": [
+      "bos"
+    ],
+    "variants": {
+      "alternatequotes": {
+        "desc": "Bosnian (with guillemets)"
+      },
+      "unicode": {
+        "desc": "Bosnian (with Bosnian digraphs)"
+      },
+      "unicodeus": {
+        "desc": "Bosnian (US, with Bosnian digraphs)"
+      },
+      "us": {
+        "desc": "Bosnian (US)"
+      }
+    }
+  },
+  "brai": {
+    "desc": "Braille",
+    "variants": {
+      "left_hand": {
+        "desc": "Braille (left-handed)"
+      },
+      "left_hand_invert": {
+        "desc": "Braille (left-handed inverted thumb)"
+      },
+      "right_hand": {
+        "desc": "Braille (right-handed)"
+      },
+      "right_hand_invert": {
+        "desc": "Braille (right-handed inverted thumb)"
+      }
+    }
+  },
+  "bg": {
+    "desc": "Bulgarian",
+    "countries": [
+      "BG"
+    ],
+    "langs": [
+      "bul"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Bulgarian (traditional phonetic)"
+      },
+      "bas_phonetic": {
+        "desc": "Bulgarian (new phonetic)"
+      },
+      "bekl": {
+        "desc": "Bulgarian (enhanced)"
+      }
+    }
+  },
+  "mm": {
+    "desc": "Burmese",
+    "countries": [
+      "MM"
+    ],
+    "langs": [
+      "mya"
+    ],
+    "variants": {
+      "zawgyi": {
+        "desc": "Burmese (Zawgyi)",
+        "langs": [
+          "mya"
+        ]
+      },
+      "mnw": {
+        "desc": "Mon",
+        "langs": [
+          "mnw",
+          "eng"
+        ]
+      },
+      "mnw-a1": {
+        "desc": "Mon (A1)",
+        "langs": [
+          "mnw"
+        ]
+      },
+      "shn": {
+        "desc": "Shan",
+        "langs": [
+          "shn",
+          "eng"
+        ]
+      },
+      "zgt": {
+        "desc": "Shan (Zawgyi)",
+        "langs": [
+          "shn"
+        ]
+      }
+    }
+  },
+  "cn": {
+    "desc": "Chinese",
+    "countries": [
+      "CN"
+    ],
+    "langs": [
+      "zho"
+    ],
+    "variants": {
+      "altgr-pinyin": {
+        "desc": "Hanyu Pinyin Letters (with AltGr dead keys)",
+        "langs": [
+          "zho"
+        ]
+      },
+      "mon_trad": {
+        "desc": "Mongolian (Bichig)",
+        "langs": [
+          "mvf"
+        ]
+      },
+      "mon_trad_todo": {
+        "desc": "Mongolian (Todo)",
+        "langs": [
+          "mvf"
+        ]
+      },
+      "mon_trad_xibe": {
+        "desc": "Mongolian (Xibe)",
+        "langs": [
+          "sjo"
+        ]
+      },
+      "mon_trad_manchu": {
+        "desc": "Mongolian (Manchu)",
+        "langs": [
+          "mnc"
+        ]
+      },
+      "mon_trad_galik": {
+        "desc": "Mongolian (Galik)",
+        "langs": [
+          "mvf"
+        ]
+      },
+      "mon_todo_galik": {
+        "desc": "Mongolian (Todo Galik)",
+        "langs": [
+          "mvf"
+        ]
+      },
+      "mon_manchu_galik": {
+        "desc": "Mongolian (Manchu Galik)",
+        "langs": [
+          "mnc"
+        ]
+      },
+      "tib": {
+        "desc": "Tibetan",
+        "langs": [
+          "bod"
+        ]
+      },
+      "tib_asciinum": {
+        "desc": "Tibetan (with ASCII numerals)",
+        "langs": [
+          "bod"
+        ]
+      },
+      "ug": {
+        "desc": "Uyghur",
+        "langs": [
+          "uig"
+        ]
+      }
+    }
+  },
+  "hr": {
+    "desc": "Croatian",
+    "countries": [
+      "HR"
+    ],
+    "langs": [
+      "hrv"
+    ],
+    "variants": {
+      "alternatequotes": {
+        "desc": "Croatian (with guillemets)"
+      },
+      "unicode": {
+        "desc": "Croatian (with Croatian digraphs)"
+      },
+      "unicodeus": {
+        "desc": "Croatian (US, with Croatian digraphs)"
+      },
+      "us": {
+        "desc": "Croatian (US)"
+      }
+    }
+  },
+  "cz": {
+    "desc": "Czech",
+    "countries": [
+      "CZ"
+    ],
+    "langs": [
+      "ces"
+    ],
+    "variants": {
+      "bksl": {
+        "desc": "Czech (extra backslash)"
+      },
+      "qwerty": {
+        "desc": "Czech (QWERTY)"
+      },
+      "qwerty_bksl": {
+        "desc": "Czech (QWERTY, extra backslash)"
+      },
+      "winkeys": {
+        "desc": "Czech (QWERTZ, Windows)"
+      },
+      "winkeys-qwerty": {
+        "desc": "Czech (QWERTY, Windows)"
+      },
+      "qwerty-mac": {
+        "desc": "Czech (QWERTY, Macintosh)"
+      },
+      "ucw": {
+        "desc": "Czech (UCW, only accented letters)"
+      },
+      "dvorak-ucw": {
+        "desc": "Czech (US, Dvorak, UCW support)"
+      },
+      "rus": {
+        "desc": "Russian (Czechia, phonetic)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "dk": {
+    "desc": "Danish",
+    "countries": [
+      "DK"
+    ],
+    "langs": [
+      "dan"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Danish (no dead keys)"
+      },
+      "winkeys": {
+        "desc": "Danish (Windows)"
+      },
+      "mac": {
+        "desc": "Danish (Macintosh)"
+      },
+      "mac_nodeadkeys": {
+        "desc": "Danish (Macintosh, no dead keys)"
+      },
+      "dvorak": {
+        "desc": "Danish (Dvorak)"
+      }
+    }
+  },
+  "af": {
+    "desc": "Dari",
+    "countries": [
+      "AF"
+    ],
+    "langs": [
+      "prs"
+    ],
+    "variants": {
+      "ps": {
+        "desc": "Pashto",
+        "langs": [
+          "pus"
+        ]
+      },
+      "uz": {
+        "desc": "Uzbek (Afghanistan)",
+        "langs": [
+          "uzb"
+        ]
+      },
+      "fa-olpc": {
+        "desc": "Dari (Afghanistan, OLPC)"
+      },
+      "ps-olpc": {
+        "desc": "Pashto (Afghanistan, OLPC)",
+        "langs": [
+          "pus"
+        ]
+      },
+      "uz-olpc": {
+        "desc": "Uzbek (Afghanistan, OLPC)",
+        "langs": [
+          "uzb"
+        ]
+      }
+    }
+  },
+  "mv": {
+    "desc": "Dhivehi",
+    "countries": [
+      "MV"
+    ],
+    "langs": [
+      "div"
+    ]
+  },
+  "nl": {
+    "desc": "Dutch",
+    "countries": [
+      "NL"
+    ],
+    "langs": [
+      "nld"
+    ],
+    "variants": {
+      "us": {
+        "desc": "Dutch (US)"
+      },
+      "mac": {
+        "desc": "Dutch (Macintosh)"
+      },
+      "std": {
+        "desc": "Dutch (standard)"
+      }
+    }
+  },
+  "bt": {
+    "desc": "Dzongkha",
+    "countries": [
+      "BT"
+    ],
+    "langs": [
+      "dzo"
+    ]
+  },
+  "au": {
+    "desc": "English (Australia)",
+    "countries": [
+      "AU"
+    ],
+    "langs": [
+      "eng"
+    ]
+  },
+  "cm": {
+    "desc": "English (Cameroon)",
+    "countries": [
+      "CM"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "french": {
+        "desc": "French (Cameroon)",
+        "langs": [
+          "fra"
+        ]
+      },
+      "qwerty": {
+        "desc": "Cameroon Multilingual (QWERTY, intl.)",
+        "langs": [
+          "eng",
+          "bas",
+          "nmg",
+          "fub",
+          "ewo",
+          "xmd",
+          "mfh",
+          "bkm",
+          "ozm",
+          "lns",
+          "sox",
+          "pny",
+          "wes",
+          "lem",
+          "nyj",
+          "mfk",
+          "mcp",
+          "ass",
+          "xed",
+          "dua",
+          "anv",
+          "bum",
+          "btb",
+          "bfd",
+          "azo",
+          "ken",
+          "yam",
+          "yat",
+          "yas"
+        ]
+      },
+      "azerty": {
+        "desc": "Cameroon (AZERTY, intl.)",
+        "langs": [
+          "fra",
+          "bas",
+          "nmg",
+          "fub",
+          "ewo",
+          "xmd",
+          "mfh",
+          "bkm",
+          "ozm",
+          "lns",
+          "sox",
+          "pny",
+          "wes",
+          "lem",
+          "nyj",
+          "mfk",
+          "mcp",
+          "ass",
+          "xed",
+          "dua",
+          "anv",
+          "bum",
+          "btb",
+          "bfd",
+          "azo",
+          "ken",
+          "yam",
+          "yat",
+          "yas"
+        ]
+      },
+      "dvorak": {
+        "desc": "Cameroon (Dvorak, intl.)"
+      },
+      "mmuock": {
+        "desc": "Mmuock"
+      }
+    }
+  },
+  "gh": {
+    "desc": "English (Ghana)",
+    "countries": [
+      "GH"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "generic": {
+        "desc": "English (Ghana, multilingual)"
+      },
+      "gillbt": {
+        "desc": "English (Ghana, GILLBT)"
+      },
+      "akan": {
+        "desc": "Akan",
+        "langs": [
+          "aka"
+        ]
+      },
+      "avn": {
+        "desc": "Avatime",
+        "langs": [
+          "avn"
+        ]
+      },
+      "ewe": {
+        "desc": "Ewe",
+        "langs": [
+          "ewe"
+        ]
+      },
+      "fula": {
+        "desc": "Fula",
+        "langs": [
+          "ful"
+        ]
+      },
+      "ga": {
+        "desc": "Ga",
+        "langs": [
+          "gaa"
+        ]
+      },
+      "hausa": {
+        "desc": "Hausa (Ghana)",
+        "langs": [
+          "hau"
+        ]
+      }
+    }
+  },
+  "nz": {
+    "desc": "English (New Zealand)",
+    "countries": [
+      "NZ"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "mao": {
+        "desc": "Maori",
+        "langs": [
+          "mri"
+        ]
+      }
+    }
+  },
+  "ng": {
+    "desc": "English (Nigeria)",
+    "countries": [
+      "NG"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "hausa": {
+        "desc": "Hausa (Nigeria)",
+        "langs": [
+          "hau"
+        ]
+      },
+      "igbo": {
+        "desc": "Igbo",
+        "langs": [
+          "ibo"
+        ]
+      },
+      "yoruba": {
+        "desc": "Yoruba",
+        "langs": [
+          "yor"
+        ]
+      }
+    }
+  },
+  "za": {
+    "desc": "English (South Africa)",
+    "countries": [
+      "ZA"
+    ],
+    "langs": [
+      "eng"
+    ]
+  },
+  "gb": {
+    "desc": "English (UK)",
+    "countries": [
+      "GB"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "extd": {
+        "desc": "English (UK, extended, Windows)"
+      },
+      "intl": {
+        "desc": "English (UK, intl., with dead keys)"
+      },
+      "dvorak": {
+        "desc": "English (UK, Dvorak)"
+      },
+      "dvorakukp": {
+        "desc": "English (UK, Dvorak, with UK punctuation)"
+      },
+      "mac": {
+        "desc": "English (UK, Macintosh)"
+      },
+      "mac_intl": {
+        "desc": "English (UK, Macintosh, intl.)"
+      },
+      "colemak": {
+        "desc": "English (UK, Colemak)"
+      },
+      "colemak_dh": {
+        "desc": "English (UK, Colemak-DH)"
+      },
+      "gla": {
+        "desc": "Scottish Gaelic",
+        "countries": [
+          "GB",
+          "CA"
+        ],
+        "langs": [
+          "eng",
+          "gla"
+        ]
+      },
+      "pl": {
+        "desc": "Polish (British keyboard)",
+        "langs": [
+          "pol"
+        ]
+      }
+    }
+  },
+  "us": {
+    "desc": "English (US)",
+    "countries": [
+      "US"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "euro": {
+        "desc": "English (US, euro on 5)"
+      },
+      "intl": {
+        "desc": "English (US, intl., with dead keys)"
+      },
+      "alt-intl": {
+        "desc": "English (US, alt. intl.)"
+      },
+      "altgr-intl": {
+        "desc": "English (intl., with AltGr dead keys)",
+        "langs": [
+          "eng",
+          "fra",
+          "deu"
+        ]
+      },
+      "mac": {
+        "desc": "English (Macintosh)"
+      },
+      "colemak": {
+        "desc": "English (Colemak)"
+      },
+      "colemak_dh": {
+        "desc": "English (Colemak-DH)"
+      },
+      "colemak_dh_wide": {
+        "desc": "English (Colemak-DH Wide)"
+      },
+      "colemak_dh_ortho": {
+        "desc": "English (Colemak-DH Ortholinear)"
+      },
+      "colemak_dh_iso": {
+        "desc": "English (Colemak-DH ISO)"
+      },
+      "colemak_dh_wide_iso": {
+        "desc": "English (Colemak-DH Wide ISO)"
+      },
+      "dvorak": {
+        "desc": "English (Dvorak)"
+      },
+      "dvorak-intl": {
+        "desc": "English (Dvorak, intl., with dead keys)"
+      },
+      "dvorak-alt-intl": {
+        "desc": "English (Dvorak, alt. intl.)"
+      },
+      "dvorak-l": {
+        "desc": "English (Dvorak, left-handed)"
+      },
+      "dvorak-r": {
+        "desc": "English (Dvorak, right-handed)"
+      },
+      "dvorak-classic": {
+        "desc": "English (classic Dvorak)"
+      },
+      "dvp": {
+        "desc": "English (programmer Dvorak)"
+      },
+      "dvorak-mac": {
+        "desc": "English (Dvorak, Macintosh)"
+      },
+      "norman": {
+        "desc": "English (Norman)"
+      },
+      "symbolic": {
+        "desc": "English (US, Symbolic)"
+      },
+      "workman": {
+        "desc": "English (Workman)"
+      },
+      "workman-intl": {
+        "desc": "English (Workman, intl., with dead keys)"
+      },
+      "olpc2": {
+        "desc": "English (the divide/multiply toggle the layout)"
+      },
+      "chr": {
+        "desc": "Cherokee",
+        "langs": [
+          "chr"
+        ]
+      },
+      "haw": {
+        "desc": "Hawaiian",
+        "langs": [
+          "haw"
+        ]
+      },
+      "rus": {
+        "desc": "Russian (US, phonetic)",
+        "langs": [
+          "rus"
+        ]
+      },
+      "hbs": {
+        "desc": "Serbo-Croatian (US)",
+        "langs": [
+          "eng",
+          "bos",
+          "hbs",
+          "hrv",
+          "srp"
+        ]
+      }
+    }
+  },
+  "epo": {
+    "desc": "Esperanto",
+    "langs": [
+      "epo"
+    ],
+    "variants": {
+      "legacy": {
+        "desc": "Esperanto (legacy)"
+      }
+    }
+  },
+  "ee": {
+    "desc": "Estonian",
+    "countries": [
+      "EE"
+    ],
+    "langs": [
+      "est"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Estonian (no dead keys)"
+      },
+      "dvorak": {
+        "desc": "Estonian (Dvorak)"
+      },
+      "us": {
+        "desc": "Estonian (US)"
+      }
+    }
+  },
+  "fo": {
+    "desc": "Faroese",
+    "countries": [
+      "FO"
+    ],
+    "langs": [
+      "fao"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Faroese (no dead keys)"
+      }
+    }
+  },
+  "ph": {
+    "desc": "Filipino",
+    "countries": [
+      "PH"
+    ],
+    "langs": [
+      "eng",
+      "bik",
+      "ceb",
+      "fil",
+      "hil",
+      "ilo",
+      "pam",
+      "pag",
+      "phi",
+      "tgl",
+      "war"
+    ],
+    "variants": {
+      "qwerty-bay": {
+        "desc": "Filipino (QWERTY, Baybayin)",
+        "langs": [
+          "bik",
+          "ceb",
+          "fil",
+          "hil",
+          "ilo",
+          "pam",
+          "pag",
+          "phi",
+          "tgl",
+          "war"
+        ]
+      },
+      "capewell-dvorak": {
+        "desc": "Filipino (Capewell-Dvorak, Latin)"
+      },
+      "capewell-dvorak-bay": {
+        "desc": "Filipino (Capewell-Dvorak, Baybayin)",
+        "langs": [
+          "bik",
+          "ceb",
+          "fil",
+          "hil",
+          "ilo",
+          "pam",
+          "pag",
+          "phi",
+          "tgl",
+          "war"
+        ]
+      },
+      "capewell-qwerf2k6": {
+        "desc": "Filipino (Capewell-QWERF 2006, Latin)"
+      },
+      "capewell-qwerf2k6-bay": {
+        "desc": "Filipino (Capewell-QWERF 2006, Baybayin)",
+        "langs": [
+          "bik",
+          "ceb",
+          "fil",
+          "hil",
+          "ilo",
+          "pam",
+          "pag",
+          "phi",
+          "tgl",
+          "war"
+        ]
+      },
+      "colemak": {
+        "desc": "Filipino (Colemak, Latin)"
+      },
+      "colemak-bay": {
+        "desc": "Filipino (Colemak, Baybayin)",
+        "langs": [
+          "bik",
+          "ceb",
+          "fil",
+          "hil",
+          "ilo",
+          "pam",
+          "pag",
+          "phi",
+          "tgl",
+          "war"
+        ]
+      },
+      "dvorak": {
+        "desc": "Filipino (Dvorak, Latin)"
+      },
+      "dvorak-bay": {
+        "desc": "Filipino (Dvorak, Baybayin)",
+        "langs": [
+          "bik",
+          "ceb",
+          "fil",
+          "hil",
+          "ilo",
+          "pam",
+          "pag",
+          "phi",
+          "tgl",
+          "war"
+        ]
+      }
+    }
+  },
+  "fi": {
+    "desc": "Finnish",
+    "countries": [
+      "FI"
+    ],
+    "langs": [
+      "fin"
+    ],
+    "variants": {
+      "winkeys": {
+        "desc": "Finnish (Windows)"
+      },
+      "classic": {
+        "desc": "Finnish (classic)"
+      },
+      "nodeadkeys": {
+        "desc": "Finnish (classic, no dead keys)"
+      },
+      "mac": {
+        "desc": "Finnish (Macintosh)"
+      },
+      "smi": {
+        "desc": "Northern Saami (Finland)",
+        "langs": [
+          "sme"
+        ]
+      }
+    }
+  },
+  "fr": {
+    "desc": "French",
+    "countries": [
+      "FR"
+    ],
+    "langs": [
+      "fra"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "French (no dead keys)"
+      },
+      "oss": {
+        "desc": "French (alt.)"
+      },
+      "oss_nodeadkeys": {
+        "desc": "French (alt., no dead keys)"
+      },
+      "oss_latin9": {
+        "desc": "French (alt., Latin-9 only)"
+      },
+      "latin9": {
+        "desc": "French (legacy, alt.)"
+      },
+      "latin9_nodeadkeys": {
+        "desc": "French (legacy, alt., no dead keys)"
+      },
+      "azerty": {
+        "desc": "French (AZERTY)"
+      },
+      "afnor": {
+        "desc": "French (AZERTY, AFNOR)"
+      },
+      "bepo": {
+        "desc": "French (BEPO)"
+      },
+      "bepo_latin9": {
+        "desc": "French (BEPO, Latin-9 only)"
+      },
+      "bepo_afnor": {
+        "desc": "French (BEPO, AFNOR)"
+      },
+      "dvorak": {
+        "desc": "French (Dvorak)"
+      },
+      "ergol": {
+        "desc": "French (Ergo\u2011L)"
+      },
+      "ergol_iso": {
+        "desc": "French (Ergo\u2011L, ISO variant)"
+      },
+      "mac": {
+        "desc": "French (Macintosh)"
+      },
+      "us": {
+        "desc": "French (US)"
+      },
+      "bre": {
+        "desc": "Breton (France)",
+        "langs": [
+          "bre"
+        ]
+      },
+      "oci": {
+        "desc": "Occitan",
+        "langs": [
+          "oci"
+        ]
+      },
+      "geo": {
+        "desc": "Georgian (France, AZERTY Tskapo)",
+        "langs": [
+          "kat"
+        ]
+      }
+    }
+  },
+  "ca": {
+    "desc": "French (Canada)",
+    "countries": [
+      "CA"
+    ],
+    "langs": [
+      "fra"
+    ],
+    "variants": {
+      "fr-dvorak": {
+        "desc": "French (Canada, Dvorak)"
+      },
+      "fr-legacy": {
+        "desc": "French (Canada, legacy)"
+      },
+      "multix": {
+        "desc": "Canadian (CSA)"
+      },
+      "eng": {
+        "desc": "English (Canada)",
+        "langs": [
+          "eng"
+        ]
+      },
+      "ike": {
+        "desc": "Inuktitut",
+        "langs": [
+          "iku"
+        ]
+      }
+    }
+  },
+  "cd": {
+    "desc": "French (Democratic Republic of the Congo)",
+    "countries": [
+      "CD"
+    ],
+    "langs": [
+      "fra"
+    ]
+  },
+  "tg": {
+    "desc": "French (Togo)",
+    "countries": [
+      "TG"
+    ],
+    "langs": [
+      "fra",
+      "ajg",
+      "blo",
+      "kpo",
+      "ewe",
+      "fon",
+      "fue",
+      "gej",
+      "ife",
+      "kbp",
+      "las",
+      "dop",
+      "mfg",
+      "nmz",
+      "bud",
+      "gng",
+      "kdh",
+      "soy"
+    ]
+  },
+  "ge": {
+    "desc": "Georgian",
+    "countries": [
+      "GE"
+    ],
+    "langs": [
+      "kat"
+    ],
+    "variants": {
+      "ergonomic": {
+        "desc": "Georgian (ergonomic)"
+      },
+      "mess": {
+        "desc": "Georgian (MESS)"
+      },
+      "os": {
+        "desc": "Ossetian (Georgia)",
+        "langs": [
+          "oss"
+        ]
+      },
+      "ru": {
+        "desc": "Russian (Georgia)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "de": {
+    "desc": "German",
+    "countries": [
+      "DE"
+    ],
+    "langs": [
+      "deu"
+    ],
+    "variants": {
+      "deadacute": {
+        "desc": "German (dead acute)"
+      },
+      "deadgraveacute": {
+        "desc": "German (dead grave acute)"
+      },
+      "deadtilde": {
+        "desc": "German (dead tilde)"
+      },
+      "nodeadkeys": {
+        "desc": "German (no dead keys)"
+      },
+      "e1": {
+        "desc": "German (E1)"
+      },
+      "e2": {
+        "desc": "German (E2)"
+      },
+      "T3": {
+        "desc": "German (T3)"
+      },
+      "us": {
+        "desc": "German (US)"
+      },
+      "dvorak": {
+        "desc": "German (Dvorak)"
+      },
+      "mac": {
+        "desc": "German (Macintosh)"
+      },
+      "mac_nodeadkeys": {
+        "desc": "German (Macintosh, no dead keys)"
+      },
+      "neo": {
+        "desc": "German (Neo 2)"
+      },
+      "qwerty": {
+        "desc": "German (QWERTY)"
+      },
+      "dsb": {
+        "desc": "Lower Sorbian",
+        "langs": [
+          "dsb"
+        ]
+      },
+      "dsb_qwertz": {
+        "desc": "Lower Sorbian (QWERTZ)",
+        "langs": [
+          "dsb"
+        ]
+      },
+      "ro": {
+        "desc": "Romanian (Germany)",
+        "langs": [
+          "ron"
+        ]
+      },
+      "ro_nodeadkeys": {
+        "desc": "Romanian (Germany, no dead keys)",
+        "langs": [
+          "ron"
+        ]
+      },
+      "ru": {
+        "desc": "Russian (Germany, phonetic)",
+        "langs": [
+          "rus"
+        ]
+      },
+      "tr": {
+        "desc": "Turkish (Germany)",
+        "langs": [
+          "tur"
+        ]
+      }
+    }
+  },
+  "at": {
+    "desc": "German (Austria)",
+    "countries": [
+      "AT"
+    ],
+    "langs": [
+      "deu"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "German (Austria, no dead keys)"
+      },
+      "mac": {
+        "desc": "German (Austria, Macintosh)"
+      }
+    }
+  },
+  "ch": {
+    "desc": "German (Switzerland)",
+    "countries": [
+      "CH"
+    ],
+    "langs": [
+      "deu",
+      "gsw"
+    ],
+    "variants": {
+      "de_nodeadkeys": {
+        "desc": "German (Switzerland, no dead keys)"
+      },
+      "de_mac": {
+        "desc": "German (Switzerland, Macintosh)"
+      },
+      "legacy": {
+        "desc": "German (Switzerland, legacy)"
+      },
+      "fr": {
+        "desc": "French (Switzerland)",
+        "langs": [
+          "fra"
+        ]
+      },
+      "fr_nodeadkeys": {
+        "desc": "French (Switzerland, no dead keys)",
+        "langs": [
+          "fra"
+        ]
+      },
+      "fr_mac": {
+        "desc": "French (Switzerland, Macintosh)",
+        "langs": [
+          "fra"
+        ]
+      }
+    }
+  },
+  "gr": {
+    "desc": "Greek",
+    "countries": [
+      "GR"
+    ],
+    "langs": [
+      "ell"
+    ],
+    "variants": {
+      "simple": {
+        "desc": "Greek (simple)"
+      },
+      "nodeadkeys": {
+        "desc": "Greek (no dead keys)"
+      },
+      "polytonic": {
+        "desc": "Greek (polytonic)"
+      }
+    }
+  },
+  "il": {
+    "desc": "Hebrew",
+    "countries": [
+      "IL"
+    ],
+    "langs": [
+      "heb"
+    ],
+    "variants": {
+      "si2": {
+        "desc": "Hebrew (SI-1452-2)"
+      },
+      "lyx": {
+        "desc": "Hebrew (lyx)"
+      },
+      "phonetic": {
+        "desc": "Hebrew (phonetic)"
+      },
+      "biblical": {
+        "desc": "Hebrew (Biblical, Tiro)"
+      }
+    }
+  },
+  "hu": {
+    "desc": "Hungarian",
+    "countries": [
+      "HU"
+    ],
+    "langs": [
+      "hun"
+    ],
+    "variants": {
+      "standard": {
+        "desc": "Hungarian (standard)"
+      },
+      "nodeadkeys": {
+        "desc": "Hungarian (no dead keys)"
+      },
+      "qwerty": {
+        "desc": "Hungarian (QWERTY)"
+      },
+      "101_qwertz_comma_dead": {
+        "desc": "Hungarian (QWERTZ, 101-key, comma, dead keys)"
+      },
+      "101_qwertz_comma_nodead": {
+        "desc": "Hungarian (QWERTZ, 101-key, comma, no dead keys)"
+      },
+      "101_qwertz_dot_dead": {
+        "desc": "Hungarian (QWERTZ, 101-key, dot, dead keys)"
+      },
+      "101_qwertz_dot_nodead": {
+        "desc": "Hungarian (QWERTZ, 101-key, dot, no dead keys)"
+      },
+      "101_qwerty_comma_dead": {
+        "desc": "Hungarian (QWERTY, 101-key, comma, dead keys)"
+      },
+      "101_qwerty_comma_nodead": {
+        "desc": "Hungarian (QWERTY, 101-key, comma, no dead keys)"
+      },
+      "101_qwerty_dot_dead": {
+        "desc": "Hungarian (QWERTY, 101-key, dot, dead keys)"
+      },
+      "101_qwerty_dot_nodead": {
+        "desc": "Hungarian (QWERTY, 101-key, dot, no dead keys)"
+      },
+      "102_qwertz_comma_dead": {
+        "desc": "Hungarian (QWERTZ, 102-key, comma, dead keys)"
+      },
+      "102_qwertz_comma_nodead": {
+        "desc": "Hungarian (QWERTZ, 102-key, comma, no dead keys)"
+      },
+      "102_qwertz_dot_dead": {
+        "desc": "Hungarian (QWERTZ, 102-key, dot, dead keys)"
+      },
+      "102_qwertz_dot_nodead": {
+        "desc": "Hungarian (QWERTZ, 102-key, dot, no dead keys)"
+      },
+      "102_qwerty_comma_dead": {
+        "desc": "Hungarian (QWERTY, 102-key, comma, dead keys)"
+      },
+      "102_qwerty_comma_nodead": {
+        "desc": "Hungarian (QWERTY, 102-key, comma, no dead keys)"
+      },
+      "102_qwerty_dot_dead": {
+        "desc": "Hungarian (QWERTY, 102-key, dot, dead keys)"
+      },
+      "102_qwerty_dot_nodead": {
+        "desc": "Hungarian (QWERTY, 102-key, dot, no dead keys)"
+      }
+    }
+  },
+  "is": {
+    "desc": "Icelandic",
+    "countries": [
+      "IS"
+    ],
+    "langs": [
+      "isl"
+    ],
+    "variants": {
+      "mac_legacy": {
+        "desc": "Icelandic (Macintosh, legacy)"
+      },
+      "mac": {
+        "desc": "Icelandic (Macintosh)"
+      },
+      "dvorak": {
+        "desc": "Icelandic (Dvorak)"
+      }
+    }
+  },
+  "in": {
+    "desc": "Indian",
+    "countries": [
+      "IN"
+    ],
+    "langs": [
+      "hin",
+      "anp",
+      "awa",
+      "bap",
+      "bfy",
+      "bgc",
+      "bhb",
+      "bhi",
+      "bho",
+      "bjj",
+      "bra",
+      "brx",
+      "btv",
+      "doi",
+      "dty",
+      "gbm",
+      "gom",
+      "gvr",
+      "hne",
+      "hoc",
+      "hoj",
+      "jml",
+      "kfr",
+      "kfy",
+      "khn",
+      "kok",
+      "kru",
+      "mag",
+      "mai",
+      "mar",
+      "mgp",
+      "mrd",
+      "mtr",
+      "mwr",
+      "nep",
+      "new",
+      "noe",
+      "raj",
+      "rjs",
+      "sck",
+      "srx",
+      "swv",
+      "taj",
+      "tdg",
+      "tdh",
+      "thl",
+      "thq",
+      "thr",
+      "tkt",
+      "wbr",
+      "wtm",
+      "xnr",
+      "xsr"
+    ],
+    "variants": {
+      "asm-kagapa": {
+        "desc": "Assamese (KaGaPa, phonetic)",
+        "langs": [
+          "asm"
+        ]
+      },
+      "ben": {
+        "desc": "Bangla (India)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben_probhat": {
+        "desc": "Bangla (India, Probhat)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben_baishakhi": {
+        "desc": "Bangla (India, Baishakhi)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben_bornona": {
+        "desc": "Bangla (India, Bornona)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben-kagapa": {
+        "desc": "Bangla (India, KaGaPa, phonetic)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben_gitanjali": {
+        "desc": "Bangla (India, Gitanjali)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "ben_inscript": {
+        "desc": "Bangla (India, Baishakhi InScript)",
+        "langs": [
+          "ben",
+          "sat"
+        ]
+      },
+      "eng": {
+        "desc": "English (India, with rupee)",
+        "langs": [
+          "eng"
+        ]
+      },
+      "guj": {
+        "desc": "Gujarati",
+        "langs": [
+          "guj"
+        ]
+      },
+      "guj-kagapa": {
+        "desc": "Gujarati (KaGaPa, phonetic)",
+        "langs": [
+          "guj"
+        ]
+      },
+      "bolnagri": {
+        "desc": "Hindi (Bolnagri)",
+        "langs": [
+          "hin"
+        ]
+      },
+      "hin-wx": {
+        "desc": "Hindi (Wx)",
+        "langs": [
+          "hin"
+        ]
+      },
+      "hin-kagapa": {
+        "desc": "Hindi (KaGaPa, phonetic)",
+        "langs": [
+          "hin"
+        ]
+      },
+      "kan": {
+        "desc": "Kannada",
+        "langs": [
+          "kan"
+        ]
+      },
+      "kan-kagapa": {
+        "desc": "Kannada (KaGaPa, phonetic)",
+        "langs": [
+          "kan"
+        ]
+      },
+      "mal": {
+        "desc": "Malayalam",
+        "langs": [
+          "mal"
+        ]
+      },
+      "mal_lalitha": {
+        "desc": "Malayalam (Lalitha)",
+        "langs": [
+          "mal"
+        ]
+      },
+      "mal_enhanced": {
+        "desc": "Malayalam (enhanced InScript, with rupee)",
+        "langs": [
+          "mal"
+        ]
+      },
+      "mal_poorna": {
+        "desc": "Malayalam (Poorna, extended InScript)",
+        "langs": [
+          "mal"
+        ]
+      },
+      "mni": {
+        "desc": "Manipuri (Meitei)",
+        "langs": [
+          "mni"
+        ]
+      },
+      "mar-kagapa": {
+        "desc": "Marathi (KaGaPa, phonetic)",
+        "langs": [
+          "mar"
+        ]
+      },
+      "marathi": {
+        "desc": "Marathi (enhanced InScript)",
+        "langs": [
+          "mar"
+        ]
+      },
+      "ori": {
+        "desc": "Oriya",
+        "langs": [
+          "ori",
+          "sat"
+        ]
+      },
+      "ori-bolnagri": {
+        "desc": "Oriya (Bolnagri)",
+        "langs": [
+          "ori",
+          "sat"
+        ]
+      },
+      "ori-wx": {
+        "desc": "Oriya (Wx)",
+        "langs": [
+          "ori",
+          "sat"
+        ]
+      },
+      "guru": {
+        "desc": "Punjabi (Gurmukhi)",
+        "langs": [
+          "pan"
+        ]
+      },
+      "jhelum": {
+        "desc": "Punjabi (Gurmukhi Jhelum)",
+        "langs": [
+          "pan"
+        ]
+      },
+      "san-kagapa": {
+        "desc": "Sanskrit (KaGaPa, phonetic)",
+        "langs": [
+          "san"
+        ]
+      },
+      "sat": {
+        "desc": "Santali (Ol Chiki)",
+        "langs": [
+          "sat"
+        ]
+      },
+      "tamilnet": {
+        "desc": "Tamil (TamilNet '99)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tamilnet_tamilnumbers": {
+        "desc": "Tamil (TamilNet '99 with Tamil numerals)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tamilnet_TAB": {
+        "desc": "Tamil (TamilNet '99, TAB encoding)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tamilnet_TSCII": {
+        "desc": "Tamil (TamilNet '99, TSCII encoding)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tam": {
+        "desc": "Tamil (InScript, with Arabic numerals)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tam_tamilnumbers": {
+        "desc": "Tamil (InScript, with Tamil numerals)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tel": {
+        "desc": "Telugu",
+        "langs": [
+          "tel"
+        ]
+      },
+      "tel-kagapa": {
+        "desc": "Telugu (KaGaPa, phonetic)",
+        "langs": [
+          "tel"
+        ]
+      },
+      "tel-sarala": {
+        "desc": "Telugu (Sarala)",
+        "langs": [
+          "tel"
+        ]
+      },
+      "urd-phonetic": {
+        "desc": "Urdu (phonetic)",
+        "langs": [
+          "urd"
+        ]
+      },
+      "urd-phonetic3": {
+        "desc": "Urdu (alt. phonetic)",
+        "langs": [
+          "urd"
+        ]
+      },
+      "urd-winkeys": {
+        "desc": "Urdu (Windows)",
+        "langs": [
+          "urd"
+        ]
+      },
+      "iipa": {
+        "desc": "Indic IPA",
+        "langs": [
+          "eng"
+        ]
+      }
+    }
+  },
+  "id": {
+    "desc": "Indonesian (Latin)",
+    "countries": [
+      "ID"
+    ],
+    "langs": [
+      "ind",
+      "ace",
+      "ban",
+      "bbc",
+      "bew",
+      "bjn",
+      "btm",
+      "bts",
+      "bug",
+      "gor",
+      "jav",
+      "jax",
+      "mad",
+      "mak",
+      "min",
+      "mui",
+      "sas",
+      "sun"
+    ],
+    "variants": {
+      "melayu-phonetic": {
+        "desc": "Indonesian (Arab Melayu, phonetic)"
+      },
+      "melayu-phoneticx": {
+        "desc": "Indonesian (Arab Melayu, extended phonetic)"
+      },
+      "pegon-phonetic": {
+        "desc": "Indonesian (Arab Pegon, phonetic)"
+      },
+      "javanese": {
+        "desc": "Javanese"
+      }
+    }
+  },
+  "ie": {
+    "desc": "Irish",
+    "countries": [
+      "IE"
+    ],
+    "langs": [
+      "eng"
+    ],
+    "variants": {
+      "UnicodeExpert": {
+        "desc": "Irish (UnicodeExpert)"
+      },
+      "CloGaelach": {
+        "desc": "CloGaelach",
+        "langs": [
+          "gle"
+        ]
+      },
+      "ogam": {
+        "desc": "Ogham",
+        "langs": [
+          "sga"
+        ]
+      },
+      "ogam_is434": {
+        "desc": "Ogham (IS434)",
+        "langs": [
+          "sga"
+        ]
+      }
+    }
+  },
+  "it": {
+    "desc": "Italian",
+    "countries": [
+      "IT"
+    ],
+    "langs": [
+      "ita"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Italian (no dead keys)"
+      },
+      "winkeys": {
+        "desc": "Italian (Windows)"
+      },
+      "mac": {
+        "desc": "Italian (Macintosh)"
+      },
+      "us": {
+        "desc": "Italian (US)"
+      },
+      "ibm": {
+        "desc": "Italian (IBM 142)"
+      },
+      "fur": {
+        "desc": "Friulian (Italy)",
+        "langs": [
+          "fur"
+        ]
+      },
+      "scn": {
+        "desc": "Sicilian",
+        "langs": [
+          "ita",
+          "scn"
+        ]
+      },
+      "geo": {
+        "desc": "Georgian (Italy)",
+        "langs": [
+          "kat"
+        ]
+      }
+    }
+  },
+  "jp": {
+    "desc": "Japanese",
+    "countries": [
+      "JP"
+    ],
+    "langs": [
+      "jpn"
+    ],
+    "variants": {
+      "kana": {
+        "desc": "Japanese (Kana)"
+      },
+      "kana86": {
+        "desc": "Japanese (Kana 86)"
+      },
+      "OADG109A": {
+        "desc": "Japanese (OADG 109A)"
+      },
+      "mac": {
+        "desc": "Japanese (Macintosh)"
+      },
+      "dvorak": {
+        "desc": "Japanese (Dvorak)"
+      }
+    }
+  },
+  "kz": {
+    "desc": "Kazakh",
+    "countries": [
+      "KZ"
+    ],
+    "langs": [
+      "kaz"
+    ],
+    "variants": {
+      "kazrus": {
+        "desc": "Kazakh (with Russian)",
+        "langs": [
+          "kaz",
+          "rus"
+        ]
+      },
+      "ext": {
+        "desc": "Kazakh (extended)",
+        "langs": [
+          "kaz"
+        ]
+      },
+      "latin": {
+        "desc": "Kazakh (Latin)",
+        "langs": [
+          "kaz"
+        ]
+      },
+      "ruskaz": {
+        "desc": "Russian (Kazakhstan, with Kazakh)",
+        "langs": [
+          "kaz",
+          "rus"
+        ]
+      }
+    }
+  },
+  "kh": {
+    "desc": "Khmer (Cambodia)",
+    "countries": [
+      "KH"
+    ],
+    "langs": [
+      "khm"
+    ]
+  },
+  "kr": {
+    "desc": "Korean",
+    "countries": [
+      "KR"
+    ],
+    "langs": [
+      "kor"
+    ],
+    "variants": {
+      "kr104": {
+        "desc": "Korean (101/104-key compatible)"
+      }
+    }
+  },
+  "kg": {
+    "desc": "Kyrgyz",
+    "countries": [
+      "KG"
+    ],
+    "langs": [
+      "kir"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Kyrgyz (phonetic)"
+      }
+    }
+  },
+  "la": {
+    "desc": "Lao",
+    "countries": [
+      "LA"
+    ],
+    "langs": [
+      "lao"
+    ],
+    "variants": {
+      "stea": {
+        "desc": "Lao (STEA)",
+        "langs": [
+          "lao"
+        ]
+      }
+    }
+  },
+  "lv": {
+    "desc": "Latvian",
+    "countries": [
+      "LV"
+    ],
+    "langs": [
+      "lav"
+    ],
+    "variants": {
+      "apostrophe": {
+        "desc": "Latvian (apostrophe)"
+      },
+      "tilde": {
+        "desc": "Latvian (tilde)"
+      },
+      "fkey": {
+        "desc": "Latvian (F)"
+      },
+      "modern": {
+        "desc": "Latvian (Modern Latin)"
+      },
+      "modern-cyr": {
+        "desc": "Latvian (Modern Cyrillic)"
+      },
+      "ergonomic": {
+        "desc": "Latvian (ergonomic, \u016aGJRMV)"
+      },
+      "adapted": {
+        "desc": "Latvian (adapted)"
+      }
+    }
+  },
+  "lt": {
+    "desc": "Lithuanian",
+    "countries": [
+      "LT"
+    ],
+    "langs": [
+      "lit"
+    ],
+    "variants": {
+      "std": {
+        "desc": "Lithuanian (standard)"
+      },
+      "us": {
+        "desc": "Lithuanian (US)"
+      },
+      "ibm": {
+        "desc": "Lithuanian (IBM)"
+      },
+      "lekp": {
+        "desc": "Lithuanian (LEKP)"
+      },
+      "lekpa": {
+        "desc": "Lithuanian (LEKPa)"
+      },
+      "ratise": {
+        "desc": "Lithuanian (Ratise)"
+      },
+      "sgs": {
+        "desc": "Samogitian",
+        "langs": [
+          "sgs"
+        ]
+      }
+    }
+  },
+  "mk": {
+    "desc": "Macedonian",
+    "countries": [
+      "MK"
+    ],
+    "langs": [
+      "mkd"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Macedonian (no dead keys)"
+      }
+    }
+  },
+  "my": {
+    "desc": "Malay (Jawi, Arabic Keyboard)",
+    "countries": [
+      "MY"
+    ],
+    "langs": [
+      "ind",
+      "msa",
+      "min",
+      "ace",
+      "bjn",
+      "tsg",
+      "mfa"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Malay (Jawi, phonetic)"
+      }
+    }
+  },
+  "mt": {
+    "desc": "Maltese",
+    "countries": [
+      "MT"
+    ],
+    "langs": [
+      "mlt"
+    ],
+    "variants": {
+      "us": {
+        "desc": "Maltese (US)"
+      },
+      "alt-us": {
+        "desc": "Maltese (US, with AltGr overrides)"
+      },
+      "alt-gb": {
+        "desc": "Maltese (UK, with AltGr overrides)"
+      }
+    }
+  },
+  "md": {
+    "desc": "Moldavian",
+    "countries": [
+      "MD"
+    ],
+    "langs": [
+      "ron"
+    ],
+    "variants": {
+      "gag": {
+        "desc": "Gagauz (Moldova)",
+        "langs": [
+          "gag"
+        ]
+      }
+    }
+  },
+  "mn": {
+    "desc": "Mongolian",
+    "countries": [
+      "MN"
+    ],
+    "langs": [
+      "mon"
+    ]
+  },
+  "me": {
+    "desc": "Montenegrin",
+    "countries": [
+      "ME"
+    ],
+    "langs": [
+      "srp"
+    ],
+    "variants": {
+      "cyrillic": {
+        "desc": "Montenegrin (Cyrillic)"
+      },
+      "cyrillicyz": {
+        "desc": "Montenegrin (Cyrillic, ZE and ZHE swapped)"
+      },
+      "cyrillicalternatequotes": {
+        "desc": "Montenegrin (Cyrillic, with guillemets)"
+      },
+      "latinunicode": {
+        "desc": "Montenegrin (Latin, Unicode)"
+      },
+      "latinyz": {
+        "desc": "Montenegrin (Latin, QWERTY)"
+      },
+      "latinunicodeyz": {
+        "desc": "Montenegrin (Latin, Unicode, QWERTY)"
+      },
+      "latinalternatequotes": {
+        "desc": "Montenegrin (Latin, with guillemets)"
+      }
+    }
+  },
+  "np": {
+    "desc": "Nepali",
+    "countries": [
+      "NP"
+    ],
+    "langs": [
+      "nep",
+      "sat"
+    ]
+  },
+  "gn": {
+    "desc": "N'Ko (AZERTY)",
+    "countries": [
+      "GN"
+    ],
+    "langs": [
+      "nqo"
+    ]
+  },
+  "no": {
+    "desc": "Norwegian",
+    "countries": [
+      "NO"
+    ],
+    "langs": [
+      "nor",
+      "nob",
+      "nno"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Norwegian (no dead keys)"
+      },
+      "winkeys": {
+        "desc": "Norwegian (Windows)"
+      },
+      "mac": {
+        "desc": "Norwegian (Macintosh)"
+      },
+      "mac_nodeadkeys": {
+        "desc": "Norwegian (Macintosh, no dead keys)"
+      },
+      "colemak": {
+        "desc": "Norwegian (Colemak)"
+      },
+      "colemak_dh": {
+        "desc": "Norwegian (Colemak-DH)"
+      },
+      "colemak_dh_wide": {
+        "desc": "Norwegian (Colemak-DH Wide)"
+      },
+      "dvorak": {
+        "desc": "Norwegian (Dvorak)"
+      },
+      "smi": {
+        "desc": "Northern Saami (Norway)",
+        "langs": [
+          "sme"
+        ]
+      },
+      "smi_nodeadkeys": {
+        "desc": "Northern Saami (Norway, no dead keys)",
+        "langs": [
+          "sme"
+        ]
+      }
+    }
+  },
+  "ir": {
+    "desc": "Persian",
+    "countries": [
+      "IR"
+    ],
+    "langs": [
+      "fas"
+    ],
+    "variants": {
+      "pes_keypad": {
+        "desc": "Persian (with Persian keypad)"
+      },
+      "winkeys": {
+        "desc": "Persian (Windows)"
+      },
+      "azb": {
+        "desc": "Azerbaijani (Iran)",
+        "langs": [
+          "azb"
+        ]
+      },
+      "ku": {
+        "desc": "Kurdish (Iran, Latin Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_alt": {
+        "desc": "Kurdish (Iran, Latin Alt-Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_f": {
+        "desc": "Kurdish (Iran, F)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_ara": {
+        "desc": "Kurdish (Iran, Arabic-Latin)",
+        "langs": [
+          "kur"
+        ]
+      }
+    }
+  },
+  "pl": {
+    "desc": "Polish",
+    "countries": [
+      "PL"
+    ],
+    "langs": [
+      "pol"
+    ],
+    "variants": {
+      "legacy": {
+        "desc": "Polish (legacy)"
+      },
+      "qwertz": {
+        "desc": "Polish (QWERTZ)"
+      },
+      "dvorak": {
+        "desc": "Polish (Dvorak)"
+      },
+      "dvorak_quotes": {
+        "desc": "Polish (Dvorak, with Polish quotes on quotemark key)"
+      },
+      "dvorak_altquotes": {
+        "desc": "Polish (Dvorak, with Polish quotes on key 1)"
+      },
+      "dvp": {
+        "desc": "Polish (programmer Dvorak)"
+      },
+      "csb": {
+        "desc": "Kashubian",
+        "langs": [
+          "csb"
+        ]
+      },
+      "szl": {
+        "desc": "Silesian",
+        "langs": [
+          "szl"
+        ]
+      },
+      "ru_phonetic_dvorak": {
+        "desc": "Russian (Poland, phonetic Dvorak)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "pt": {
+    "desc": "Portuguese",
+    "countries": [
+      "PT"
+    ],
+    "langs": [
+      "por"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Portuguese (no dead keys)"
+      },
+      "mac": {
+        "desc": "Portuguese (Macintosh)"
+      },
+      "mac_nodeadkeys": {
+        "desc": "Portuguese (Macintosh, no dead keys)"
+      },
+      "nativo": {
+        "desc": "Portuguese (Nativo)"
+      },
+      "nativo-us": {
+        "desc": "Portuguese (Nativo for US keyboards)"
+      },
+      "nativo-epo": {
+        "desc": "Esperanto (Portugal, Nativo)",
+        "langs": [
+          "epo"
+        ]
+      }
+    }
+  },
+  "br": {
+    "desc": "Portuguese (Brazil)",
+    "countries": [
+      "BR"
+    ],
+    "langs": [
+      "por"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Portuguese (Brazil, no dead keys)"
+      },
+      "dvorak": {
+        "desc": "Portuguese (Brazil, Dvorak)"
+      },
+      "nativo": {
+        "desc": "Portuguese (Brazil, Nativo)"
+      },
+      "nativo-us": {
+        "desc": "Portuguese (Brazil, Nativo for US keyboards)"
+      },
+      "thinkpad": {
+        "desc": "Portuguese (Brazil, IBM/Lenovo ThinkPad)"
+      },
+      "nativo-epo": {
+        "desc": "Esperanto (Brazil, Nativo)",
+        "langs": [
+          "epo"
+        ]
+      },
+      "rus": {
+        "desc": "Russian (Brazil, phonetic)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "ro": {
+    "desc": "Romanian",
+    "countries": [
+      "RO"
+    ],
+    "langs": [
+      "ron"
+    ],
+    "variants": {
+      "std": {
+        "desc": "Romanian (standard)"
+      },
+      "winkeys": {
+        "desc": "Romanian (Windows)"
+      }
+    }
+  },
+  "ru": {
+    "desc": "Russian",
+    "countries": [
+      "RU"
+    ],
+    "langs": [
+      "rus"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Russian (phonetic)"
+      },
+      "phonetic_winkeys": {
+        "desc": "Russian (phonetic, Windows)"
+      },
+      "phonetic_YAZHERTY": {
+        "desc": "Russian (phonetic, YAZHERTY)"
+      },
+      "phonetic_azerty": {
+        "desc": "Russian (phonetic, AZERTY)"
+      },
+      "phonetic_dvorak": {
+        "desc": "Russian (phonetic, Dvorak)"
+      },
+      "typewriter": {
+        "desc": "Russian (typewriter)"
+      },
+      "ruchey_ru": {
+        "desc": "Russian (engineering, RU)"
+      },
+      "ruchey_en": {
+        "desc": "Russian (engineering, EN)"
+      },
+      "legacy": {
+        "desc": "Russian (legacy)"
+      },
+      "typewriter-legacy": {
+        "desc": "Russian (typewriter, legacy)"
+      },
+      "dos": {
+        "desc": "Russian (DOS)"
+      },
+      "mac": {
+        "desc": "Russian (Macintosh)"
+      },
+      "ab": {
+        "desc": "Abkhazian (Russia)",
+        "langs": [
+          "abk"
+        ]
+      },
+      "bak": {
+        "desc": "Bashkirian",
+        "langs": [
+          "bak"
+        ]
+      },
+      "cv": {
+        "desc": "Chuvash",
+        "langs": [
+          "chv"
+        ]
+      },
+      "cv_latin": {
+        "desc": "Chuvash (Latin)",
+        "langs": [
+          "chv"
+        ]
+      },
+      "xal": {
+        "desc": "Kalmyk",
+        "langs": [
+          "xal"
+        ]
+      },
+      "kom": {
+        "desc": "Komi",
+        "langs": [
+          "kom"
+        ]
+      },
+      "chm": {
+        "desc": "Mari",
+        "langs": [
+          "chm"
+        ]
+      },
+      "os_legacy": {
+        "desc": "Ossetian (legacy)",
+        "langs": [
+          "oss"
+        ]
+      },
+      "os_winkeys": {
+        "desc": "Ossetian (Windows)",
+        "langs": [
+          "oss"
+        ]
+      },
+      "srp": {
+        "desc": "Serbian (Russia)",
+        "langs": [
+          "rus",
+          "srp"
+        ]
+      },
+      "tt": {
+        "desc": "Tatar",
+        "langs": [
+          "tat"
+        ]
+      },
+      "udm": {
+        "desc": "Udmurt",
+        "langs": [
+          "udm"
+        ]
+      },
+      "sah": {
+        "desc": "Yakut",
+        "langs": [
+          "sah"
+        ]
+      }
+    }
+  },
+  "rs": {
+    "desc": "Serbian",
+    "countries": [
+      "RS"
+    ],
+    "langs": [
+      "srp"
+    ],
+    "variants": {
+      "alternatequotes": {
+        "desc": "Serbian (Cyrillic, with guillemets)"
+      },
+      "yz": {
+        "desc": "Serbian (Cyrillic, ZE and ZHE swapped)"
+      },
+      "latin": {
+        "desc": "Serbian (Latin)"
+      },
+      "latinalternatequotes": {
+        "desc": "Serbian (Latin, with guillemets)"
+      },
+      "latinunicode": {
+        "desc": "Serbian (Latin, Unicode)"
+      },
+      "latinyz": {
+        "desc": "Serbian (Latin, QWERTY)"
+      },
+      "latinunicodeyz": {
+        "desc": "Serbian (Latin, Unicode, QWERTY)"
+      },
+      "rue": {
+        "desc": "Pannonian Rusyn",
+        "langs": [
+          "rue"
+        ]
+      }
+    }
+  },
+  "lk": {
+    "desc": "Sinhala (phonetic)",
+    "countries": [
+      "LK"
+    ],
+    "langs": [
+      "sin"
+    ],
+    "variants": {
+      "us": {
+        "desc": "Sinhala (US)"
+      },
+      "tam_unicode": {
+        "desc": "Tamil (Sri Lanka, TamilNet '99)",
+        "langs": [
+          "tam"
+        ]
+      },
+      "tam_TAB": {
+        "desc": "Tamil (Sri Lanka, TamilNet '99, TAB encoding)",
+        "langs": [
+          "tam"
+        ]
+      }
+    }
+  },
+  "sk": {
+    "desc": "Slovak",
+    "countries": [
+      "SK"
+    ],
+    "langs": [
+      "slk"
+    ],
+    "variants": {
+      "bksl": {
+        "desc": "Slovak (extra backslash)"
+      },
+      "qwerty": {
+        "desc": "Slovak (QWERTY)"
+      },
+      "qwerty_bksl": {
+        "desc": "Slovak (QWERTY, extra backslash)"
+      }
+    }
+  },
+  "si": {
+    "desc": "Slovenian",
+    "countries": [
+      "SI"
+    ],
+    "langs": [
+      "slv"
+    ],
+    "variants": {
+      "alternatequotes": {
+        "desc": "Slovenian (with guillemets)"
+      },
+      "us": {
+        "desc": "Slovenian (US)"
+      }
+    }
+  },
+  "es": {
+    "desc": "Spanish",
+    "countries": [
+      "ES"
+    ],
+    "langs": [
+      "spa"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Spanish (no dead keys)"
+      },
+      "deadtilde": {
+        "desc": "Spanish (dead tilde)"
+      },
+      "winkeys": {
+        "desc": "Spanish (Windows)"
+      },
+      "dvorak": {
+        "desc": "Spanish (Dvorak)"
+      },
+      "ast": {
+        "desc": "Asturian (Spain, with bottom-dot H and L)",
+        "langs": [
+          "ast"
+        ]
+      },
+      "cat": {
+        "desc": "Catalan (Spain, with middle-dot L)",
+        "langs": [
+          "cat"
+        ]
+      }
+    }
+  },
+  "latam": {
+    "desc": "Spanish (Latin American)",
+    "countries": [
+      "AR",
+      "BO",
+      "CL",
+      "CO",
+      "CR",
+      "CU",
+      "DO",
+      "EC",
+      "GT",
+      "HN",
+      "HT",
+      "MX",
+      "NI",
+      "PA",
+      "PE",
+      "PR",
+      "PY",
+      "SV",
+      "US",
+      "UY",
+      "VE"
+    ],
+    "langs": [
+      "spa"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Spanish (Latin American, no dead keys)"
+      },
+      "deadtilde": {
+        "desc": "Spanish (Latin American, dead tilde)"
+      },
+      "dvorak": {
+        "desc": "Spanish (Latin American, Dvorak)"
+      },
+      "colemak": {
+        "desc": "Spanish (Latin American, Colemak)"
+      }
+    }
+  },
+  "ke": {
+    "desc": "Swahili (Kenya)",
+    "countries": [
+      "KE"
+    ],
+    "langs": [
+      "swa"
+    ],
+    "variants": {
+      "kik": {
+        "desc": "Kikuyu",
+        "langs": [
+          "kik"
+        ]
+      }
+    }
+  },
+  "tz": {
+    "desc": "Swahili (Tanzania)",
+    "countries": [
+      "TZ"
+    ],
+    "langs": [
+      "swa"
+    ]
+  },
+  "se": {
+    "desc": "Swedish",
+    "countries": [
+      "SE"
+    ],
+    "langs": [
+      "swe"
+    ],
+    "variants": {
+      "nodeadkeys": {
+        "desc": "Swedish (no dead keys)"
+      },
+      "dvorak": {
+        "desc": "Swedish (Dvorak)"
+      },
+      "us_dvorak": {
+        "desc": "Swedish (Dvorak, intl.)"
+      },
+      "svdvorak": {
+        "desc": "Swedish (Svdvorak)"
+      },
+      "mac": {
+        "desc": "Swedish (Macintosh)"
+      },
+      "us": {
+        "desc": "Swedish (US)"
+      },
+      "swl": {
+        "desc": "Swedish Sign Language",
+        "langs": [
+          "swl"
+        ]
+      },
+      "smi": {
+        "desc": "Northern Saami (Sweden)",
+        "langs": [
+          "sme"
+        ]
+      },
+      "rus": {
+        "desc": "Russian (Sweden, phonetic)",
+        "langs": [
+          "rus"
+        ]
+      }
+    }
+  },
+  "tw": {
+    "desc": "Taiwanese",
+    "countries": [
+      "TW"
+    ],
+    "langs": [
+      "fox"
+    ],
+    "variants": {
+      "indigenous": {
+        "desc": "Taiwanese (indigenous)",
+        "langs": [
+          "ami",
+          "tay",
+          "bnn",
+          "ckv",
+          "pwn",
+          "pyu",
+          "pzh",
+          "dru",
+          "ssf",
+          "szy",
+          "tao",
+          "tsu",
+          "trv",
+          "xnb",
+          "sxr",
+          "uon",
+          "fos"
+        ]
+      },
+      "saisiyat": {
+        "desc": "Saisiyat (Taiwan)",
+        "langs": [
+          "xsy"
+        ]
+      }
+    }
+  },
+  "tj": {
+    "desc": "Tajik",
+    "countries": [
+      "TJ"
+    ],
+    "langs": [
+      "tgk"
+    ],
+    "variants": {
+      "legacy": {
+        "desc": "Tajik (legacy)"
+      }
+    }
+  },
+  "th": {
+    "desc": "Thai",
+    "countries": [
+      "TH"
+    ],
+    "langs": [
+      "tha"
+    ],
+    "variants": {
+      "tis": {
+        "desc": "Thai (TIS-820.2538)"
+      },
+      "pat": {
+        "desc": "Thai (Pattachote)"
+      }
+    }
+  },
+  "bw": {
+    "desc": "Tswana",
+    "countries": [
+      "BW"
+    ],
+    "langs": [
+      "tsn"
+    ]
+  },
+  "tm": {
+    "desc": "Turkmen",
+    "countries": [
+      "TM"
+    ],
+    "langs": [
+      "tuk"
+    ],
+    "variants": {
+      "alt": {
+        "desc": "Turkmen (Alt-Q)"
+      }
+    }
+  },
+  "tr": {
+    "desc": "Turkish",
+    "countries": [
+      "TR"
+    ],
+    "langs": [
+      "tur"
+    ],
+    "variants": {
+      "f": {
+        "desc": "Turkish (F)"
+      },
+      "e": {
+        "desc": "Turkish (E)"
+      },
+      "alt": {
+        "desc": "Turkish (Alt-Q)"
+      },
+      "intl": {
+        "desc": "Turkish (intl., with dead keys)"
+      },
+      "ku": {
+        "desc": "Kurdish (Turkey, Latin Q)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_f": {
+        "desc": "Kurdish (Turkey, F)",
+        "langs": [
+          "kur"
+        ]
+      },
+      "ku_alt": {
+        "desc": "Kurdish (Turkey, Latin Alt-Q)",
+        "langs": [
+          "kur"
+        ]
+      }
+    }
+  },
+  "ua": {
+    "desc": "Ukrainian",
+    "countries": [
+      "UA"
+    ],
+    "langs": [
+      "ukr"
+    ],
+    "variants": {
+      "phonetic": {
+        "desc": "Ukrainian (phonetic)"
+      },
+      "typewriter": {
+        "desc": "Ukrainian (typewriter)"
+      },
+      "winkeys": {
+        "desc": "Ukrainian (Windows)"
+      },
+      "macOS": {
+        "desc": "Ukrainian (macOS)"
+      },
+      "legacy": {
+        "desc": "Ukrainian (legacy)"
+      },
+      "homophonic": {
+        "desc": "Ukrainian (homophonic)"
+      },
+      "crh": {
+        "desc": "Crimean Tatar (Turkish Q)",
+        "langs": [
+          "crh"
+        ]
+      },
+      "crh_f": {
+        "desc": "Crimean Tatar (Turkish F)",
+        "langs": [
+          "crh"
+        ]
+      },
+      "crh_alt": {
+        "desc": "Crimean Tatar (Turkish Alt-Q)",
+        "langs": [
+          "crh"
+        ]
+      }
+    }
+  },
+  "pk": {
+    "desc": "Urdu (Pakistan)",
+    "countries": [
+      "PK"
+    ],
+    "langs": [
+      "urd"
+    ],
+    "variants": {
+      "urd-crulp": {
+        "desc": "Urdu (Pakistan, CRULP)"
+      },
+      "urd-nla": {
+        "desc": "Urdu (Pakistan, NLA)"
+      },
+      "ara": {
+        "desc": "Arabic (Pakistan)",
+        "langs": [
+          "ara"
+        ]
+      },
+      "snd": {
+        "desc": "Sindhi",
+        "langs": [
+          "snd"
+        ]
+      }
+    }
+  },
+  "uz": {
+    "desc": "Uzbek",
+    "countries": [
+      "UZ"
+    ],
+    "langs": [
+      "uzb"
+    ],
+    "variants": {
+      "latin": {
+        "desc": "Uzbek (Latin)"
+      }
+    }
+  },
+  "vn": {
+    "desc": "Vietnamese",
+    "countries": [
+      "VN"
+    ],
+    "langs": [
+      "vie"
+    ],
+    "variants": {
+      "us": {
+        "desc": "Vietnamese (US)",
+        "countries": [
+          "US"
+        ]
+      },
+      "fr": {
+        "desc": "Vietnamese (France)",
+        "countries": [
+          "FR"
+        ]
+      }
+    }
+  },
+  "sn": {
+    "desc": "Wolof",
+    "countries": [
+      "SN"
+    ],
+    "langs": [
+      "wol"
+    ]
+  },
+  "custom": {
+    "desc": "A user-defined custom Layout",
+    "langs": [
+      "und"
+    ]
+  }
+}
