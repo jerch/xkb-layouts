@@ -355,4 +355,59 @@ describe('detector unit tests', () => {
     dect.feed('boo', '4');
     assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 3/4 }, { layout: '2', match: 2/4 }, { layout: '3', match: 1/4 }]);
   });
+  describe('guessKey', () => {
+    it('empty record state', () => {
+      const km = new MutableKeymaps();
+      km.addCode('foo');
+      km.addCode('bar');
+      km.addCode('baz');
+      km.addCode('boo');
+      km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+      km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+      km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+      const dect = new Detector(km);
+      // known code: certainty 0 always emits all keys
+      assert.deepStrictEqual(dect.guessKey('foo'), { layouts: ['1', '2', '3'], certain: 0, key: ['1', '1', '1'] });
+      assert.deepStrictEqual(dect.guessKey('bar'), { layouts: ['1', '2', '3'], certain: 0, key: ['2', '2', '222'] });
+      assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['1', '2', '3'], certain: 0, key: ['3', '33', '333'] });
+      assert.deepStrictEqual(dect.guessKey('boo'), { layouts: ['1', '2', '3'], certain: 0, key: [undefined, undefined, undefined] });
+      // unknown code: key is undefined
+      assert.deepStrictEqual(dect.guessKey('nul'), { layouts: ['1', '2', '3'], certain: 0, key: undefined });
+    });
+    it('with recorded state', () => {
+      const km = new MutableKeymaps();
+      km.addCode('foo');
+      km.addCode('bar');
+      km.addCode('baz');
+      km.addCode('boo');
+      km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+      km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+      km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+      const dect = new Detector(km);
+      dect.feed('foo', '1');
+      dect.feed('bar', '2');
+      dect.feed('boo', '4');
+      // recorded state: certainty is 1, key is string
+      assert.deepStrictEqual(dect.guessKey('foo'), { layouts: ['1', '2'], certain: 1, key: '1' });
+      assert.deepStrictEqual(dect.guessKey('bar'), { layouts: ['1', '2'], certain: 1, key: '2' });
+      // undefined in keymap still produces from recorded state
+      assert.deepStrictEqual(dect.guessKey('boo'), { layouts: ['1', '2'], certain: 1, key: '4' });
+      // ambiguous: selected layouts match for 2/3 + keys are 2 ==> 1/3 certainty
+      assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['1', '2'], certain: 1/3, key: ['3', '33'] });
+      // unknown code: still produces undefined with layout match certainty
+      assert.deepStrictEqual(dect.guessKey('nul'), { layouts: ['1', '2'], certain: 2/3, key: undefined });
+
+      dect.reset();
+      dect.feed('bar', '222');
+      // layout is one: return single key with certainty 1 (==match)
+      assert.deepStrictEqual(dect.guessKey('foo'), { layouts: ['3'], certain: 1, key: '1' });
+      assert.deepStrictEqual(dect.guessKey('bar'), { layouts: ['3'], certain: 1, key: '222' });
+      assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['3'], certain: 1, key: '333' });
+      dect.feed('boo', '4');
+      // with unknown codes certainty is less except for recorded code
+      assert.deepStrictEqual(dect.guessKey('foo'), { layouts: ['3'], certain: 1/2, key: '1' });
+      assert.deepStrictEqual(dect.guessKey('bar'), { layouts: ['3'], certain: 1, key: '222' });
+      assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['3'], certain: 1/2, key: '333' });
+    });
+  });
 });
