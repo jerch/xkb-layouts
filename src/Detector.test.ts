@@ -410,4 +410,54 @@ describe('detector unit tests', () => {
       assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['3'], certain: 1/2, key: '333' });
     });
   });
+  describe.only('resolve', () => {
+    it('empty record state should emit all layouts', () => {
+      const km = new MutableKeymaps();
+      km.addCode('foo');
+      km.addCode('bar');
+      km.addCode('baz');
+      km.addCode('boo');
+      km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+      km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+      km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+      const dect = new Detector(km);
+      // baz before bar as it resolves faster
+      assert.deepStrictEqual(
+        dect.resolve(),
+        { layouts: ['1', '2', '3'], keys: [{ code: 'baz', keys: ['3', '33', '333'] }, { code: 'bar', keys: ['2', '222'] }] }
+      );
+    });
+    it('resolve loop', () => {
+      const km = new MutableKeymaps();
+      km.addCode('foo');
+      km.addCode('bar');
+      km.addCode('baz');
+      km.addCode('boo');
+      km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+      km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+      km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+      const dect = new Detector(km);
+      let toResolve = dect.resolve();
+      while (toResolve.layouts.length > 1) {
+        dect.feed(toResolve.keys[0].code, toResolve.keys[0].keys[0]);
+        toResolve = dect.resolve();
+      }
+      assert.strictEqual(toResolve.layouts[0], '1');
+    });
+    it('manual resolve', () => {
+      const km = new MutableKeymaps();
+      km.addCode('foo');
+      km.addCode('bar');
+      km.addCode('baz');
+      km.addCode('boo');
+      km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+      km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+      km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+      const dect = new Detector(km);
+      dect.feed('bar', '2');
+      assert.deepStrictEqual(dect.resolve(), { layouts: ['1', '2'], keys: [{ code: 'baz', keys: ['3', '33'] }] });
+      dect.feed('baz', '33');
+      assert.deepStrictEqual(dect.resolve(), { layouts: ['2'], keys: [] });
+    });
+  });
 });

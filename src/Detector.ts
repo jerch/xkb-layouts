@@ -36,7 +36,7 @@ interface IKeyResult {
 
 interface IResolveKey {
   code: string;
-  keys: (string|undefined)[];
+  keys: string[];
 }
 
 interface IResolveResult {
@@ -472,7 +472,7 @@ export default class Detector {
     }
     const acc = cands.map(e => this._maps.layoutIdx[e]);
     const values = [];
-    const value = new Set<string|undefined>();
+    const value = new Set<string>();
     for (let i = 0; i < this._maps.codes.length; ++i) {
       if (this._rec[i]) {
         // don't handle key if it was already recorded
@@ -480,7 +480,10 @@ export default class Detector {
       }
       value.clear();
       for (let k = 0; k < acc.length; ++k) {
-        value.add(this._maps.getKey(i, acc[k]));
+        const key = this._maps.getKey(i, acc[k]);
+        if (key !== undefined) {
+          value.add(key);
+        }
       }
       if (value.size > 1) {
         values.push({ code: this._maps.codes[i], keys: [...value] });
