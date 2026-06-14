@@ -61,7 +61,7 @@ describe('keymaps resolved match original in mutable keymaps', () => {
   }
 });
 
-describe.only('MutableKeymaps unit tests', () => {
+describe('MutableKeymaps unit tests', () => {
   it('empty ctor', () => {
     const km = new MutableKeymaps();
     assert.deepStrictEqual(km.layouts, []);
