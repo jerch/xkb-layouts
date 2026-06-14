@@ -410,7 +410,7 @@ describe('detector unit tests', () => {
       assert.deepStrictEqual(dect.guessKey('baz'), { layouts: ['3'], certain: 1/2, key: '333' });
     });
   });
-  describe.only('resolve', () => {
+  describe('resolve', () => {
     it('empty record state should emit all layouts', () => {
       const km = new MutableKeymaps();
       km.addCode('foo');
