@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
-import Detector, { IKeymap } from './Detector.js';
+import Detector, { IKeymap, MutableKeymaps } from './Detector.js';
 import keymaps from './keymaps.js';
 import keymapsResolved from './keymapsResolved.js';
 
@@ -59,6 +59,120 @@ describe('keymaps resolved match original in mutable keymaps', () => {
       assert.deepStrictEqual(dect.getLayoutMap(layout), JSON.parse(orig));
     });
   }
+});
+
+describe.only('MutableKeymaps unit tests', () => {
+  it('empty ctor', () => {
+    const km = new MutableKeymaps();
+    assert.deepStrictEqual(km.layouts, []);
+    assert.deepStrictEqual(km.layoutIdx, {});
+    assert.deepStrictEqual(km.codes, []);
+    assert.deepStrictEqual(km.codeIdx, {});
+  });
+  it('getKey yields same value - keymaps', () => {
+    const km = new MutableKeymaps(keymaps);
+    for (let l = 0; l < keymaps.layouts.length; ++l) {
+      for (let c = 0; c < keymaps.codes.length; ++c) {
+        assert.deepStrictEqual(
+          km.getKey(km.codeIdx[km.codes[c]], km.layoutIdx[km.layouts[l]]),
+          keymaps.getKey(keymaps.codeIdx[keymaps.codes[c]], keymaps.layoutIdx[keymaps.layouts[l]])
+        );
+      }
+    }
+  });
+  it('getKey yields same value - keymapsRevoslved', () => {
+    const km = new MutableKeymaps(keymapsResolved);
+    for (let l = 0; l < keymapsResolved.layouts.length; ++l) {
+      for (let c = 0; c < keymapsResolved.codes.length; ++c) {
+        assert.deepStrictEqual(
+          km.getKey(km.codeIdx[km.codes[c]], km.layoutIdx[km.layouts[l]]),
+          keymapsResolved.getKey(
+            keymapsResolved.codeIdx[keymapsResolved.codes[c]],
+            keymapsResolved.layoutIdx[keymapsResolved.layouts[l]]
+          )
+        );
+      }
+    }
+  });
+  it('addCode', () => {
+    const km = new MutableKeymaps();
+    km.addCode('foo');
+    km.addCode('bar');
+    assert.deepStrictEqual(km.codes, ['foo', 'bar']);
+    assert.deepStrictEqual(km.codeIdx, {'foo': 0, 'bar': 1});
+    assert.throws(() => km.addCode('foo'));
+  });
+  it('removeCode', () => {
+    const km = new MutableKeymaps();
+    km.addCode('foo');
+    km.addCode('bar');
+    km.removeCode('foo');
+    assert.deepStrictEqual(km.codes, ['bar']);
+    assert.deepStrictEqual(km.codeIdx, {'bar': 0});
+    assert.throws(() => km.removeCode('foo'));
+    km.addCode('foo');
+    assert.deepStrictEqual(km.codes, ['bar', 'foo']);
+    assert.deepStrictEqual(km.codeIdx, {'bar': 0, 'foo': 1});
+  });
+  it('addCode/removeCode does not corrupt existing data', () => {
+    const km = new MutableKeymaps(keymaps);
+    km.addCode('foo');
+    km.removeCode('KeyQ');
+    for (let l = 0; l < keymaps.layouts.length; ++l) {
+      const layout = keymaps.layouts[l];
+      for (let c = 0; c < keymaps.codes.length; ++c) {
+        const code = keymaps.codes[c];
+        if (km.codes.includes(code)) {
+          assert.notStrictEqual(km.codeIdx[code], undefined);
+          assert.deepStrictEqual(
+            km.getKey(km.codeIdx[code], km.layoutIdx[layout]),
+            keymaps.getKey(keymaps.codeIdx[code], keymaps.layoutIdx[layout])
+          );
+        } else {
+          assert.strictEqual(km.codeIdx[code], undefined);
+        }
+      }
+    }
+  });
+  it('addCode creates undefined key values', () => {
+    const km = new MutableKeymaps(keymaps);
+    km.addCode('foo');
+    for (let l = 0; l < keymaps.layouts.length; ++l) {
+      const layout = keymaps.layouts[l];
+      assert.deepStrictEqual(km.getKey(km.codeIdx['foo'], km.layoutIdx[layout]), undefined);
+    }
+  });
+  it('register', () => {
+    const km = new MutableKeymaps();
+    km.addCode('foo');
+    km.addCode('bar');
+    km.register('one', { 'foo': '1', 'bar': '2', 'baz': '3' });
+    km.register('two', { 'foo': '11', 'bar': '22', 'baz': '33' });
+    assert.deepStrictEqual(km.layouts, ['one', 'two']);
+    assert.deepStrictEqual(km.layoutIdx, {'one': 0, 'two': 1});
+    assert.deepStrictEqual(km.getKey(km.codeIdx['foo'], km.layoutIdx['one']), '1');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['bar'], km.layoutIdx['one']), '2');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['foo'], km.layoutIdx['two']), '11');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['bar'], km.layoutIdx['two']), '22');
+    assert.deepStrictEqual(km.codeIdx['baz'], undefined);
+    assert.throws(() => km.register('one', { 'foo': '1', 'bar': '2', 'baz': '3' }));
+  });
+  it('unregister', () => {
+    const km = new MutableKeymaps();
+    km.addCode('foo');
+    km.addCode('bar');
+    km.register('one', { 'foo': '1', 'bar': '2', 'baz': '3' });
+    km.register('two', { 'foo': '11', 'bar': '22', 'baz': '33' });
+    km.register('thr', { 'foo': '111', 'bar': '222', 'baz': '333' });
+    km.unregister('two');
+    assert.deepStrictEqual(km.layouts, ['one', 'thr']);
+    assert.deepStrictEqual(km.layoutIdx, {'one': 0, 'thr': 1});
+    assert.deepStrictEqual(km.getKey(km.codeIdx['foo'], km.layoutIdx['one']), '1');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['bar'], km.layoutIdx['one']), '2');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['foo'], km.layoutIdx['thr']), '111');
+    assert.deepStrictEqual(km.getKey(km.codeIdx['bar'], km.layoutIdx['thr']), '222');
+    assert.throws(() => km.unregister('two'));
+  });
 });
 
 describe('detector unit tests', () => {

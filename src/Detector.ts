@@ -116,6 +116,7 @@ export class MutableKeymaps implements IMutableKeymaps {
         this.codeIdx[_code]--;
       }
     }
+    this.codes.splice(pos, 1);
     this._values.splice(pos, 1);
   }
 
