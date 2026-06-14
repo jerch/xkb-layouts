@@ -307,4 +307,52 @@ describe('detector unit tests', () => {
       assert.deepStrictEqual(discards, [['KeyA', 'x'], ['KeyA', 'z']]);
     });
   });
+  it('matches', () => {
+    const km = new MutableKeymaps();
+    km.addCode('foo');
+    km.addCode('bar');
+    km.addCode('baz');
+    km.addCode('boo');
+    km.register('1', { 'foo': '1', 'bar': '2', 'baz': '3' });
+    km.register('2', { 'foo': '1', 'bar': '2', 'baz': '33' });
+    km.register('3', { 'foo': '1', 'bar': '222', 'baz': '333' });
+    const dect = new Detector(km);
+
+    // narrow foo --> bar --> baz
+    dect.feed('foo', '1');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 1 }, { layout: '2', match: 1 }, { layout: '3', match: 1 }]);
+    dect.feed('bar', '2');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 1 }, { layout: '2', match: 1 }, { layout: '3', match: 0.5 }]);
+    dect.feed('baz', '3');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 1 }, { layout: '2', match: 2/3 }, { layout: '3', match: 1/3 }]);
+    
+    dect.reset();
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 0 }, { layout: '2', match: 0 }, { layout: '3', match: 0 }]);
+    
+    dect.feed('foo', '1');
+    dect.feed('bar', '222');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '3', match: 1 }, { layout: '1', match: 0.5 }, { layout: '2', match: 0.5 }]);
+    dect.feed('baz', '333');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '3', match: 1 }, { layout: '1', match: 1/3 }, { layout: '2', match: 1/3 }]);
+    // conflicting input resets recorded state and matches
+    dect.feed('baz', '3');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 1 }, { layout: '2', match: 0 }, { layout: '3', match: 0 }]);
+    
+    // narrow baz --> bar --> foo
+    dect.feed('baz', '33');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '2', match: 1 }, { layout: '1', match: 0 }, { layout: '3', match: 0 }]);
+    dect.feed('bar', '2');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '2', match: 1 }, { layout: '1', match: 0.5 }, { layout: '3', match: 0 }]);
+    dect.feed('foo', '1');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '2', match: 1 }, { layout: '1', match: 2/3 }, { layout: '3', match: 1/3 }]);
+    
+    dect.reset();
+    
+    // unknown key lowers match
+    dect.feed('foo', '1');
+    dect.feed('bar', '2');
+    dect.feed('baz', '3');
+    dect.feed('boo', '4');
+    assert.deepStrictEqual(dect.matches(), [{ layout: '1', match: 3/4 }, { layout: '2', match: 2/4 }, { layout: '3', match: 1/4 }]);
+  });
 });
