@@ -11,9 +11,9 @@ For electron based application you are better served with `@vscodium/native-keym
 
 ```javascript
 import Detector from 'xkb-layouts';
-import KEYMAPS from 'xkb-layouts/keymapsResolved';
+import getKeymaps from 'xkb-layouts/keymapsResolved';
 
-const dect = new Detector(KEYMAPS);
+const dect = new Detector(getKeymaps());
 
 // feed the detector `code` and `key` from unshifted keyboard events, e.g.
 some_input_field.addEventListener('keydown', ev => {
@@ -87,12 +87,10 @@ const a_char = dect.getActiveKey('KeyA');
 
 - *Full Keymaps*\
   The provided keymaps contain only the unshifted key characters. The data is already quite
-  big with ~35kB for ~350 layouts. xkb knows ~600 layouts (with variants), the higher number
+  big with ~37kB for ~350 layouts. xkb knows ~600 layouts (with variants), the higher number
   results from character changes in shifted states. While it is possible to export
   the shifted states as well (needs only minor adjustments in `create_layouts.js`),
-  it gets impractical due to the resulting package size in the hundreds of kilobytes.
-  There are still savings possible on the package size by a more clever map construction.
-  Currently a tradeoff between reasonable package size and loading times is chosen.
+  it gets impractical due to the resulting package size.
 
 - *Layout Description*\
   The repo also contains a file `xkb_layouts_structured.json` containing all layout meta information
@@ -125,7 +123,7 @@ with this recovery command:
 setxkbmap your_default_layout
 ```
 
-To build a typescript module from the layout files, run `create_map.js` (uncomment the line `writeToFile`).
+To build a typescript module from the layout files, run `create_map.js` (uncomment the line `writeModule`).
 ```bash
 node bin/create_map.js target_folder/*
 ```

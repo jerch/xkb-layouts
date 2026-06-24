@@ -3,161 +3,8 @@
  * @license MIT
  */
 
-
-export interface IKeymap {
-  [index: string]: string;
-}
-
-export interface IKeymaps {
-  layouts: string[];
-  layoutIdx: {[index: string]: number};
-  codes: string[];
-  codeIdx: {[index: string]: number};
-  getKey(codeIdx: number, layoutIdx: number): string | undefined;
-}
-
-export interface IMutableKeymaps extends IKeymaps {
-  addCode(code: string): void;
-  removeCode(code: string): void;
-  register(layout: string, map: IKeymap): void;
-  unregister(layout: string): void;
-}
-
-interface ILayoutMatch {
-  layout: string;
-  match: number;
-}
-
-interface IKeyResult {
-  layouts: string[];
-  certain: number;
-  key: string | undefined | (string | undefined)[];
-}
-
-interface IResolveKey {
-  code: string;
-  keys: string[];
-}
-
-interface IResolveResult {
-  layouts: string[];
-  keys: IResolveKey[];
-}
-
-type DiscardHandler = (code: string, key: string) => boolean | void;
-
-
-/**
- * Mutable version of keymaps.
- * By default the detector uses the static shared version of the keymaps
- * to save memory - static holds ~35kB in memory for unshifted layouts
- * for all detector instances, while this instance needs ~120kB per instance.
- * On a register or unregister request the static version
- * gets replaced by this mutable one allowing code and layout changes,
- * e.g. to add a custom layout on-the-fly.
- */
-export class MutableKeymaps implements IMutableKeymaps {
-  public layouts: string[];
-  public layoutIdx: {[index: string]: number};
-  public codes: string[];
-  public codeIdx: {[index: string]: number};
-  private _values: string[][] = [];
-
-  constructor(maps?: IKeymaps) {
-    if (maps) {
-      this.layouts = [...maps.layouts];
-      this.layoutIdx = Object.assign({}, maps.layoutIdx);
-      this.codes = [...maps.codes];
-      this.codeIdx = Object.assign({}, maps.codeIdx);
-      for (let codeIdx = 0; codeIdx < this.codes.length; ++codeIdx) {
-        const line: string[] = [];
-        for (let layoutIdx = 0; layoutIdx < this.layouts.length; ++layoutIdx) {
-          line.push(maps.getKey(codeIdx, layoutIdx) ?? '');
-        }
-        this._values.push(line);
-      }
-    } else {
-      this.layouts = [];
-      this.layoutIdx = {};
-      this.codes = [];
-      this.codeIdx = {}
-    }
-  }
-
-  public getKey(codeIdx: number, layoutIdx: number): string | undefined {
-    return this._values[codeIdx][layoutIdx];
-  }
-
-  /**
-   * Add code to keymaps.
-   * The key values of registered layouts will be set to undefined.
-   */
-  public addCode(code: string): void {
-    if (!code || this.codeIdx[code] !== undefined) {
-      throw new Error(`code '${code}' is already registered`);
-    }
-    const pos = this.codes.length;
-    this.codeIdx[code] = pos;
-    this.codes.push(code);
-    this._values.push(new Array(this.layouts.length).fill(undefined));
-  }
-
-  /**
-   * Remove a code from keymaps.
-   */
-  public removeCode(code: string): void {
-    if (this.codeIdx[code] === undefined) {
-      throw new Error(`code '${code}' is not registered`);
-    }
-    const pos = this.codeIdx[code];
-    delete this.codeIdx[code];
-    for (const _code in this.codeIdx) {
-      if (this.codeIdx[_code] > pos) {
-        this.codeIdx[_code]--;
-      }
-    }
-    this.codes.splice(pos, 1);
-    this._values.splice(pos, 1);
-  }
-
-  /**
-   * Register a custom layout.
-   * Note that only known codes are transferred.
-   * Use `addCode` to introduce new codes to the keymaps.
-   */
-  public register(layout: string, map: IKeymap): void {
-    if (!layout || this.layoutIdx[layout] !== undefined) {
-      throw new Error(`layout '${layout}' is already registered`);
-    }
-    const pos = this.layouts.length;
-    this.layoutIdx[layout] = pos;
-    this.layouts.push(layout);
-    for (let i = 0; i < this._values.length; ++i) {
-      // NOTE: pushes undefined for non-existent codes
-      this._values[i].push(map[this.codes[i]]);
-    }
-  }
-
-  /**
-   * Unregister a layout.
-   */
-  public unregister(layout: string): void {
-    if (this.layoutIdx[layout] === undefined) {
-      throw new Error(`layout '${layout}' is not registered`);
-    }
-    const pos = this.layoutIdx[layout];
-    delete this.layoutIdx[layout];
-    for (const _layout in this.layoutIdx) {
-      if (this.layoutIdx[_layout] > pos) {
-        this.layoutIdx[_layout]--;
-      }
-    }
-    this.layouts.splice(pos, 1);
-    for (let i = 0; i < this._values.length; ++i) {
-      this._values[i].splice(pos, 1);
-    }
-  }
-}
+import { MutableKeymaps } from "./MutableKeymaps.js";
+import type { DiscardHandler, IKeymap, IKeymaps, IKeyResult, ILayoutMatch, IMutableKeymaps, IResolveResult } from "./Types.js";
 
 
 /**
@@ -275,18 +122,7 @@ export default class Detector {
    * Get the layout map for a given or the active layout.
    */
   public getLayoutMap(layout?: string): IKeymap {
-    const layoutIdx = this._maps.layoutIdx[layout ?? this._active];
-    if (layoutIdx === undefined) {
-      throw new Error(`layout '${layout}' is not registered`);
-    }
-    const result: IKeymap = {};
-    for (let i = 0; i < this._maps.codes.length; ++i) {
-      const v = this._maps.getKey(i, layoutIdx);
-      if (v !== undefined) {
-        result[this._maps.codes[i]] = v;
-      }
-    }
-    return result;
+    return this._maps.getLayoutMap(layout ?? this._active);
   }
 
   /**
@@ -313,7 +149,7 @@ export default class Detector {
       this._maps.codeIdx[code] !== undefined &&
       this._maps.layoutIdx[layout ?? this._active] !== undefined
     ) {
-      return this._maps.getKey(this._maps.codeIdx[code], this._maps.layoutIdx[layout ?? this._active]);
+      return this._maps.keyIndexed(this._maps.codeIdx[code], this._maps.layoutIdx[layout ?? this._active]);
     }
   }
 
@@ -352,7 +188,7 @@ export default class Detector {
         if (v) {
           c++;
           for (let i = 0; i < this._maps.layouts.length; ++i) {
-            if (v === this._maps.getKey(k, i)) {
+            if (v === this._maps.keyIndexed(k, i)) {
               this._cached[i].match++;
             }
           }
@@ -423,12 +259,12 @@ export default class Detector {
       return {
         layouts,
         certain: last,
-        key: this._maps.getKey(pos, this._maps.layoutIdx[layouts[0]])
+        key: this._maps.keyIndexed(pos, this._maps.layoutIdx[layouts[0]])
       };
     }
     const values = [];
     for (let i = 0; i < layouts.length; ++i) {
-      values.push(this._maps.getKey(pos, this._maps.layoutIdx[layouts[i]]));
+      values.push(this._maps.keyIndexed(pos, this._maps.layoutIdx[layouts[i]]));
     }
     return {
       layouts,
@@ -480,7 +316,7 @@ export default class Detector {
       }
       value.clear();
       for (let k = 0; k < acc.length; ++k) {
-        const key = this._maps.getKey(i, acc[k]);
+        const key = this._maps.keyIndexed(i, acc[k]);
         if (key !== undefined) {
           value.add(key);
         }

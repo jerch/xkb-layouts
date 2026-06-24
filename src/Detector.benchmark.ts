@@ -3,7 +3,7 @@ import Detector from './Detector.js';
 import keymaps from './keymaps.js';
 
 
-const dect = new Detector(keymaps);
+const dect = new Detector(keymaps());
 //dect.feed('KeyQ', 'q');
 
 const RUNS = 10;
